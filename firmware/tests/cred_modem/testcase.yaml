@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+# The credentials backend for Nordic's modems, against a fake modem, so it runs on upstream Zephyr without the nRF Connect SDK.
+tests:
+  tracegale.cred_modem:
+    platform_allow:
+      - native_sim
+    integration_platforms:
+      - native_sim

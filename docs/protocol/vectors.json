@@ -1,0 +1,163 @@
+{
+  "valid": [
+    {
+      "name": "hello",
+      "type": "HELLO",
+      "hex": "84010101a50065312e322e300154000102030405060708090a0b0c0d0e0f10111213026a6e72663532383430646b030104190200"
+    },
+    {
+      "name": "ack, an update is waiting",
+      "type": "ACK",
+      "hex": "84010201a10001"
+    },
+    {
+      "name": "error, rate limited",
+      "type": "ERROR",
+      "hex": "84010309a2000a01183c"
+    },
+    {
+      "name": "start a crash upload",
+      "type": "XFER_START",
+      "hex": "84010a02a3000101194000025820000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
+    },
+    {
+      "name": "xfer_start, a coredump with the build ID it crashed in, cut to fit",
+      "type": "XFER_START",
+      "hex": "84010a03a5000101190273025820da2969b098a8b89b82e4b159449f9dc597d38f78cfe8cbad13944c4a0e49f7950354000102030405060708090a0b0c0d0e0f101112130401"
+    },
+    {
+      "name": "first chunk",
+      "type": "XFER_CHUNK",
+      "hex": "84010b03a300070100024401020304"
+    },
+    {
+      "name": "status, resume from 512",
+      "type": "XFER_STATUS",
+      "hex": "84010c03a40007011902000219020003f4"
+    },
+    {
+      "name": "ask whether there's an update",
+      "type": "IMG_CHECK",
+      "hex": "84011403a30065312e322e300154000102030405060708090a0b0c0d0e0f1011121302736e72663532383430646b2f6e72663532383430"
+    },
+    {
+      "name": "offer a full image",
+      "type": "IMG_OFFER",
+      "hex": "84011504a50003011a0001000002000465312e332e30055820000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
+    },
+    {
+      "name": "offer a delta image, reserved for after v1",
+      "type": "IMG_OFFER",
+      "hex": "84011505a60004011910000201035820000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0465312e332e30055820000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
+    },
+    {
+      "name": "get image bytes",
+      "type": "IMG_GET",
+      "hex": "84011606a300030119800002190200"
+    },
+    {
+      "name": "image data",
+      "type": "IMG_DATA",
+      "hex": "84011706a30003011980000242aabb"
+    },
+    {
+      "name": "result, the new image was reverted",
+      "type": "IMG_RESULT",
+      "hex": "8401181807a200030103"
+    },
+    {
+      "name": "metrics, what the firmware measured by itself",
+      "type": "METRICS",
+      "hex": "84010409a200190e1001a6011a00015180021914000319100004190138080009190348"
+    },
+    {
+      "name": "metrics, the application's own, with a negative value",
+      "type": "METRICS",
+      "hex": "8401040aa300190e1002846a626174746572795f6d76190e806d74656d70657261747572655f632303826b646f6f725f6f70656e65640c"
+    },
+    {
+      "name": "unknown field, which must be ignored",
+      "type": "XFER_STATUS",
+      "hex": "84010c08a3000701001828f5"
+    },
+    {
+      "name": "logs, two records and two dropped",
+      "type": "LOGS",
+      "hex": "8401050ca4001a5eed1234011a0036f074028285001904b003646d61696e6c50756d70207374617274656485011a0036eee4016673656e736f7278244e6f207265706c792066726f6d207468652073656e736f722c206572726f72202d3131360302"
+    }
+  ],
+  "invalid": [
+    {
+      "name": "empty",
+      "hex": ""
+    },
+    {
+      "name": "not an array",
+      "hex": "a0"
+    },
+    {
+      "name": "three items",
+      "hex": "83010101"
+    },
+    {
+      "name": "version 2",
+      "hex": "84020101a0"
+    },
+    {
+      "name": "version 0",
+      "hex": "84000101a0"
+    },
+    {
+      "name": "body is not a map",
+      "hex": "8401010180"
+    },
+    {
+      "name": "id over 32 bits",
+      "hex": "8401011b0000000100000000a0"
+    },
+    {
+      "name": "integer not in shortest form",
+      "hex": "8401180101a0"
+    },
+    {
+      "name": "indefinite-length array",
+      "hex": "9f01ff"
+    },
+    {
+      "name": "float body",
+      "hex": "84010101f90000"
+    },
+    {
+      "name": "tag",
+      "hex": "84010101c0a0"
+    },
+    {
+      "name": "duplicate map key",
+      "hex": "84010101a200010002"
+    },
+    {
+      "name": "descending map keys",
+      "hex": "84010101a201000000"
+    },
+    {
+      "name": "text key",
+      "hex": "84010101a1616100"
+    },
+    {
+      "name": "trailing byte",
+      "hex": "84010101a000"
+    },
+    {
+      "name": "truncated bytes",
+      "hex": "84010b01a1025804aa"
+    },
+    {
+      "name": "invalid UTF-8",
+      "hex": "84010101a10061ff"
+    },
+    {
+      "name": "negative integer not in shortest form",
+      "hex": "8401040aa300190e1002846a626174746572795f6d76190e806d74656d70657261747572655f63380303826b646f6f725f6f70656e65640c"
+    }
+  ]
+}

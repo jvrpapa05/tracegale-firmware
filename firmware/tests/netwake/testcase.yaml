@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+tests:
+  tracegale.netwake:
+    platform_allow:
+      - native_sim
+    integration_platforms:
+      - native_sim

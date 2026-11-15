@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+tests:
+  # What one line gives: CONFIG_TRACEGALE=y and nothing else.
+  tracegale.metrics:
+    platform_allow:
+      - native_sim
+      - qemu_cortex_m3
+      - qemu_riscv32
+    integration_platforms:
+      - native_sim
+  # With a heap and thread run times, which the application turns on.
+  tracegale.metrics.full:
+    extra_args:
+      - EXTRA_CONF_FILE=full.conf
+    platform_allow:
+      - native_sim
+      - qemu_cortex_m3
+      - qemu_riscv32
+    integration_platforms:
+      - native_sim
+  tracegale.metrics.minimal:
+    extra_args:
+      - EXTRA_CONF_FILE=minimal.conf
+    platform_allow:
+      - native_sim
+    integration_platforms:
+      - native_sim
+  tracegale.metrics.net:
+    extra_args:
+      - EXTRA_CONF_FILE=net.conf
+    platform_allow:
+      - native_sim
+    integration_platforms:
+      - native_sim
+  tracegale.metrics.off:
+    extra_args:
+      - EXTRA_CONF_FILE=off.conf
+    platform_allow:
+      - native_sim
+    integration_platforms:
+      - native_sim

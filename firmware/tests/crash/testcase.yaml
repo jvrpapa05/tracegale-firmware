@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+# native_sim has no coredump support in Zephyr, so crash reports are off there.
+tests:
+  tracegale.crash:
+    platform_allow:
+      - qemu_cortex_m3
+      - qemu_riscv32
+    integration_platforms:
+      - qemu_cortex_m3
+  # The same tests, and those for a crash kept through a power loss, with settings storage.
+  tracegale.crash.keep:
+    extra_args:
+      - EXTRA_CONF_FILE=keep.conf
+      - EXTRA_DTC_OVERLAY_FILE=keep.overlay
+    platform_allow:
+      - qemu_cortex_m3
+      - qemu_riscv32
+    integration_platforms:
+      - qemu_cortex_m3
+  # Zephyr's flash coredump backend instead of Tracegale's store.
+  tracegale.crash.zephyr_backend:
+    extra_args:
+      - EXTRA_CONF_FILE=zephyr-flash.conf
+      - EXTRA_DTC_OVERLAY_FILE=zephyr-flash.overlay
+    platform_allow:
+      - qemu_cortex_m3
+      - qemu_riscv32
+    integration_platforms:
+      - qemu_cortex_m3

@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+tests:
+  tracegale.module:
+    platform_allow:
+      - native_sim
+      - qemu_cortex_m3
+      - qemu_riscv32
+    integration_platforms:
+      - native_sim

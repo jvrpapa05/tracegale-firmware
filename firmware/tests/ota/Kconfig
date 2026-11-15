@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+# These tests need CONFIG_BOOTLOADER_MCUBOOT on native_sim, where a stand-in plays MCUboot. Before Zephyr v4.5 that option
+# can't be chosen there, because it wants an image that's linked at an offset in flash. Nothing is linked differently for
+# native_sim, so saying yes here is safe, and only these tests do it.
+config HAS_FLASH_LOAD_OFFSET
+	default y
+
+source "Kconfig.zephyr"

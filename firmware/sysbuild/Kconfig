@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+config TRACEGALE_APP_ENABLED
+	bool
+	default $(shell,"$(PYTHON_EXECUTABLE)" "$(ZEPHYR_TRACEGALE_MODULE_DIR)/firmware/sysbuild/detect.py" app-enabled)
+	help
+	  The application's configuration sets CONFIG_TRACEGALE=y.
+
+config TRACEGALE_MCUBOOT_USABLE
+	bool
+	default $(shell,"$(PYTHON_EXECUTABLE)" "$(ZEPHYR_TRACEGALE_MODULE_DIR)/firmware/sysbuild/detect.py" mcuboot-usable)
+	help
+	  The MCUboot module is present, the board or an application overlay defines boot_partition, and
+	  the board isn't listed in mcuboot-unsupported-boards.txt.
+
+# MCUboot installs updates. These are only defaults: sysbuild.conf overrides both of them.
+choice BOOTLOADER
+	default BOOTLOADER_MCUBOOT if TRACEGALE_APP_ENABLED && TRACEGALE_MCUBOOT_USABLE
+endchoice
+
+# ECDSA P-256 needs about half of RSA's RAM and less flash, and it fits boot partitions where RSA doesn't.
+choice BOOT_SIGNATURE_TYPE
+	default BOOT_SIGNATURE_TYPE_ECDSA_P256 if TRACEGALE_APP_ENABLED
+endchoice

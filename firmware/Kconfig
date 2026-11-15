@@ -1,0 +1,531 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig TRACEGALE
+	bool "Tracegale fleet firmware stack"
+	help
+	  Enables the Tracegale fleet firmware stack.
+
+	  Tracegale uses the connection your application already has, and never
+	  turns on networking by itself. The server address and device credentials
+	  are provided at runtime, and are never compiled in.
+
+if TRACEGALE
+
+# Sockets offloaded to a modem with its own TCP and TLS, so the application needs neither Zephyr's TCP stack nor a TLS library,
+# and Tracegale adds no TLS library either. Only Nordic's modem library in the nRF Connect SDK for now. Nothing here may depend on
+# NET_SOCKETS_OFFLOAD or on the bindings: they select NET_SOCKETS, which that depends on, and Kconfig would find a loop.
+config TRACEGALE_MODEM_SOCKETS
+	def_bool NRF_MODEM_LIB
+
+choice TRACEGALE_TRANSPORT
+	prompt "How Tracegale reaches the server"
+	default TRACEGALE_TRANSPORT_HTTPS if NET_TCP || TRACEGALE_MODEM_SOCKETS
+	default TRACEGALE_TRANSPORT_NONE
+	help
+	  HTTPS by default when the application has TCP networking, from Zephyr's stack or from sockets offloaded to a modem. A
+	  device carries only the binding it uses.
+
+config TRACEGALE_TRANSPORT_HTTPS
+	bool "HTTPS"
+	depends on NETWORKING && (NET_TCP || TRACEGALE_MODEM_SOCKETS)
+	select NET_SOCKETS
+	select HTTP_CLIENT
+	select NET_SOCKETS_SOCKOPT_TLS if !TRACEGALE_MODEM_SOCKETS
+	imply DNS_RESOLVER
+	help
+	  The default when the application has TCP networking. This adds Tracegale's
+	  HTTP and TLS code and DNS, but not the network stack, which the application owns.
+
+config TRACEGALE_TRANSPORT_MQTT
+	bool "MQTT"
+	depends on NETWORKING && (NET_TCP || TRACEGALE_MODEM_SOCKETS)
+	select NET_SOCKETS
+	select NET_SOCKETS_SOCKOPT_TLS if !TRACEGALE_MODEM_SOCKETS
+	imply DNS_RESOLVER
+	help
+	  MQTT 3.1.1 over TLS, to the broker in Tracegale's server, on port 8883 by default. The same messages as HTTPS, and the
+	  same credentials: the identity comes from the device certificate. See docs/firmware/README.md.
+
+config TRACEGALE_TRANSPORT_CUSTOM
+	bool "A connection provided by the application"
+	help
+	  The application provides tg_transport_get(). Used by tests, and possible for
+	  links Tracegale doesn't support itself.
+
+config TRACEGALE_TRANSPORT_NONE
+	bool "None"
+	help
+	  The default without TCP networking. Tracegale then builds only what needs no connection, such as the build ID.
+
+endchoice
+
+config TRACEGALE_TLS
+	def_bool TRACEGALE_TRANSPORT_HTTPS || TRACEGALE_TRANSPORT_MQTT
+	help
+	  Set when a binding uses TLS with the device's credentials.
+
+config TRACEGALE_CRED_NRF_MODEM
+	def_bool TRACEGALE_TLS && NRF_MODEM_LIB
+	select MODEM_KEY_MGMT
+	select BASE64
+	help
+	  Keeps the credentials in the modem's own storage, where its TLS reads them, rather than in Zephyr's TLS credentials.
+	  nRF Connect SDK only. See docs/firmware/README.md.
+
+config TRACEGALE_CORE
+	def_bool TRACEGALE_TRANSPORT_HTTPS || TRACEGALE_TRANSPORT_MQTT || TRACEGALE_TRANSPORT_CUSTOM
+	help
+	  Set when the device has some way to reach the server.
+
+if TRACEGALE_CORE
+
+config TRACEGALE_AUTOSTART
+	bool "Start reporting automatically once provisioned"
+	default y
+
+# Only when the application already uses Zephyr's connection manager. Tracegale never turns it on.
+config TRACEGALE_NET_WAKE
+	bool "Try again soon after the network comes up"
+	default y
+	depends on TRACEGALE_AUTOSTART && NET_CONNECTION_MANAGER && NET_MGMT_EVENT
+	help
+	  After a failed attempt, Tracegale waits longer each time, up to TRACEGALE_BACKOFF_MAX_S. With this on, it tries
+	  again shortly after the connection manager reports that the network is up, on any link, instead of waiting out
+	  the delay. That matters on links that take a while to come up, such as cellular, and after an outage.
+
+config TRACEGALE_NET_WAKE_JITTER_S
+	int "Longest random wait after the network comes up, in seconds"
+	default 30
+	range 0 3600
+	depends on TRACEGALE_NET_WAKE
+	help
+	  A random wait, so that devices which all regain the network at once, after a cell or Internet outage, don't
+	  all reach the server at the same moment (threat T11).
+
+config TRACEGALE_STACK_SIZE
+	int "Stack size of the Tracegale thread"
+	default 4096 if TRACEGALE_TLS && ARM
+	default 6144 if TRACEGALE_TLS
+	default 2048
+	help
+	  Measured on emulators: a TLS handshake with certificates, followed by a crash upload, used about
+	  2,800 bytes on Cortex-M3 and 3,000 bytes on 32-bit RISC-V. Other architectures haven't been
+	  measured, so everything but Arm gets the larger default. "tracegale status" shows what is left
+	  when CONFIG_INIT_STACKS is on.
+
+config TRACEGALE_THREAD_PRIORITY
+	int "Priority of the Tracegale thread"
+	default 10
+
+config TRACEGALE_CHECKIN_INTERVAL_S
+	int "Seconds between check-ins"
+	default 3600
+	range 10 604800
+
+config TRACEGALE_BACKOFF_MIN_S
+	int "First wait after a failure, in seconds"
+	default 5
+	range 1 3600
+
+config TRACEGALE_BACKOFF_MAX_S
+	int "Longest wait after failures, in seconds"
+	default 3600
+	range 1 86400
+
+config TRACEGALE_TIMEOUT_MS
+	int "How long to wait for each reply, in milliseconds"
+	default 30000
+
+config TRACEGALE_MAX_MESSAGE
+	int "Largest message sent or received, in bytes"
+	default 1024 if TRACEGALE_OTA
+	default 512 if TRACEGALE_CRASH
+	default 256
+	range 128 65535
+	help
+	  Also sets the size of each piece of an upload or a download, and one buffer of this size is kept in RAM. With
+	  crash reports on, 512 sends a 2 KB crash in 5 messages, rather than 10. With updates on, 1024 downloads a
+	  250 KB image in about 250 messages, rather than 500.
+
+config TRACEGALE_HARDWARE
+	string "Name of the hardware this firmware is built for"
+	default BOARD_TARGET
+	help
+	  Reported to the server, which shows it for each device, and offers a device only updates that were uploaded
+	  for exactly this name. The default is the board target of the build, such as nrf52840dk/nrf52840, which
+	  includes the board's revision when one is given. Set your own name when products with different firmware
+	  share one board target, or when one firmware serves several. Up to 64 bytes.
+
+config TRACEGALE_HOST_MAX_LEN
+	int "Longest server host name"
+	default 64
+
+config TRACEGALE_CRED_MAX_SIZE
+	int "Largest credential, in bytes"
+	default 512
+	help
+	  Each of the CA certificate, device certificate and private key gets a buffer
+	  of this size in RAM, in DER form.
+
+config TRACEGALE_SEC_TAG
+	int "TLS security tag for Tracegale's credentials"
+	default 1414987776
+	help
+	  Must differ from the tags your application uses. Used over HTTPS and MQTT. With a Nordic modem, it is also where the
+	  credentials are kept in the modem's storage.
+
+config TRACEGALE_RESET_REASON
+	bool "Report why the device last reset"
+	default y
+	imply HWINFO
+
+config TRACEGALE_SHELL
+	bool "Shell commands"
+	default y if SHELL
+	depends on SHELL
+	select BASE64
+	help
+	  Adds the "tracegale" shell command, to show state and to provision a device.
+
+config TRACEGALE_SHELL_TEST
+	bool "Shell commands that crash on purpose"
+	depends on TRACEGALE_SHELL
+	help
+	  Adds "tracegale test crash" and "tracegale test fault", to check that crash reports reach the server. Anyone
+	  with the shell could restart the device with them, so leave this off in products.
+
+config TRACEGALE_METRICS
+	bool "Report metrics"
+	default y
+	help
+	  Sends, at each check-in, what the firmware measured by itself, and the application's own gauges and counters,
+	  which are defined with TRACEGALE_METRIC_GAUGE_DEFINE() and TRACEGALE_METRIC_COUNTER_DEFINE(). The time the device
+	  has run, its failed check-ins and how long a check-in takes are always reported. The options below add more.
+	  See docs/firmware/README.md.
+
+if TRACEGALE_METRICS
+
+config TRACEGALE_METRICS_HEAP
+	bool "Report the free space of the system heap"
+	default y
+	select SYS_HEAP_RUNTIME_STATS
+	help
+	  Reports the bytes free now, and the fewest that have been free since the device started, in the heap that
+	  k_malloc() uses. Nothing is reported by a build that has no such heap. The C library's malloc() has a heap of
+	  its own, which isn't measured.
+
+config TRACEGALE_METRICS_STACK
+	bool "Report the least free stack of any thread"
+	default y
+	select INIT_STACKS
+	select THREAD_MONITOR
+	select THREAD_STACK_INFO
+	help
+	  Reports the fewest bytes that any thread's stack has had free since the device started, which shows a stack
+	  that's about to overflow before it does. Zephyr fills each stack with a pattern when its thread starts, and
+	  Tracegale looks for the end of the pattern at each check-in.
+
+config TRACEGALE_METRICS_STACK_LOCKED
+	bool "Keep the list of threads locked while stacks are measured"
+	depends on TRACEGALE_METRICS_STACK
+	help
+	  Measuring reads every unused byte of every stack. With this off, as in Zephyr's thread analyzer, interrupts
+	  stay on meanwhile, and the application mustn't end a thread whose memory is then freed or used again at that
+	  moment. With this on, the list can't change, and interrupts are off for the whole measurement, which can be
+	  more than a millisecond. Turn it on if the application creates and ends threads as it runs.
+
+config TRACEGALE_METRICS_CPU
+	bool "Report how busy the CPU is"
+	default y
+	depends on SCHED_THREAD_USAGE_ALL
+	help
+	  Reports the share of each period that the CPU wasn't idle. On by default when the application has
+	  CONFIG_THREAD_RUNTIME_STATS, which Tracegale doesn't turn on, because it adds work to every thread switch.
+
+config TRACEGALE_METRICS_NET
+	bool "Report the bytes sent and received"
+	default y
+	depends on NET_STATISTICS_USER_API
+	help
+	  Reports the bytes that Zephyr's network stack sent and received in each period, on all interfaces. On by
+	  default when the application has CONFIG_NET_STATISTICS and CONFIG_NET_STATISTICS_USER_API. A modem that runs
+	  its own network stack isn't counted.
+
+endif # TRACEGALE_METRICS
+
+config TRACEGALE_LOGS
+	bool "Send the application's logs"
+	default y
+	depends on LOG && !LOG_MODE_MINIMAL
+	help
+	  Keeps what the firmware logs through Zephyr's logging API in a RAM buffer, and sends it at each check-in, so
+	  records made while the device couldn't reach the server arrive later. It's on when the application has
+	  CONFIG_LOG=y. See docs/firmware/README.md.
+
+if TRACEGALE_LOGS
+
+config TRACEGALE_LOGS_LEVEL
+	int "Lowest level of record to send: 1 error, 2 warning, 3 info, 4 debug"
+	range 1 4
+	default 3
+	help
+	  Records below this level aren't kept. Each module's own log level still applies first, so a debug record is
+	  kept only if its module logs at debug level too.
+
+config TRACEGALE_LOGS_BUFFER_SIZE
+	int "Bytes of RAM for records waiting to be sent"
+	range 512 65536
+	default 2048
+	help
+	  When it's full, the oldest records are dropped, and the server is told how many. A record takes its text plus
+	  about 24 bytes.
+
+config TRACEGALE_LOGS_LINE_MAX
+	int "Longest text of a record, in bytes"
+	range 32 255
+	default 128
+	help
+	  Longer messages are cut short.
+
+endif # TRACEGALE_LOGS
+
+config TRACEGALE_CRASH
+	bool "Report crashes"
+	default y
+	depends on ARCH_SUPPORTS_COREDUMP
+	select DEBUG_COREDUMP
+	help
+	  Keeps a coredump when the device crashes, restarts, and sends the dump to the server, which decodes it into a
+	  backtrace. On by default where Zephyr supports coredumps. See docs/firmware/README.md.
+
+if TRACEGALE_CRASH
+
+config TRACEGALE_CRASH_RAM
+	bool "Keep crashes in RAM that a restart doesn't clear"
+	default y
+	depends on DEBUG_COREDUMP_BACKEND_OTHER
+	select CRC
+	help
+	  Needs no flash partition. Power loss clears it, which TRACEGALE_CRASH_KEEP covers.
+
+	  To use one of Zephyr's own coredump backends instead, choose it with CONFIG_DEBUG_COREDUMP_BACKEND_..., which
+	  turns this off. Tracegale then sends what that backend stored, with three limits: the build ID sent is the
+	  running image's, which is wrong if the image changed after the crash; two identical crashes count as one; and
+	  a dump larger than the server accepts is refused, not cut.
+
+config TRACEGALE_CRASH_RAM_SIZE
+	int "Bytes of RAM kept for a crash"
+	default 2048
+	range 256 65536
+	depends on TRACEGALE_CRASH_RAM
+	help
+	  This RAM is used all the time. A crash too large for it keeps the registers and the newest part of the stack,
+	  which is usually enough for a backtrace, and the server says it was cut.
+
+config TRACEGALE_CRASH_KEEP
+	bool "Keep an unsent crash through a power loss"
+	default y
+	depends on TRACEGALE_CRASH_RAM && SETTINGS
+	help
+	  On by default when the application has settings storage. A crash that couldn't be sent at the first attempt
+	  after it is also saved with the application's settings, as "tracegale/crash", and loaded again if RAM was
+	  cleared. It needs no flash partition of its own. Nothing is written while the device is crashing, and a device
+	  that can reach the server right away never writes, so a crash loop doesn't wear the flash.
+
+	  The settings storage must take a value of TRACEGALE_CRASH_RAM_SIZE + 48 bytes. Tracegale doesn't encrypt
+	  it, so the dump sits in flash as the device's private key does.
+
+config TRACEGALE_CRASH_REBOOT
+	bool "Restart after a fatal error"
+	default y
+	select REBOOT
+	help
+	  Zephyr's default is to halt, and a halted device never reports its crash. This provides
+	  k_sys_fatal_error_handler(), so turn it off if your application has its own, and restart from there.
+
+endif # TRACEGALE_CRASH
+
+# Only when the build has MCUboot in a mode that keeps a second slot, which sysbuild sets up. See firmware/sysbuild.
+config TRACEGALE_OTA
+	bool "Over-the-air updates"
+	default y
+	depends on BOOTLOADER_MCUBOOT && SETTINGS && FLASH_MAP && FLASH && FLASH_HAS_PAGE_LAYOUT
+	depends on $(dt_nodelabel_enabled,slot0_partition) && $(dt_nodelabel_enabled,slot1_partition)
+	depends on !MCUBOOT_BOOTLOADER_MODE_SINGLE_APP && !MCUBOOT_BOOTLOADER_MODE_FIRMWARE_UPDATER
+	depends on !MCUBOOT_BOOTLOADER_MODE_DIRECT_XIP && !MCUBOOT_BOOTLOADER_MODE_DIRECT_XIP_WITH_REVERT
+	depends on !MCUBOOT_BOOTLOADER_MODE_RAM_LOAD && !MCUBOOT_BOOTLOADER_MODE_RAM_LOAD_WITH_REVERT
+	depends on !MCUBOOT_BOOTLOADER_MODE_SINGLE_APP_RAM_LOAD
+	# An encrypted image isn't the same bytes in the two slots, which is how Tracegale tells what's running.
+	depends on MCUBOOT_ENCRYPTION_KEY_FILE = ""
+	select FLASH_PAGE_LAYOUT
+	select STREAM_FLASH
+	select IMG_MANAGER
+	select REBOOT
+	help
+	  Downloads a new image into MCUboot's second slot when the server offers one, asks MCUboot to try it, and
+	  tells the server how it went. On by default when the build has MCUboot with two slots and the application has
+	  settings storage. See docs/firmware/README.md.
+
+	  MCUboot alone decides whether an image runs, by checking its signature. The server never has the signing key.
+
+if TRACEGALE_OTA
+
+config TRACEGALE_OTA_CONFIRM
+	bool "Keep a new image once it has reached the server"
+	default y
+	help
+	  A new image runs on trial at first. With this on, Tracegale confirms it after its first check-in that works,
+	  which shows it can start, join the network and reach the server, and so can be updated again. Turn it off to
+	  confirm in your own code with boot_write_img_confirmed(), after your own checks.
+
+config TRACEGALE_OTA_CONFIRM_TIMEOUT_S
+	int "Seconds a new image has to be confirmed"
+	default 900
+	range 0 604800
+	help
+	  A new image that isn't confirmed in this time is given up: Tracegale restarts the device, and MCUboot brings
+	  the previous image back. Without this, an image that runs but can't reach the server would stay until
+	  something else restarts the device. Allow for your slowest link and for TRACEGALE_BACKOFF_MAX_S. 0 never
+	  restarts.
+
+config TRACEGALE_OTA_DOWNGRADE
+	bool "Accept an image older than the running one"
+	help
+	  Off by default: an image with a lower version than the running image is refused before it's written. That
+	  stops a server, even a breached one, from putting back an old signed image with a known fault. The version is
+	  the one in the image's MCUboot header, from the application's VERSION file. The same version is accepted.
+
+config TRACEGALE_OTA_MAX_ATTEMPTS
+	int "Times to try one image"
+	default 3
+	range 1 250
+	help
+	  An image that failed this many times on this device, whether damaged, refused by MCUboot or reverted, is
+	  declined when it's offered again, without downloading it.
+
+config TRACEGALE_OTA_HOLD_S
+	int "Seconds to wait after a failed update"
+	default 3600
+	range 0 86400
+	help
+	  After a failed update, the device takes no other update for this long. The time is counted from the failure,
+	  or from the next boot if the failure ended in a restart. The wait doubles with each further failure in a row,
+	  up to a day, and ends with the first update that works. A download that was already under way isn't held
+	  back. It bounds how often a server, even a breached one, can make a device erase its flash and restart. 0
+	  turns it off.
+
+endif # TRACEGALE_OTA
+
+module = TRACEGALE
+module-str = tracegale
+source "subsys/logging/Kconfig.template.log_config"
+
+endif # TRACEGALE_CORE
+
+config TRACEGALE_BUILD_ID
+	bool "Put a build ID in the image"
+	default y
+	help
+	  A GNU build ID, which the server uses to find the symbol file that decodes this image's crashes. It costs 36
+	  bytes of flash.
+
+endif # TRACEGALE
+
+if TRACEGALE_CRASH
+
+# Zephyr's defaults dump all of RAM to the log. Tracegale keeps only what a backtrace needs, in its own store.
+choice DEBUG_COREDUMP_BACKEND
+	default DEBUG_COREDUMP_BACKEND_OTHER
+endchoice
+
+choice DEBUG_COREDUMP_MEMORY_DUMP
+	default DEBUG_COREDUMP_MEMORY_DUMP_MIN
+endchoice
+
+endif # TRACEGALE_CRASH
+
+if TRACEGALE_TLS
+
+# Name lookup allocates from the kernel heap on some Zephyr versions, and an application might not have one.
+config HEAP_MEM_POOL_ADD_SIZE_TRACEGALE
+	int
+	default 1024
+
+endif # TRACEGALE_TLS
+
+if TRACEGALE_TLS && !TRACEGALE_CRED_NRF_MODEM
+
+config TLS_CREDENTIALS
+	bool
+	default y
+
+endif
+
+if TRACEGALE_TLS && !TRACEGALE_MODEM_SOCKETS
+
+# Sets what TLS needs by default, so the one line is enough. An application can override each of these. Zephyr versions name them
+# differently, so a symbol that a version doesn't have here is simply unused on that version.
+config MBEDTLS
+	bool
+	default y
+
+# TLS sets up its crypto at boot, on the main stack. Zephyr's default of 1,024 bytes overflowed in testing on Cortex-M, and 1,536 worked.
+config MAIN_STACK_SIZE
+	int
+	default 2048
+
+config MBEDTLS_ENABLE_HEAP
+	bool
+	default y
+
+config MBEDTLS_HEAP_SIZE
+	int
+	default 16384
+
+config MBEDTLS_CIPHERSUITE_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+	bool
+	default y
+
+# Zephyr v3.7's name. Later versions call it MBEDTLS_SSL_PROTO_TLS1_2, and warn that this one is deprecated.
+config MBEDTLS_TLS_VERSION_1_2
+	bool
+	default y if $(KERNELVERSION) < 0x4000000
+
+config MBEDTLS_SSL_PROTO_TLS1_2
+	bool
+	default y
+
+config MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+	bool
+	default y
+
+config MBEDTLS_ECDH_C
+	bool
+	default y
+
+config MBEDTLS_ECDSA_C
+	bool
+	default y
+
+config MBEDTLS_ECP_C
+	bool
+	default y
+
+config MBEDTLS_ECP_DP_SECP256R1_ENABLED
+	bool
+	default y
+
+config MBEDTLS_CIPHER_AES_ENABLED
+	bool
+	default y
+
+config MBEDTLS_CIPHER_GCM_ENABLED
+	bool
+	default y
+
+config MBEDTLS_SHA256
+	bool
+	default y
+
+endif # TRACEGALE_TLS && !TRACEGALE_MODEM_SOCKETS

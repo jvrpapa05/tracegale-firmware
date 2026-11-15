@@ -1,0 +1,4 @@
+a8a13370b0d9dc19f5f6e9bf4df77539e46c358ad323d72072fae4e2b2de3d02  hosttools_linux-x86_64.tar.xz
+81162a8326e3cb82fcc53f20528aa7abec29a0bf8376fa009e0c887ba864aaf8  toolchain_linux-x86_64_arm-zephyr-eabi.tar.xz
+64d41c0674c6bc9d29347b4e1abf1a012941cb80a9ef31ca5d87ebe4e7a32982  toolchain_linux-x86_64_riscv64-zephyr-elf.tar.xz
+b433f19b334cd15f4d7696a958dda214a7737cf41432900d076adce4253782a5  zephyr-sdk-0.16.9_linux-x86_64_minimal.tar.xz

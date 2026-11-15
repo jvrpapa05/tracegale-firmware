@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+#
+# The nRF Connect SDK, the latest stable release, with only what Tracegale builds against: Nordic's Zephyr, its MCUboot and
+# crypto, and the Nordic HAL and libraries; docs/firmware/README.md, "The nRF Connect SDK". Nothing from the SDK is copied into
+# Tracegale; it's only built against.
+
+manifest:
+  remotes:
+    - name: ncs
+      url-base: https://github.com/nrfconnect
+  projects:
+    - name: nrf
+      remote: ncs
+      repo-path: sdk-nrf
+      revision: v3.4.2
+      import:
+        name-allowlist:
+          - nrf
+          - zephyr
+          - cmsis
+          - cmsis_6
+          - hal_nordic
+          - mbedtls
+          - mcuboot
+          - nrfxlib
+          - oberon-psa-crypto
+          - segger
+          - tf-psa-crypto
+          - trusted-firmware-m
+          - zcbor
+  self:
+    path: tracegale

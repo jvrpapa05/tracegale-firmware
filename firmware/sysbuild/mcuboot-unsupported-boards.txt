@@ -1,0 +1,11 @@
+# Boards with a boot_partition where MCUboot doesn't build on Zephyr v4.5.0, with ECDSA P-256 signatures.
+# Tracegale leaves MCUboot off on these, and warns that OTA is off. Setting SB_CONFIG_BOOTLOADER_MCUBOOT=y in
+# sysbuild.conf still forces it on. This comes from a sample of boards, so it isn't a complete list.
+#
+# Boards whose own Kconfig.sysbuild defaults to MCUboot, such as many ESP32 boards, can't be listed here, because
+# their default takes priority over Tracegale's. On those, use SB_CONFIG_BOOTLOADER_NONE=y if MCUboot doesn't build.
+nrf52840dongle/nrf52840        # boot partition too small (flash overflow)
+thingy53/nrf5340/cpuapp        # MCUboot's console configuration doesn't link
+nrf9280pdk/nrf9280/cpuapp      # Kconfig warnings in the MCUboot image
+stm32f0_disco/stm32f051x8      # MCUboot has no support for this target
+frdm_mcxa344/mcxa344           # imgtool rejects the flash write alignment

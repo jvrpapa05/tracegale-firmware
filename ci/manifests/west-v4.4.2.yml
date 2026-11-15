@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: dccb09599635bdff17633fa7e9dab014b91dce90 # v4.4.2
+      import:
+        name-allowlist:
+          - cmsis
+          - cmsis_6
+          - hal_nordic
+          - mcuboot
+          - mbedtls
+          - tf-psa-crypto
+          - zcbor
+  self:
+    path: tracegale

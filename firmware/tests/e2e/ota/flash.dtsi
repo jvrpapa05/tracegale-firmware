@@ -1,0 +1,61 @@
+/*
+ * SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * A flash chip for QEMU's mps2-an385 machine, which has none: Zephyr's flash simulator, kept in the machine's 16 MB of
+ * extra RAM at 0x21000000. The test backs that RAM with a file, so its contents last through a reset and through
+ * "switching the power off", as flash does. MCUboot, both image slots and the settings all live in it, and code runs from it.
+ */
+
+/delete-node/ &flash_sim0;
+
+/ {
+	chosen {
+		zephyr,flash = &flash_sim1;
+		zephyr,flash-controller = &sim_flash_controller;
+	};
+
+	psram: memory@21000000 {
+		compatible = "zephyr,memory-region";
+		reg = <0x21000000 0x1000000>;
+		zephyr,memory-region = "PSRAM";
+	};
+};
+
+&sim_flash_controller {
+	erase-value = <0xff>;
+	memory-region = <&psram>;
+
+	flash_sim1: flash_sim@21000000 {
+		compatible = "soc-nv-flash";
+		reg = <0x21000000 0x400000>;
+		erase-block-size = <4096>;
+		write-block-size = <4>;
+
+		partitions {
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			boot_partition: partition@0 {
+				label = "mcuboot";
+				reg = <0x00000000 0x20000>;
+			};
+
+			slot0_partition: partition@20000 {
+				label = "image-0";
+				reg = <0x00020000 0x100000>;
+			};
+
+			slot1_partition: partition@120000 {
+				label = "image-1";
+				reg = <0x00120000 0x100000>;
+			};
+
+			storage_partition: partition@220000 {
+				label = "storage";
+				reg = <0x00220000 0x10000>;
+			};
+		};
+	};
+};

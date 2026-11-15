@@ -1,0 +1,12 @@
+/*
+ * SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include "flash.dtsi"
+
+/ {
+	chosen {
+		zephyr,code-partition = &slot0_partition;
+	};
+};

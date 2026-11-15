@@ -1,0 +1,10 @@
+/*
+ * SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * The simulator's flash takes single bytes. Real flash is often written in blocks, so these tests use blocks of 8.
+ */
+
+&flash0 {
+	write-block-size = <8>;
+};

@@ -1,0 +1,34 @@
+/*
+ * SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * A simulated flash for settings, since the emulated boards have none that can be written.
+ */
+
+/ {
+	sim_flash_controller: sim-flash-controller {
+		compatible = "zephyr,sim-flash";
+		#address-cells = <1>;
+		#size-cells = <1>;
+		erase-value = <0xff>;
+
+		/* Zephyr v3.7's simulator finds its flash by this name. */
+		sim_flash: flash_sim@0 {
+			compatible = "soc-nv-flash";
+			reg = <0x0 0x4000>;
+			erase-block-size = <4096>;
+			write-block-size = <4>;
+
+			partitions {
+				compatible = "fixed-partitions";
+				#address-cells = <1>;
+				#size-cells = <1>;
+
+				storage_partition: partition@0 {
+					label = "storage";
+					reg = <0x0 0x4000>;
+				};
+			};
+		};
+	};
+};

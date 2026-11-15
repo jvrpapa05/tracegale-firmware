@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+# Over-the-air updates against a fake server and a stand-in for MCUboot, on the simulator's flash. The real MCUboot
+# is in the end-to-end test, firmware/tests/e2e/run_ota.py.
+common:
+  platform_allow:
+    - native_sim
+  integration_platforms:
+    - native_sim
+tests:
+  # Zephyr's default MCUboot mode. In v4, that mode keeps the first sector of the second slot free.
+  tracegale.ota:
+    extra_configs:
+      - CONFIG_TRACEGALE_OTA_CONFIRM_TIMEOUT_S=60
+      - CONFIG_TRACEGALE_OTA_HOLD_S=100
+  # A mode in which the image starts at the beginning of the slot in every version.
+  tracegale.ota.overwrite:
+    extra_configs:
+      - CONFIG_MCUBOOT_BOOTLOADER_MODE_OVERWRITE_ONLY=y
+      - CONFIG_TRACEGALE_OTA_CONFIRM_TIMEOUT_S=60
+      - CONFIG_TRACEGALE_OTA_HOLD_S=100
+  # The options an application can change: it confirms images itself, takes older ones, and never waits.
+  tracegale.ota.options:
+    extra_configs:
+      - CONFIG_TRACEGALE_OTA_CONFIRM=n
+      - CONFIG_TRACEGALE_OTA_CONFIRM_TIMEOUT_S=0
+      - CONFIG_TRACEGALE_OTA_DOWNGRADE=y
+      - CONFIG_TRACEGALE_OTA_HOLD_S=0
