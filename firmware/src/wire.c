@@ -434,6 +434,20 @@ bool tg_read_bytes(const struct tg_message *msg, uint32_t key, const uint8_t **d
 	return true;
 }
 
+bool tg_read_text(const struct tg_message *msg, uint32_t key, const char **text, size_t *len)
+{
+	struct reader r;
+	uint8_t major;
+	uint64_t v;
+
+	if (!find(msg, key, &major, &v, &r) || major != MAJOR_TEXT) {
+		return false;
+	}
+	*text = (const char *)&r.data[r.pos];
+	*len = v;
+	return true;
+}
+
 bool tg_read_bool(const struct tg_message *msg, uint32_t key, bool *value)
 {
 	struct reader r;

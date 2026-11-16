@@ -112,7 +112,8 @@ void tracegale_update_pause(bool pause)
 {
 	atomic_set(&paused, pause ? 1 : 0);
 	if (!pause && st.phase == PHASE_DOWNLOADING) {
-		tracegale_connect_now();
+		/* Continues at once, on a link that is up. */
+		tg_core_wake();
 	}
 }
 

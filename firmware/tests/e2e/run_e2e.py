@@ -65,8 +65,8 @@ def free_port():
 
 
 class Device:
-    def __init__(self, exe, flash):
-        self.proc = subprocess.Popen([exe, f"--flash={flash}"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=0)
+    def __init__(self, exe, flash, extra=()):
+        self.proc = subprocess.Popen([exe, f"--flash={flash}", *extra], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=0)
         self.output = ""
         self.expect("uart:~$", 20)
 

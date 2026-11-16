@@ -32,16 +32,35 @@ machine only, such as `127.0.0.1:8883`.
 
 Browsers warn about the admin page, because the certificate comes from the server's own CA.
 
-## Add a device
+## Add devices
 
-Open `https://localhost:8444` and log in. The overview shows the fleet's health. Under **Devices**, choose **Add a device**. The page shows the shell commands that provision it. **The private key appears only
-once.** The server doesn't keep it.
+Open `https://localhost:8444` and log in. The overview shows the fleet's health.
 
-Or use the API:
+**Enrollment keys**, for any number of devices: under **Devices**, choose **Enrollment keys**, then **New enrollment key**. You get
+a build file for the firmware, which holds no secret, and a token, shown once. Devices built with both add themselves on first
+boot, each with its own key pair, made on the device. A key either adds new devices straight away or holds them under **Devices**,
+**Waiting for approval**. A known device asking again with a new key always waits for approval. Revoke a key on its page to stop
+it at once; devices it enrolled keep working. Each enrollment, approval and key change is in the audit log. Or use the API:
+
+```sh
+curl --insecure -H "Authorization: Bearer $TOKEN" -d '{"name":"line 1","approve":false}' https://localhost:8444/api/v1/enrollment-keys
+curl --insecure -H "Authorization: Bearer $TOKEN" https://localhost:8444/api/v1/enrollment-keys
+curl --insecure -H "Authorization: Bearer $TOKEN" -X POST https://localhost:8444/api/v1/enrollment-keys/<id>/revoke
+curl --insecure -H "Authorization: Bearer $TOKEN" -X POST https://localhost:8444/api/v1/devices/<id>/approve   # or /decline
+```
+
+The first answers with the key's `id`, its `token` and its `build_file`. The token is never stored, so this is the only time it's
+returned.
+
+**One device by hand:** under **Devices**, choose **Add a device**, and choose HTTPS or MQTT, which sets the port in the commands.
+The page shows the shell commands that provision it. **The private key appears only once.** The server doesn't keep it. Or use
+the API:
 
 ```sh
 curl --insecure -H "Authorization: Bearer $TOKEN" -d '{"name":"pump 1"}' https://localhost:8444/api/v1/devices
 ```
+
+Its answer has `port` for HTTPS and `mqtt_port` for MQTT, from `TRACEGALE_DEVICE_PORT` and `TRACEGALE_MQTT_PORT`.
 
 The firmware side is in `docs/firmware/README.md`.
 
@@ -303,7 +322,7 @@ restarts.
 |---|---|---|
 | `TRACEGALE_SERVER_NAMES` | `localhost` | Names devices connect to |
 | `TRACEGALE_DEVICE_PORT` | `8443` | Port for devices, over HTTPS |
-| `TRACEGALE_MQTT_PORT` | `8883` | Port for devices, over MQTT. Docker's port syntax, so `127.0.0.1:8883` keeps it on this machine |
+| `TRACEGALE_MQTT_PORT` | `8883` | Port for devices, over MQTT. Docker's port syntax, so `127.0.0.1:8883` keeps it on this machine. The web app shows it in provisioning commands and enrollment build files, so behind a proxy that uses another port, set the port devices reach |
 | `TRACEGALE_ADMIN_PORT` | `8444` | Port for administrators |
 | `TRACEGALE_ADMIN_BIND` | `127.0.0.1` | Address the admin port listens on |
 | `TRACEGALE_EVENT_RETENTION_DAYS` | `90` | How long check-in records are kept. Whole days go at once |

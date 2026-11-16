@@ -6,7 +6,7 @@ if(CONFIG_TRACEGALE)
 
   zephyr_library()
   zephyr_library_sources(src/version.c)
-  zephyr_library_sources_ifdef(CONFIG_TRACEGALE_CORE src/core.c src/store.c src/wire.c)
+  zephyr_library_sources_ifdef(CONFIG_TRACEGALE_CORE src/core.c src/der.c src/store.c src/wire.c)
   # core.c reports the application's version from this generated header, so it must exist first.
   if(TARGET app_version_h)
     add_dependencies(${ZEPHYR_CURRENT_LIBRARY} app_version_h)
@@ -14,7 +14,17 @@ if(CONFIG_TRACEGALE)
   zephyr_library_sources_ifdef(CONFIG_TRACEGALE_RESET_REASON src/reset.c)
   zephyr_library_sources_ifdef(CONFIG_TRACEGALE_SHELL src/shell.c)
   zephyr_library_sources_ifdef(CONFIG_TRACEGALE_TRANSPORT_HTTPS src/transport_https.c)
-  zephyr_library_sources_ifdef(CONFIG_TRACEGALE_TRANSPORT_MQTT src/identity.c)
+  zephyr_library_sources_ifdef(CONFIG_TRACEGALE_ENROLL src/enroll.c)
+  # The key pair is made with Mbed TLS, or its PSA Crypto, whose headers come with its library target.
+  # Linked by name: the Mbed TLS module defines the target after this one is read. The nRF Connect SDK's security library
+  # puts its headers on the global include path itself.
+  if(CONFIG_TRACEGALE_ENROLL AND CONFIG_MBEDTLS AND NOT CONFIG_NRF_SECURITY)
+    zephyr_library_link_libraries(mbedTLS)
+  endif()
+  # A custom transport may need the identity too, for MQTT topics: see include/tracegale/transport.h. Enrollment checks it.
+  if(CONFIG_TRACEGALE_TRANSPORT_MQTT OR CONFIG_TRACEGALE_TRANSPORT_CUSTOM OR CONFIG_TRACEGALE_ENROLL)
+    zephyr_library_sources(src/identity.c)
+  endif()
   zephyr_library_sources_ifdef(CONFIG_TRACEGALE_MQTT_CLIENT_OWN src/transport_mqtt.c)
   zephyr_library_sources_ifdef(CONFIG_TRACEGALE_MQTT_CLIENT_ZEPHYR src/transport_mqtt_zephyr.c)
   # Zephyr's MQTT library opens its own TLS connection.
@@ -63,6 +73,21 @@ if(CONFIG_TRACEGALE)
       "because the board has no random number driver here. If the chip has a random number generator, enable its "
       "device in the devicetree and its driver; otherwise use the vendor's SDK or provide a driver. "
       "Only for a simulator or emulator, set CONFIG_TRACEGALE_INSECURE_RANDOM_FOR_TESTS=y.")
+  endif()
+
+  # The build file of an enrollment key sets CONFIG_TRACEGALE_ENROLL, which Kconfig drops without what it needs.
+  if(NOT CONFIG_TRACEGALE_ENROLL AND NOT "${CONFIG_TRACEGALE_ENROLL_CERT}" STREQUAL "")
+    message(WARNING
+      "Tracegale: this build has an enrollment key's build file, but can't enroll. Enrollment needs settings storage "
+      "(CONFIG_SETTINGS with a backend), to keep the device's key and certificate, and isn't yet available with the nRF91 "
+      "series' modem. Provision such devices with the web app's Add a device commands.")
+  endif()
+  if(CONFIG_TRACEGALE_ENROLL AND ("${CONFIG_TRACEGALE_SERVER_HOST}" STREQUAL "" OR "${CONFIG_TRACEGALE_SERVER_CA}" STREQUAL ""
+     OR "${CONFIG_TRACEGALE_ENROLL_CERT}" STREQUAL ""))
+    message(FATAL_ERROR
+      "Tracegale: CONFIG_TRACEGALE_ENROLL needs the rest of an enrollment key's build file: the server's host, its CA and the "
+      "claim certificate. Download tracegale.conf from the web app's Enrollment keys page, and build with "
+      "-DEXTRA_CONF_FILE=tracegale.conf.")
   endif()
 
   if(NOT CONFIG_TRACEGALE_CORE)

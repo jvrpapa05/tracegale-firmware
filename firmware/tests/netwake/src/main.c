@@ -13,6 +13,7 @@
 
 #include <tracegale/tracegale.h>
 
+#include "fake_creds.h"
 #include "transport.h"
 #include "wire.h"
 
@@ -82,15 +83,10 @@ static void network_up(void)
 
 ZTEST(netwake, test_retries_when_the_network_comes_up_and_only_then)
 {
-	static const uint8_t der[] = {1, 2, 3};
 	struct tracegale_status status;
 	int before;
 
-	zassert_ok(tracegale_provision_server("server.example", 8443));
-	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_CA, der, sizeof(der)));
-	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_CERT, der, sizeof(der)));
-	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_KEY, der, sizeof(der)));
-	zassert_ok(tracegale_provision_commit());
+	FAKE_PROVISION();
 
 	/* The first attempt fails, because the link isn't up yet, and the backoff is long. */
 	zassert_true(wait_for_state(TRACEGALE_STATE_BACKING_OFF, 5), "the first attempt should fail");

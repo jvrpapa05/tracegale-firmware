@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <zephyr/kernel.h>
 
 #if defined(CONFIG_TRACEGALE_METRICS)
 #include <zephyr/sys/iterable_sections.h>
@@ -38,6 +39,8 @@ enum tracegale_error {
 	TRACEGALE_ERR_REFUSED = 13,
 	/** The device certificate names no identity Tracegale can use. */
 	TRACEGALE_ERR_IDENTITY = 14,
+	/** Enrolled, and waiting for someone to approve the device in the web app. It asks again by itself. */
+	TRACEGALE_ERR_WAITING_FOR_APPROVAL = 15,
 };
 
 enum tracegale_state {
@@ -49,6 +52,8 @@ enum tracegale_state {
 	TRACEGALE_STATE_IDLE,
 	/** The last attempt failed, and the next attempt is scheduled. */
 	TRACEGALE_STATE_BACKING_OFF,
+	/** The application said its link is down, with tracegale_link_set(false). Nothing is attempted until it's back. */
+	TRACEGALE_STATE_WAITING_FOR_LINK,
 };
 
 enum tracegale_credential {
@@ -150,7 +155,7 @@ struct tracegale_status {
  * @brief Set the server to connect to. Takes effect at tracegale_provision_commit().
  *
  * @param host Name in the server's certificate, which is always verified.
- * @param port TCP port.
+ * @param port TCP port, or 0 for CONFIG_TRACEGALE_SERVER_PORT: 8443 for HTTPS and 8883 for MQTT unless set otherwise.
  * @return 0, or a negative tracegale_error.
  */
 int tracegale_provision_server(const char *host, uint16_t port);
@@ -168,7 +173,10 @@ int tracegale_provision_credential(enum tracegale_credential type, const uint8_t
  * Without CONFIG_SETTINGS, values last until the next reset. With it, they are stored in plain flash unless the application
  * has encrypted that flash, including the private key. See docs/firmware/README.md.
  *
- * @return 0, or a negative tracegale_error.
+ * Credentials set since the last commit are checked first: each must be one whole DER element, and the key must belong to
+ * the device certificate. A piece entered twice or left out is refused here, with a logged reason, and nothing changes.
+ *
+ * @return 0, or a negative tracegale_error: TRACEGALE_ERR_BAD_ARGUMENT for credentials that fail those checks.
  */
 int tracegale_provision_commit(void);
 
@@ -179,8 +187,59 @@ int tracegale_provision_commit(void);
  */
 int tracegale_provision_erase(void);
 
-/** @brief Ask for an attempt now, instead of waiting for the next one. */
+/**
+ * @brief Give the device an enrollment token, so it enrolls by itself. Needs CONFIG_TRACEGALE_ENROLL and the build file of
+ * the token's enrollment key.
+ *
+ * For devices whose firmware image mustn't hold the token: give it once, at the factory or on the bench, and it's kept in
+ * settings storage until the device has its own certificate, then deleted. The shell has it as tracegale enroll <token>.
+ *
+ * @param token "tge_" and 43 characters, as the web app showed it when the key was made.
+ * @return 0, or a negative tracegale_error: TRACEGALE_ERR_BAD_ARGUMENT for something that isn't a token.
+ */
+int tracegale_enroll(const char *token);
+
+/**
+ * @brief Set the serial number the device enrolls with, such as the one on its label, in place of the chip's ID.
+ *
+ * Kept in settings storage. Call it before the device enrolls: a device that has enrolled keeps the identity it has. The
+ * server tells devices apart by serial within a project, so each must be different.
+ *
+ * @param serial 1 to 64 printable ASCII characters, without spaces.
+ * @return 0, or a negative tracegale_error.
+ */
+int tracegale_set_serial(const char *serial);
+
+/** @brief Ask for an attempt now, instead of waiting for the next one. It doesn't wait: see tracegale_check_in(). */
 void tracegale_connect_now(void);
+
+/**
+ * @brief Make one attempt now, and wait until it has finished.
+ *
+ * For a link the application turns on only for a moment, such as a modem it powers for a check-in: call this while the link
+ * is up, and turn the link off when it returns. The attempt is one that starts after the call, whatever else is under way, and
+ * it's made even while tracegale_link_set(false) holds the schedule back. It sends what's waiting, as a scheduled
+ * check-in does.
+ *
+ * With CONFIG_TRACEGALE_AUTOSTART, Tracegale's thread makes the attempt, and this waits for it up to @p timeout. Without it,
+ * the attempt runs on the calling thread and @p timeout isn't used: each message is bounded by CONFIG_TRACEGALE_TIMEOUT_MS.
+ * Never call it from Tracegale's own thread, such as from tracegale_update_restart().
+ *
+ * @return 0 if the attempt worked, -TRACEGALE_ERR_TIMEOUT if it hadn't finished in time, or the attempt's negative
+ *         tracegale_error, as in tracegale_status.last_error.
+ */
+int tracegale_check_in(k_timeout_t timeout);
+
+/**
+ * @brief Say whether the application's link to the server is up. Up at boot unless CONFIG_TRACEGALE_LINK_UP_AT_BOOT=n.
+ *
+ * While it's down, Tracegale makes no scheduled attempts, so none fail and none count in checkin_failures or the backoff,
+ * and its state is TRACEGALE_STATE_WAITING_FOR_LINK. When it's up again, an attempt that came due meanwhile is made at once.
+ * tracegale_check_in() and tracegale_connect_now() still make an attempt while it's down.
+ *
+ * Use it for a link the application powers or shares, such as a cellular modem. Zephyr's connection manager isn't needed.
+ */
+void tracegale_link_set(bool up);
 
 /** @brief Get the current state, for debugging or display. */
 void tracegale_get_status(struct tracegale_status *status);

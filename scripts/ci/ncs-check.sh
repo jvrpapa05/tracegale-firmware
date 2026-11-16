@@ -104,6 +104,17 @@ fi
 west build -p always --no-sysbuild -b native_sim -d "$out/e2e" "$sample" -- -DEXTRA_CONF_FILE="$sim_overlay"
 python3 "$repo/firmware/tests/e2e/run_e2e.py" "$out/e2e/zephyr/zephyr.exe"
 
+# A custom transport that enrolls, on an nRF52840 with the SDK's sysbuild and security library: an application whose own modem
+# runs TLS, as products with a cellular module built on AT commands do. The build file's values only need to be well formed.
+custom_meta=()
+case "$tag" in
+  ncs-v2.*) custom_meta=(-DCONFIG_BUILD_OUTPUT_META=n -Dmcuboot_CONFIG_BUILD_OUTPUT_META=n) ;;
+esac
+west build -p always --sysbuild -b nrf52840dk/nrf52840 -d "$out/custom-enroll" "$repo/firmware/samples/custom_link" -- \
+  -DCONFIG_TRACEGALE_ENROLL=y -DCONFIG_TRACEGALE_SERVER_HOST=\"fleet.example.com\" -DCONFIG_TRACEGALE_SERVER_CA=\"MAA=\" \
+  -DCONFIG_TRACEGALE_ENROLL_CERT=\"MAA=\" "${custom_meta[@]}"
+expect_on "$out/custom-enroll/custom_link/zephyr/.config" custom-enroll TRACEGALE_ENROLL TRACEGALE_TRANSPORT_CUSTOM NRF_SECURITY
+
 # Nordic's boards, with the SDK's sysbuild, partitions and MCUboot.
 check_sysbuild nrf52840dk/nrf52840
 check_sysbuild nrf54l15dk/nrf54l15/cpuapp

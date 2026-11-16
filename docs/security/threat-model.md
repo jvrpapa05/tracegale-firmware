@@ -1,6 +1,6 @@
 # Threat model
 
-Version 6, 2026-11-10. Each plan reviews this file. Nothing below is implemented yet unless its status says so: the
+Version 7, 2026-11-17, for enrollment. Each plan reviews this file. Nothing below is implemented yet unless its status says so: the
 mitigations are requirements for the plan named.
 
 ## What we protect
@@ -57,7 +57,7 @@ may still be compromised.
 | T1 | A server breach is used to push malicious firmware | Signing keys are never on the server. MCUboot verifies each image before booting it |
 | T2 | An old, vulnerable firmware image is reinstalled | MCUboot downgrade prevention, with hardware counters where available. Documented for each board |
 | T3 | A bad update bricks a fleet | Test swap with automatic revert, health confirmation before committing an image, staged rollout and abort |
-| T4 | A device is impersonated | Unique credentials per device. No shared fleet-wide secret |
+| T4 | A device is impersonated | Unique credentials per device. No shared secret that can act as a device: an enrollment token, shared by the devices built with it, can only ask for new devices' certificates (T21) |
 | T5 | Credentials are extracted from one device | One device's credentials give no access to other devices. Revocation. Use secure storage where hardware has it |
 | T6 | Traffic is read or altered in transit | Authenticated encryption with certificate or key validation, on every link. No unencrypted mode in production builds |
 | T7 | Retired on 2026-11-09: a compromised gateway. Bluetooth and its gateway were dropped, so there is no gateway. The number stays unused | None None |
@@ -74,6 +74,7 @@ may still be compromised.
 | T18 | Repository history is altered or secrets are committed | Linear history check and secret scanning in CI, plus branch protection once available |
 | T19 | Firmware or tools are copied from an incompatible licence | Licence checks in CI, independent implementation |
 | T20 | A crash loop drains a device's battery, flash or data allowance | Rate limit uploads and flash writes on the device, and bound storage use |
+| T21 | An enrollment token leaks, from a firmware image or a build | It can only enroll new devices into one project: no data as an existing device, no updates. A known serial with a new key always waits for approval. Keys can hold every new device for approval, and be revoked at once. Every enrollment is audited and rate-limited. The device's own key is made on the device and never leaves it, so a reply read by another token holder gives nothing away |
 
 ## Status
 
@@ -100,4 +101,5 @@ against the code as it stands, and the ones the later changes affected were upda
 | T15 | In place, tested by a restore drill on every local check: `backup.sh` encrypts the database and the volumes with age to a public key, as each part is produced, so neither the plain database nor the keys reach a disk, and the server holds no key that decrypts. A backup without a key is refused. A restore goes only onto a new install, refuses one that has keys or data, and decrypts the files in full before writing any; during a restore, that plain copy is only in the short-lived container's work volume, which goes with it. Keeping the secret key off the server, and the backups off the host, is the operator's, and the docs say how |
 | T16 | Partly in place: no default passwords, secrets generated at first start, a one-time setup code, and the admin port on this machine only by default. The server warns, in its log and on the overview for server administrators, about device names only this machine has, backups not set up, a trusted proxy range far wider than one proxy, and a nearly full disk. Upgrades take a backup first, and every database version is tested to migrate. Not yet: a warning when the server is out of date |
 | T13 | Partly in place: three roles, viewer, operator and administrator, checked on the server for every page, form and API call, in the wrappers every route goes through. A test tries every route as every role, and another fails when a route is added without a decision about who may use it. The last administrator can't be removed. The audit log records every change. Organizations and projects separate fleets: every store query of fleet data takes the project, the device side matches rollouts and issues within a device's project, and a crash is decoded only with a symbol file from its own project, so a device can't name another project's build ID to have that firmware's functions shown. Tests show nothing crosses between projects in the store, the device side, the decoder and the pages. Not yet: a link to something in another project the account can see says "not found" instead of switching to it |
+| T21 | In place, tested end to end over HTTPS and MQTT on Zephyr v3.7 and v4.5 (`server/test/e2e_compose.py`): a claim certificate's identity can send only `ENROLL`; a revoked key enrolls nothing; a known serial with a new key waits for approval and keeps its identity only once approved; a declined new device is revoked; the token is shown once and never stored; every step is in the audit log. Left to the integrator: a token built into images others can get should use a key that waits for approval, as the web app and docs say. A serial is only as unique as the hardware's ID, or what the application sets |
 | Others | Not started |

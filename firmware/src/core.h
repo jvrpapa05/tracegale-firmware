@@ -11,6 +11,10 @@
 /** Makes one attempt: connect, HELLO, wait for the reply, close. @return 0, or a negative tracegale_error. */
 int tg_core_attempt(void);
 
+/** Wakes Tracegale's thread after provisioning: it attempts at once if the link is up. Unlike tracegale_connect_now(), it
+ *  never attempts while the application says the link is down. */
+void tg_core_wake(void);
+
 /** The application's firmware version, from its VERSION file, as sent to the server, or "unknown". */
 const char *tg_core_fw_version(void);
 

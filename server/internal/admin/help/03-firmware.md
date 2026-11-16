@@ -77,8 +77,9 @@ Devices reach the server over HTTPS unless you choose MQTT, with one more line:
 CONFIG_TRACEGALE_TRANSPORT_MQTT=y
 ```
 
-Everything else stays the same: the credentials, and every feature. Give the device the server's MQTT port, **8883**, in step 5,
-in place of 8443. MQTT costs about 9 KB less flash, but port 8883 is blocked on some networks where HTTPS passes.
+Everything else stays the same: the credentials, and every feature. The device uses the server's MQTT port, **8883**, in place of
+8443: choose **MQTT** when you add it in step 5, and the commands give the right port. MQTT costs about 9 KB less flash, but port
+8883 is blocked on some networks where HTTPS passes.
 
 A cellular link works through Zephyr's own modem driver. The `connect` sample's `overlay-cellular.conf` shows the lines an
 application needs, none of them Tracegale's.
@@ -139,7 +140,7 @@ Or provide them from your own code, for example from a factory programming step:
 ```
 #include <tracegale/tracegale.h>
 
-tracegale_provision_server("tracegale.example.com", 8443);
+tracegale_provision_server("tracegale.example.com", 0); /* 0: the port for this firmware's binding */
 tracegale_provision_credential(TRACEGALE_CREDENTIAL_CA, ca_der, ca_len);
 tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_CERT, cert_der, cert_len);
 tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_KEY, key_der, key_len);

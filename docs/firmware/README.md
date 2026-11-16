@@ -24,6 +24,20 @@ Tracegale uses the connection your application already has, and never turns on n
 
     Zephyr finds the module by itself. For products, pin `revision` to a release tag.
 
+    **If the manifest isn't yours,** as when you build against an nRF Connect SDK installed by `nrfutil sdk-manager` or VS Code,
+    don't edit the SDK's `west.yml`: a reinstall loses the change. Instead, keep Tracegale in your application's own
+    repository, as a git submodule, and name it when you build:
+
+    ```
+    git submodule add https://github.com/jvrpapa05/tracegale-firmware modules/tracegale
+    git -C modules/tracegale checkout v1.0.0-rc.1
+    west build -b <board> -- -DZEPHYR_EXTRA_MODULES=$PWD/modules/tracegale
+    ```
+
+    Or set it once, in your application's `CMakeLists.txt`, before `find_package(Zephyr)`:
+    `list(APPEND ZEPHYR_EXTRA_MODULES ${CMAKE_CURRENT_SOURCE_DIR}/modules/tracegale)`. With sysbuild, that line reaches only
+    the application, which is all that needs Tracegale.
+
 2. Add `CONFIG_TRACEGALE=y` to `prj.conf`.
 
 If the application has TCP networking (`CONFIG_NETWORKING` and `CONFIG_NET_TCP`), that's enough. Tracegale adds its HTTPS and TLS code, with
@@ -36,9 +50,15 @@ Which boards it builds for, with the whole stack's size on each: [boards.md](boa
 
 ## HTTPS or MQTT
 
-A device reaches the server over HTTPS by default. To use MQTT instead, add `CONFIG_TRACEGALE_TRANSPORT_MQTT=y`, and provision
-the server's MQTT port, 8883 unless the server changed it, in place of its HTTPS port. Everything else is the same: the
-credentials, the messages, what the server does with them, and every feature. A device uses one or the other, never both.
+A device reaches the server over HTTPS by default. To use MQTT instead, add `CONFIG_TRACEGALE_TRANSPORT_MQTT=y`. Everything else
+is the same: the credentials, the messages, what the server does with them, and every feature. A device uses one or the other,
+never both.
+
+**The port follows the binding.** Each is on its own port: 8443 for HTTPS and 8883 for MQTT, unless the server changed them.
+Provisioning without a port, `tracegale server <host>`, takes the port for the firmware's binding, from
+`CONFIG_TRACEGALE_SERVER_PORT_HTTPS` or `CONFIG_TRACEGALE_SERVER_PORT_MQTT`. Set those only if your server or proxy uses other
+ports. A device given the other binding's port logs a warning at `tracegale commit`, because otherwise it fails with only
+`last error 3`, a connect error. `tracegale status` shows the binding.
 
 | | HTTPS | MQTT |
 |---|---|---|
@@ -76,7 +96,40 @@ Tracegale turns this on in Mbed TLS (`CONFIG_MBEDTLS_SSL_SERVER_NAME_INDICATION`
 v4.3), at 388 to 404 bytes of flash, depending on the Zephyr version. On the nRF91 series, the modem sends it. A device provisioned with an IP address in
 place of a name can't be routed by name.
 
-`CONFIG_TRACEGALE_TRANSPORT_CUSTOM` is for an application that carries the messages itself, and `_NONE` turns reporting off.
+`CONFIG_TRACEGALE_TRANSPORT_NONE` turns reporting off.
+
+## Your own connection
+
+`CONFIG_TRACEGALE_TRANSPORT_CUSTOM` is for a link Tracegale has no binding for, such as a cellular modem that runs TLS and MQTT
+itself on AT commands. The application provides `tg_transport_get()`, with `open`, `exchange` and `close`. The whole contract
+is in `include/tracegale/transport.h`, a public header that stays stable between releases, so the application never needs
+Tracegale's internal source. In short:
+
+- **Lifecycle:** `open`, then `exchange` for each message, then `close`. `close` follows every `open` that worked, and is never
+  called after one that failed, so a failing `open` cleans up after itself. All calls come from one thread at a time.
+- **Messages are binary.** The link must carry every byte value. Some modems' MQTT commands accept only UTF-8 text unless told
+  otherwise; the SIMCom SIM7600's `AT+CMQTTPAYLOAD`, for example, needs `AT+CMQTTCFG="checkUTF8",0,0`.
+- **Credentials:** `open` reads the server, port and credentials with `tg_store_host()`, `tg_store_port()` and
+  `tg_store_credential()`, in DER form, and writes them to the modem if it keeps its own.
+- **Identity:** for MQTT topics, `tg_identity_from_cert()` reads the device's identity from its certificate. A transport that
+  speaks the MQTT binding also sets `CONFIG_TRACEGALE_BINDING_MQTT=y`, so the device takes the server's MQTT port.
+- **Errors:** return a negative `tracegale_error`, and put your own code in `*detail`, which the shell and status show. Make it
+  say which step failed: it's often the only clue in a device's log.
+- **Verify the server** against the provisioned CA: its chain, signature and host name. Expiry needs the time, which a device
+  without a clock doesn't have; see the header.
+
+**A link that's usually off,** such as a modem the application powers for a moment, needs no schedule of its own:
+
+```c
+/* prj.conf: CONFIG_TRACEGALE_LINK_UP_AT_BOOT=n, so Tracegale waits to be told. */
+modem_power_on();
+int rc = tracegale_check_in(K_SECONDS(120)); /* one attempt, which sends what's waiting; 0 if it worked */
+modem_power_off();
+```
+
+While the link is down, Tracegale makes no attempts, so none fail or count in `checkin_failures`, and `tracegale status` says
+`waiting for link`. `tracegale_link_set(true)` tells it the link is up for longer, and a check-in that came due meanwhile is
+made at once. `tracegale_check_in()` is in the shell too, as `tracegale checkin`.
 
 ## Links
 
@@ -139,20 +192,87 @@ such as cellular, and after an outage, so a crash is reported soon after the dev
 schedule, so a link that comes and goes doesn't cause extra check-ins. The random wait keeps devices that regain the network together
 from reaching the server at the same moment (threat T11). Turn it off with `CONFIG_TRACEGALE_NET_WAKE=n`.
 
-## Provisioning
+Without the connection manager, the application can say when its link is up or down with `tracegale_link_set()`, and check in
+on demand with `tracegale_check_in()`, which waits for the attempt and returns its result. See
+[Your own connection](#your-own-connection).
 
-Each device needs its server and its own credentials, provided at runtime and never compiled in. Certificates are in DER form.
+## Enrollment
 
-Through the shell, in pieces of up to 120 bytes before base64, because shell lines are limited to 256 characters by default and anything
-longer is cut off. Each command reports the total so far, so check that it matches:
+The easy way to give devices their credentials: nothing is copied per device. In the web app, **Devices**, **Enrollment keys**,
+make a key for the devices' project. You get two things:
+
+- **A build file, `tracegale.conf`,** with the server's host, its HTTPS and MQTT ports, its CA, and the key's claim
+  certificate. It holds no secret, so commit it with your application.
+- **A token,** `tge_` and 43 characters, shown once. It's the secret.
+
+Build with the file, and give the devices the token in one of two ways:
 
 ```
-tracegale server fleet.example.com 443
+# The token built in: nothing at all is done per device. Keep this file out of your repository.
+echo 'CONFIG_TRACEGALE_ENROLL_TOKEN="tge_..."' > tracegale-token.conf
+west build -b <board> <app> -- -DEXTRA_CONF_FILE="tracegale.conf;tracegale-token.conf"
+
+# Or the token typed into each device's shell once, so the firmware image holds no secret:
+west build -b <board> <app> -- -DEXTRA_CONF_FILE=tracegale.conf
+uart:~$ tracegale enroll tge_...
+```
+
+From code, `tracegale_enroll(token)` does what the shell command does, for a factory test jig for example.
+
+**What happens on first boot.** The device makes its own P-256 key pair, which never leaves it, and keeps it in settings
+storage. It connects with the claim certificate, through the same mutual TLS as any device, and sends `ENROLL` with its serial
+number and public key. The server answers with a certificate for that key, and the device stores it and checks in at once. It
+appears under **Devices**, named after its serial number, which you can rename later. If the key holds new devices for approval,
+it shows as **Waiting for approval** until someone approves it, and the device asks again every minute or so.
+
+**The serial number** is the chip's own ID from Zephyr's `hwinfo` driver, in hexadecimal, such as the nRF52's FICR device ID. On a
+board without one, the device makes a random serial the first time, and keeps it. `tracegale status` shows it.
+
+**After an erase or a reflash** that loses settings storage, the device makes a new key and asks again. A known serial with a new
+key always waits for approval, whatever the key says, so holding the token isn't enough to take over a device: the web app asks
+**Approve** or **Decline the new key** on the device's page.
+
+**What it needs:**
+
+- `CONFIG_SETTINGS` with a backend, to keep the key and certificate. Without it the build warns, and enrollment is off.
+- P-256 key generation: PSA Crypto on Zephyr from v4.0 and on the nRF Connect SDK, Mbed TLS's elliptic curves on Zephyr v3.7.
+  With Tracegale's own TLS these are already there. A custom transport gets them through `CONFIG_TRACEGALE_ENROLL`.
+- `CONFIG_TRACEGALE_MAX_MESSAGE` of at least `CONFIG_TRACEGALE_CRED_MAX_SIZE` plus 64, which is the default with enrollment.
+- Not yet the nRF91 series' modem, which can't take new credentials while it's connected. Provision those by hand.
+
+**Cost:** measured on `nrf52840dk` with Zephyr v4.5, with the `connect` sample: 4,588 bytes of flash and 152 bytes of RAM, for
+key generation, the enrollment exchange and the chip's ID. A build without updates also grows its message buffer from 512 to 640
+bytes, to fit the certificate.
+
+**Keeping the token safe.** The token can do one thing: add new devices to its project. It can't act as a device that exists,
+reach anyone's data, or offer updates. If it leaks, revoke the key on its page, which stops it at once, and make another; devices
+it enrolled keep working. Built in, anyone with a firmware image has it, so for images you publish, choose **Wait for approval**
+when you make the key, or give the token in the shell instead.
+
+## Provisioning by hand
+
+For a few devices, or a modem that can't enroll yet. Each device needs its server and its own credentials, provided at runtime.
+Certificates are in DER form.
+
+Through the shell, in pieces of up to 120 bytes before base64, because shell lines are limited to 256 characters by default and anything
+longer is cut off. The web app's **Add a device** page gives these commands, with the port for the binding you choose there and
+each credential's expected total:
+
+```
+tracegale cred ca clear
+tracegale cred cert clear
+tracegale cred key clear
+tracegale server fleet.example.com 8443
 tracegale cred ca <base64>
 tracegale cred cert <base64>
 tracegale cred key <base64>
 tracegale commit
 ```
+
+The first three lines start each credential again, so pasting all the commands a second time after a mistake can't double one.
+Each `cred` line reports the total so far. `tracegale commit` checks the credentials before using them: each must be one whole
+DER element, and the key must belong to the certificate. A piece pasted twice or left out is refused with error 12, the log
+says which credential, and nothing changes.
 
 Or from code, with `tracegale_provision_server()`, `tracegale_provision_credential()` and `tracegale_provision_commit()`.
 
@@ -191,7 +311,7 @@ The server decodes a crash with the image's ELF file, so **upload `build/zephyr/
 | `CONFIG_TRACEGALE_CRASH` | `y` where supported | Crash reports |
 | `CONFIG_TRACEGALE_CRASH_RAM_SIZE` | 2048 | RAM kept for a crash, used all the time. A larger crash keeps the registers and the newest part of the stack, which is usually enough |
 | `CONFIG_TRACEGALE_CRASH_KEEP` | `y` with `CONFIG_SETTINGS` | Save a crash that couldn't be sent in settings storage, so it survives a power loss |
-| `CONFIG_TRACEGALE_CRASH_REBOOT` | `y` | Restart after a fatal error. Turn it off if your application has its own `k_sys_fatal_error_handler()`, and restart from there |
+| `CONFIG_TRACEGALE_CRASH_REBOOT` | `y` | Restart after a fatal error. Turn it off if your application has its own `k_sys_fatal_error_handler()`, and restart from there. It's off by itself with the nRF Connect SDK's `CONFIG_RESET_ON_FATAL_ERROR`, whose handler restarts too |
 | `CONFIG_TRACEGALE_BUILD_ID` | `y` | A GNU build ID in the image, 36 bytes of flash |
 | `CONFIG_TRACEGALE_SHELL_TEST` | `n` | `tracegale test crash` and `tracegale test fault`, to check the whole path |
 
@@ -269,7 +389,9 @@ server never has. A breached server can therefore offer a device a wrong image, 
   written to the second slot.
 - **Check the hardware name.** A device reports `CONFIG_TRACEGALE_HARDWARE`, which is the build's board target unless you
   set it, and the server offers it only releases uploaded for exactly that name. Set your own name when two products with
-  different firmware share a board target, so that neither is ever offered the other's image.
+  different firmware share a board target, so that neither is ever offered the other's image. That includes hardware
+  revisions built for one board target that differ by a snippet, an overlay or a signing key: give each revision's build its
+  own name, for example `CONFIG_TRACEGALE_HARDWARE="sensor-hub/rev-b"` in that revision's snippet.
 
 ### What happens
 

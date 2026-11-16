@@ -14,6 +14,7 @@ Every report has the same parts:
 
 | Date | Report | Headline |
 |---|---|---|
+| 2026-11-16 | [First integration on real hardware](2026-11-16-first-hardware-integration.md) | A production nRF52840 board checked in through its SIM7600G modem's own MQTT and TLS to the live server; 14 points of friction found, each fixed or recorded |
 | 2026-11-16 | [Tracegale on every board Zephyr supports](2026-11-15-board-survey.md) | 1,642 of 1,662 board configurations build the one line, 178 build the whole stack; the survey found and fixed a random-number security gap |
 | 2026-11-15 | [Two MQTT clients, measured](2026-11-15-mqtt-clients.md) | Tracegale's own 2.2 KB MQTT client, or Zephyr's library shared with the application; both pass the same end-to-end checks; devices now work behind name-routing proxies |
 | 2026-11-15 | [1,000,000 devices on one server](2026-11-15-load-1m.md) | A million devices checking in hourly, 99% answered within 57 ms, on under one CPU thread and 450 MB; all of them back after an outage within 9 minutes |

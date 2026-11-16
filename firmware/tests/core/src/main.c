@@ -11,6 +11,7 @@
 #include <tracegale/tracegale.h>
 
 #include "core.h"
+#include "fake_creds.h"
 #include "reset.h"
 #include "store.h"
 #include "transport.h"
@@ -192,24 +193,74 @@ ZTEST(core, test_reset_reasons_map_to_the_specification)
 
 ZTEST(core, test_provisioning_needs_everything)
 {
-	static const uint8_t der[] = {1, 2, 3};
 	uint8_t too_big[CONFIG_TRACEGALE_CRED_MAX_SIZE + 1] = {0};
 
 	zassert_equal(tracegale_provision_commit(), -TRACEGALE_ERR_NOT_PROVISIONED);
 	zassert_false(tg_store_ready());
 	zassert_equal(tracegale_provision_server("", 8443), -TRACEGALE_ERR_BAD_ARGUMENT);
-	zassert_equal(tracegale_provision_server("server.example", 0), -TRACEGALE_ERR_BAD_ARGUMENT);
 	zassert_ok(tracegale_provision_server("server.example", 8443));
 	zassert_equal(tracegale_provision_credential(TRACEGALE_CREDENTIAL_CA, too_big, sizeof(too_big)), -TRACEGALE_ERR_TOO_LARGE);
-	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_CA, der, sizeof(der)));
-	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_CERT, der, sizeof(der)));
+	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_CA, fake_cert, sizeof(fake_cert)));
+	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_CERT, fake_cert, sizeof(fake_cert)));
 	zassert_equal(tracegale_provision_commit(), -TRACEGALE_ERR_NOT_PROVISIONED, "the key is still missing");
-	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_KEY, der, sizeof(der)));
+	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_KEY, fake_key_pkcs8, sizeof(fake_key_pkcs8)));
 	zassert_ok(tracegale_provision_commit());
 	zassert_true(tg_store_ready());
 	zassert_mem_equal(tg_store_host(), "server.example", 15);
+	zassert_equal(tg_store_port(), 8443);
 	zassert_ok(tracegale_provision_erase());
 	zassert_false(tg_store_ready());
+}
+
+/* Without a port, the one for the firmware's binding: this build's custom transport speaks HTTPS. */
+ZTEST(core, test_a_missing_port_follows_the_binding)
+{
+	zassert_ok(tracegale_provision_server("server.example", 0));
+	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_CA, fake_cert, sizeof(fake_cert)));
+	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_CERT, fake_cert, sizeof(fake_cert)));
+	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_KEY, fake_key_sec1, sizeof(fake_key_sec1)));
+	zassert_ok(tracegale_provision_commit());
+	zassert_equal(tg_store_port(), CONFIG_TRACEGALE_SERVER_PORT_HTTPS);
+	zassert_ok(tracegale_provision_erase());
+}
+
+static void enter_in_pieces(enum tracegale_credential type, const uint8_t *der, size_t len, bool twice)
+{
+	for (size_t at = 0; at < len; at += 40) {
+		size_t n = MIN(40, len - at);
+
+		zassert_ok(tg_store_append(type, &der[at], n));
+		if (twice && at == 40) {
+			zassert_ok(tg_store_append(type, &der[at], n));
+		}
+	}
+}
+
+/* What happened on the first real hardware: a piece pasted twice was stored, and TLS failed with no clue why. */
+ZTEST(core, test_commit_refuses_bad_credentials)
+{
+	zassert_ok(tracegale_provision_server("server.example", 8443));
+	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_CA, fake_cert, sizeof(fake_cert)));
+	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_KEY, fake_key_pkcs8, sizeof(fake_key_pkcs8)));
+
+	enter_in_pieces(TRACEGALE_CREDENTIAL_DEVICE_CERT, fake_cert, sizeof(fake_cert), true);
+	zassert_equal(tracegale_provision_commit(), -TRACEGALE_ERR_BAD_ARGUMENT, "a doubled piece");
+	zassert_false(tg_store_ready(), "nothing may change when commit refuses");
+
+	tg_store_clear_pending(TRACEGALE_CREDENTIAL_DEVICE_CERT);
+	enter_in_pieces(TRACEGALE_CREDENTIAL_DEVICE_CERT, fake_cert, sizeof(fake_cert) - 40, false);
+	zassert_equal(tracegale_provision_commit(), -TRACEGALE_ERR_BAD_ARGUMENT, "a missing piece");
+
+	tg_store_clear_pending(TRACEGALE_CREDENTIAL_DEVICE_CERT);
+	enter_in_pieces(TRACEGALE_CREDENTIAL_DEVICE_CERT, fake_cert, sizeof(fake_cert), false);
+	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_KEY, fake_key_other, sizeof(fake_key_other)));
+	zassert_equal(tracegale_provision_commit(), -TRACEGALE_ERR_BAD_ARGUMENT, "another device's key");
+
+	/* A key without its public half can't be compared, and is left to TLS. */
+	zassert_ok(tracegale_provision_credential(TRACEGALE_CREDENTIAL_DEVICE_KEY, fake_key_sec1_no_public, sizeof(fake_key_sec1_no_public)));
+	zassert_ok(tracegale_provision_commit());
+	zassert_true(tg_store_ready());
+	zassert_ok(tracegale_provision_erase());
 }
 
 ZTEST_SUITE(core, NULL, NULL, before, NULL, NULL);

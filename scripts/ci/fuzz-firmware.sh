@@ -20,18 +20,19 @@ flags=(-g -O1 -fsanitize=fuzzer,address,undefined -fno-sanitize-recover=all -Wal
   -I"$fuzz/shim" -I"$repo/firmware/src" -I"$repo/firmware/include")
 
 mkdir -p "$work"
-# target and the firmware sources it tests.
+# target and the firmware sources it tests, separated by spaces.
 targets=(
   "wire:$repo/firmware/src/wire.c"
   "mqtt:$repo/firmware/src/transport_mqtt.c"
-  "identity:$repo/firmware/src/identity.c"
+  "identity:$repo/firmware/src/identity.c $repo/firmware/src/der.c"
 )
 failed=()
 for entry in "${targets[@]}"; do
   target=${entry%%:*}
   source=${entry#*:}
   echo "== Firmware fuzzing: $target, $seconds s"
-  clang "${flags[@]}" "$fuzz/fuzz_$target.c" "$source" -o "$work/fuzz_$target"
+  read -r -a sources <<<"$source"
+  clang "${flags[@]}" "$fuzz/fuzz_$target.c" "${sources[@]}" -o "$work/fuzz_$target"
   corpus="$work/corpus-$target"
   python3 "$fuzz/make_corpus.py" "$target" "$corpus"
   if ! "$work/fuzz_$target" -max_total_time="$seconds" -print_final_stats=1 -artifact_prefix="$work/crash-$target-" \

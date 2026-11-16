@@ -120,6 +120,14 @@ config TRACEGALE_AUTOSTART
 	bool "Start reporting automatically once provisioned"
 	default y
 
+config TRACEGALE_LINK_UP_AT_BOOT
+	bool "The application's link counts as up at boot"
+	default y
+	help
+	  Turn it off for a link the application powers only now and then, such as a cellular modem it switches on for a
+	  moment: Tracegale then attempts nothing until tracegale_link_set(true) or tracegale_check_in(), so no attempt fails
+	  for want of a link. See tracegale_link_set() in tracegale.h.
+
 # Only when the application already uses Zephyr's connection manager. Tracegale never turns it on.
 config TRACEGALE_NET_WAKE
 	bool "Try again soon after the network comes up"
@@ -176,10 +184,12 @@ config TRACEGALE_TIMEOUT_MS
 config TRACEGALE_MAX_MESSAGE
 	int "Largest message sent or received, in bytes"
 	default 1024 if TRACEGALE_OTA
+	default 640 if TRACEGALE_ENROLL
 	default 512 if TRACEGALE_CRASH
 	default 256
 	range 128 65535
 	help
+	  Enrollment needs room for the device's certificate in one reply: TRACEGALE_CRED_MAX_SIZE and 64 bytes.
 	  Also sets the size of each piece of an upload or a download, and one buffer of this size is kept in RAM. With
 	  crash reports on, 512 sends a 2 KB crash in 5 messages, rather than 10. With updates on, 1024 downloads a
 	  250 KB image in about 250 messages, rather than 500.
@@ -192,6 +202,79 @@ config TRACEGALE_HARDWARE
 	  for exactly this name. The default is the board target of the build, such as nrf52840dk/nrf52840, which
 	  includes the board's revision when one is given. Set your own name when products with different firmware
 	  share one board target, or when one firmware serves several. Up to 64 bytes.
+
+config TRACEGALE_BINDING_MQTT
+	bool "The connection speaks Tracegale's MQTT binding" if TRACEGALE_TRANSPORT_CUSTOM
+	default y if TRACEGALE_TRANSPORT_MQTT
+	help
+	  Set by the MQTT transport. A custom transport that publishes Tracegale's messages over MQTT sets it too, so the
+	  device picks the server's MQTT port and says it's MQTT. Leave it off for one that speaks HTTPS.
+
+config TRACEGALE_SERVER_PORT_HTTPS
+	int "The server's HTTPS port for devices"
+	default 8443
+	range 1 65535
+	help
+	  TRACEGALE_DEVICE_PORT on the server. Change it only if the server, or the proxy in front of it, uses another.
+
+config TRACEGALE_SERVER_PORT_MQTT
+	int "The server's MQTT port"
+	default 8883
+	range 1 65535
+	help
+	  TRACEGALE_MQTT_PORT on the server. Change it only if the server, or the proxy in front of it, uses another.
+
+config TRACEGALE_SERVER_PORT
+	int
+	default TRACEGALE_SERVER_PORT_MQTT if TRACEGALE_BINDING_MQTT
+	default TRACEGALE_SERVER_PORT_HTTPS
+	help
+	  The port used when provisioning doesn't give one: the server's port for this firmware's binding.
+
+config TRACEGALE_SERVER_HOST
+	string "The server's host name, for enrollment"
+	default ""
+	help
+	  From the build file of an enrollment key, tracegale.conf. Must be a name in the server's certificate.
+
+config TRACEGALE_SERVER_CA
+	string "The server's CA certificate, DER in base64, for enrollment"
+	default ""
+	help
+	  From the build file of an enrollment key. Public, not a secret.
+
+config TRACEGALE_ENROLL_CERT
+	string "The enrollment key's claim certificate, DER in base64"
+	default ""
+	help
+	  From the build file of an enrollment key. Public, not a secret: without the token it's useless.
+
+config TRACEGALE_ENROLL
+	bool "Enroll with the server on first boot"
+	depends on TRACEGALE_CORE && SETTINGS && !TRACEGALE_CRED_NRF_MODEM
+	select BASE64
+	imply HWINFO
+	# PSA Crypto: in the nRF Connect SDK from v3.0 that brings its security library too, and before that NRF_SECURITY
+	# does. Zephyr v3.7 has no PSA_CRYPTO, and gets Mbed TLS's own elliptic curves. ZEPHYR_NRF_MODULE is set in the SDK.
+	imply PSA_CRYPTO if !TRACEGALE_TLS
+	imply NRF_SECURITY if !TRACEGALE_TLS && ZEPHYR_NRF_MODULE
+	imply MBEDTLS if !TRACEGALE_TLS && !ZEPHYR_NRF_MODULE
+	imply MBEDTLS_ECP_C if !TRACEGALE_TLS && !ZEPHYR_NRF_MODULE
+	imply MBEDTLS_ECP_DP_SECP256R1_ENABLED if !TRACEGALE_TLS && !ZEPHYR_NRF_MODULE
+	help
+	  A device with an enrollment key's build file and its token makes its own key pair, which never leaves it, and asks the
+	  server for its certificate, so nothing is copied per device. The web app's Enrollment keys page makes the build file and
+	  the token. Needs settings storage, to keep the device's key and certificate. Not yet for the nRF91 series' modem, which
+	  can't take new credentials while connected. See docs/firmware/README.md, "Enrollment".
+
+config TRACEGALE_ENROLL_TOKEN
+	string "Enrollment token, built in"
+	default ""
+	depends on TRACEGALE_ENROLL
+	help
+	  "tge_" and 43 characters. Built in, nothing is done per device, but anyone with the firmware image has the token: it
+	  can add devices to the key's project, nothing more. Keep it in a file you don't commit, and choose approval for keys
+	  whose images others can get. Or leave it empty, and give each device the token with tracegale enroll <token>.
 
 config TRACEGALE_HOST_MAX_LEN
 	int "Longest server host name"
@@ -375,10 +458,13 @@ config TRACEGALE_CRASH_KEEP
 config TRACEGALE_CRASH_REBOOT
 	bool "Restart after a fatal error"
 	default y
+	# The nRF Connect SDK's own handler, which restarts too. Both would define k_sys_fatal_error_handler() and fail to link.
+	depends on !RESET_ON_FATAL_ERROR
 	select REBOOT
 	help
 	  Zephyr's default is to halt, and a halted device never reports its crash. This provides
-	  k_sys_fatal_error_handler(), so turn it off if your application has its own, and restart from there.
+	  k_sys_fatal_error_handler(), so turn it off if your application has its own, and restart from there. It's off by
+	  itself with the nRF Connect SDK's CONFIG_RESET_ON_FATAL_ERROR, whose handler restarts as well.
 
 endif # TRACEGALE_CRASH
 
@@ -588,6 +674,31 @@ endif # TRACEGALE_TLS && !TRACEGALE_MODEM_SOCKETS
 # The same TLS (ECDHE-ECDSA with AES-128-GCM and SHA-256 on P-256) in the nRF Connect SDK's own crypto, which takes PSA's
 # names. The SDK v3.4 derives these from the Mbed TLS options above; v3.3 doesn't, and then stops with "MBEDTLS_PK_C defined,
 # but not all prerequisites" (found 2026-11-16 on the nRF54L15). Only with the SDK's crypto, so upstream builds don't change.
+# Enrollment makes a P-256 key pair: through PSA Crypto in Zephyr from v4.0 and the nRF Connect SDK, and Mbed TLS's own
+# elliptic curves in Zephyr v3.7. With Tracegale's TLS these are on already; TRACEGALE_ENROLL implies them for a custom
+# transport.
+if TRACEGALE_ENROLL && (PSA_CRYPTO || NRF_SECURITY)
+
+config PSA_WANT_ECC_SECP_R1_256
+	default y
+
+config PSA_WANT_KEY_TYPE_ECC_KEY_PAIR_GENERATE
+	default y
+
+config PSA_WANT_KEY_TYPE_ECC_KEY_PAIR_IMPORT
+	default y
+
+config PSA_WANT_KEY_TYPE_ECC_KEY_PAIR_EXPORT
+	default y
+
+config PSA_WANT_KEY_TYPE_ECC_PUBLIC_KEY
+	default y
+
+config PSA_WANT_ALG_ECDSA
+	default y
+
+endif
+
 if TRACEGALE_TLS && !TRACEGALE_MODEM_SOCKETS && NRF_SECURITY
 
 config PSA_WANT_ALG_ECDH

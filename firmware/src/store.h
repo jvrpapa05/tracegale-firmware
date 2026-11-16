@@ -22,11 +22,18 @@ bool tg_store_ready(void);
 void tg_store_attempt_begin(void);
 void tg_store_attempt_end(void);
 
-/** The credential in use, or NULL with *len 0 when there's none. It stays valid until the attempt ends. */
-const uint8_t *tg_store_credential(enum tracegale_credential type, size_t *len);
+/* tg_store_credential(), tg_store_host() and tg_store_port() are public, for custom transports. */
+#include <tracegale/transport.h>
 
-const char *tg_store_host(void);
-uint16_t tg_store_port(void);
+/**
+ * For enrollment: uses an enrollment key's claim credentials for one connection, without storing them or counting as
+ * provisioned. Called with the attempt lock held; tg_store_drop_claim() undoes it. @return 0, or a negative tracegale_error.
+ */
+int tg_store_use_claim(const char *host, uint16_t port, const char *ca_b64, const char *cert_b64, const uint8_t *key, size_t key_len);
+void tg_store_drop_claim(void);
+
+/** For enrollment: sets a credential waiting for commit from base64, decoded in place. @return 0, or a negative tracegale_error. */
+int tg_store_pending_b64(enum tracegale_credential type, const char *b64);
 
 /** Adds to a credential being entered in pieces, for the shell. @return 0, or a negative tracegale_error. */
 int tg_store_append(enum tracegale_credential type, const uint8_t *data, size_t len);

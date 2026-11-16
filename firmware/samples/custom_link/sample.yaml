@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering
+# SPDX-License-Identifier: Apache-2.0
+
+sample:
+  name: Tracegale over the application's own link
+  description: A custom transport, written against the public include/tracegale/transport.h only, for a link the
+    application powers now and then.
+common:
+  build_only: true
+  platform_allow:
+    - native_sim
+    - qemu_cortex_m3
+  integration_platforms:
+    - native_sim
+tests:
+  sample.tracegale.custom_link: {}
+  # With an enrollment key's build file. The values only need to be well formed to build.
+  sample.tracegale.custom_link.enroll:
+    extra_configs:
+      - CONFIG_TRACEGALE_ENROLL=y
+      - CONFIG_TRACEGALE_SERVER_HOST="fleet.example.com"
+      - CONFIG_TRACEGALE_SERVER_CA="MAA="
+      - CONFIG_TRACEGALE_ENROLL_CERT="MAA="

@@ -20,6 +20,7 @@ TYPES = {
     1: "HELLO", 2: "ACK", 3: "ERROR", 4: "METRICS", 5: "LOGS",
     10: "XFER_START", 11: "XFER_CHUNK", 12: "XFER_STATUS",
     20: "IMG_CHECK", 21: "IMG_OFFER", 22: "IMG_GET", 23: "IMG_DATA", 24: "IMG_RESULT",
+    30: "ENROLL", 31: "ENROLLED",
 }
 
 # Field names per message type, used only for display. Unknown fields stay visible under their number.
@@ -35,6 +36,8 @@ FIELDS = {
     "IMG_GET": {0: "image_ref", 1: "offset", 2: "len"},
     "IMG_DATA": {0: "image_ref", 1: "offset", 2: "data"},
     "IMG_RESULT": {0: "image_ref", 1: "outcome"},
+    "ENROLL": {0: "serial", 1: "hardware", 2: "public_key"},
+    "ENROLLED": {0: "device_id", 1: "cert"},
     "METRICS": {0: "period_s", 1: "system", 2: "gauges", 3: "counters"},
     "LOGS": {0: "boot", 1: "uptime_ms", 2: "records", 3: "dropped"},
 }
@@ -42,7 +45,7 @@ FIELDS = {
 ERRORS = {
     1: "malformed", 2: "unsupported_version", 3: "unsupported_type", 4: "missing_field", 5: "too_large",
     6: "bad_offset", 7: "hash_mismatch", 8: "unknown_transfer", 9: "unknown_image", 10: "rate_limited",
-    11: "not_authorized", 12: "server_busy", 13: "unsupported_kind",
+    11: "not_authorized", 12: "server_busy", 13: "unsupported_kind", 14: "pending_approval",
 }
 
 # IMG_RESULT's outcome: how an update ended on the device.

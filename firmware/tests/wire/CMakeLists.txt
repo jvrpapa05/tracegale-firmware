@@ -15,8 +15,9 @@ add_custom_command(OUTPUT ${generated}
 add_custom_target(vectors_inc DEPENDS ${generated})
 add_dependencies(app vectors_inc)
 
-target_include_directories(app PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${ZEPHYR_TRACEGALE_MODULE_DIR}/firmware/src)
+target_include_directories(app PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${ZEPHYR_TRACEGALE_MODULE_DIR}/firmware/src
+  ${ZEPHYR_TRACEGALE_MODULE_DIR}/firmware/include)
 target_sources(app PRIVATE src/main.c ${ZEPHYR_TRACEGALE_MODULE_DIR}/firmware/src/wire.c
   ${ZEPHYR_TRACEGALE_MODULE_DIR}/firmware/src/sha256.c)
-# The identity reader is pure code, tested here although only the MQTT binding builds it.
-target_sources(app PRIVATE ${ZEPHYR_TRACEGALE_MODULE_DIR}/firmware/src/identity.c)
+# The identity and DER readers are pure code, tested here although only some builds use them.
+target_sources(app PRIVATE ${ZEPHYR_TRACEGALE_MODULE_DIR}/firmware/src/identity.c ${ZEPHYR_TRACEGALE_MODULE_DIR}/firmware/src/der.c)

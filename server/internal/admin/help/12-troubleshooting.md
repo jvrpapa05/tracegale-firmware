@@ -22,10 +22,11 @@ On the device, run `tracegale status` and look at `last error`:
 |---|---|---|
 | 1 | Not provisioned | Paste all the commands from **Add a device**, ending with `tracegale commit` |
 | 2 | The server's name didn't resolve | The name, and the application's DNS |
-| 3 | No connection | The network, the port, and any firewall |
+| 3 | No connection | The network, the port, and any firewall. An MQTT device needs the MQTT port, 8883, and an HTTPS device 8443: `tracegale status` shows the binding, and `tracegale commit` warns about the other one's port |
 | 4 | TLS failed | The name in `tracegale server` must be one the server's certificate has, and the credentials must come from this server |
 | 9 | The server refused a message | The number after `detail` is the server's reason. 11 means the device was revoked |
 | 11 | Storage failed, on `tracegale commit` or `erase` | On an nRF91 series device, the modem's link must be off. See "In the nRF Connect SDK" in [Add Tracegale to your firmware](03-firmware.md). Otherwise, the application's settings storage |
+| 12 | `tracegale commit` refused the credentials | A piece is missing or was pasted twice, or the key isn't this certificate's. The device's log says which. Paste all the commands again: they start by clearing |
 | 13 | Over MQTT, the broker refused the device | Detail 5: the device's certificate isn't from this server. Use the port for MQTT, 8883, not 8443 |
 | 14 | Over MQTT, the certificate names no device | The device's certificate must be the one this server issued for it |
 

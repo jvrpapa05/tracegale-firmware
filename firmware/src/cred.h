@@ -15,23 +15,35 @@
 #include <tracegale/tracegale.h>
 
 /**
- * Makes these credentials the ones TLS uses. They stay at these addresses until tg_cred_release().
+ * @brief Makes these credentials the ones the link uses. They stay at these addresses until tg_cred_release().
+ *
+ * It may be lazy: a modem that's off when the device is provisioned can keep the pointers, and write the credentials to the
+ * modem in open(). Return an error only if they can never work, since it fails provisioning.
+ *
  * @return 0, or a negative tracegale_error.
  */
 int tg_cred_install(const uint8_t cred[TRACEGALE_CREDENTIAL_COUNT][CONFIG_TRACEGALE_CRED_MAX_SIZE],
 		    const uint16_t len[TRACEGALE_CREDENTIAL_COUNT]);
 
 /**
- * Called after a successful tg_cred_install with a copy of the private key the store holds. Where a device such as a modem
- * keeps the key itself, it's replaced with a marker that holds only its hash, so no copy stays in the store's memory or in
- * settings storage. Zephyr's TLS credentials need the key itself, and leave it.
+ * @brief Called after tg_cred_install() worked, with the store's copy of the private key.
+ *
+ * Where the link keeps the key for good, replace it with something that isn't the key, and set *len, so no copy stays in the
+ * store's memory or settings storage. A backend that must write the key at every session, such as one whose modem forgets
+ * it at power-off, leaves it as it is: the key then stays in settings storage, in plain flash unless the application
+ * encrypts it. That is the same as with Zephyr's own TLS.
  */
 void tg_cred_forget_key(uint8_t key[CONFIG_TRACEGALE_CRED_MAX_SIZE], uint16_t *len);
 
-/** Called before the installed credentials' memory changes, so TLS stops reading it. */
+/** @brief Called before the installed credentials' memory changes, so the link stops reading it. */
 void tg_cred_release(void);
 
-/** Removes the credentials for good, when the device is erased. @return 0, or a negative tracegale_error. */
+/**
+ * @brief Removes the credentials for good, when the device is erased.
+ *
+ * A link that's off may remove them at its next open() instead, before connecting: it must never connect with erased
+ * credentials. @return 0, or a negative tracegale_error.
+ */
 int tg_cred_erase(void);
 
 #endif /* TG_CRED_H_ */

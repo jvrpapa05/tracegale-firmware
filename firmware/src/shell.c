@@ -25,8 +25,11 @@
 #include "logs.h"
 #endif
 #include "store.h"
+#if defined(CONFIG_TRACEGALE_ENROLL)
+#include "enroll.h"
+#endif
 
-static const char *const state_names[] = {"unprovisioned", "connecting", "idle", "backing off"};
+static const char *const state_names[] = {"unprovisioned", "connecting", "idle", "backing off", "waiting for link"};
 
 static int cmd_status(const struct shell *sh, size_t argc, char **argv)
 {
@@ -39,6 +42,11 @@ static int cmd_status(const struct shell *sh, size_t argc, char **argv)
 	shell_print(sh, "tracegale: %s", tracegale_version());
 	shell_print(sh, "state: %s", state_names[s.state]);
 	shell_print(sh, "server: %s:%u", tg_store_ready() ? tg_store_host() : "none", tg_store_port());
+	shell_print(sh, "binding: %s", IS_ENABLED(CONFIG_TRACEGALE_BINDING_MQTT) ? "mqtt" : "https");
+#if defined(CONFIG_TRACEGALE_ENROLL)
+	shell_print(sh, "serial: %s%s", tg_enroll_serial(),
+		    tg_store_ready() ? "" : (tg_enroll_wanted() ? ", enrolling" : ", needs a token: tracegale enroll <token>"));
+#endif
 	shell_print(sh, "attempts: %u", s.attempts);
 	shell_print(sh, "successes: %u", s.successes);
 	shell_print(sh, "last error: %d, detail %d", s.last_error, s.last_error_detail);
@@ -129,11 +137,12 @@ static int cmd_metrics(const struct shell *sh, size_t argc, char **argv)
 
 static int cmd_server(const struct shell *sh, size_t argc, char **argv)
 {
-	long port = strtol(argv[2], NULL, 10);
+	/* Without a port, the one for this firmware's binding. */
+	long port = argc > 2 ? strtol(argv[2], NULL, 10) : 0;
 	int rc;
 
-	ARG_UNUSED(argc);
-	rc = (port > 0 && port <= UINT16_MAX) ? tracegale_provision_server(argv[1], port) : -TRACEGALE_ERR_BAD_ARGUMENT;
+	rc = (port >= 0 && port <= UINT16_MAX && (argc == 2 || port > 0)) ? tracegale_provision_server(argv[1], port)
+									    : -TRACEGALE_ERR_BAD_ARGUMENT;
 	if (rc != 0) {
 		shell_error(sh, "error %d", -rc);
 	}
@@ -183,6 +192,11 @@ static int cmd_commit(const struct shell *sh, size_t argc, char **argv)
 
 	ARG_UNUSED(argc);
 	ARG_UNUSED(argv);
+	if (rc == -TRACEGALE_ERR_BAD_ARGUMENT) {
+		shell_error(sh, "error %d: a credential is incomplete, doubled, or the key doesn't match the certificate. "
+				"Check each cred total; the log says which", -rc);
+		return rc;
+	}
 	if (rc != 0) {
 		shell_error(sh, "error %d", -rc);
 		return rc;
@@ -205,6 +219,26 @@ static int cmd_erase(const struct shell *sh, size_t argc, char **argv)
 	return 0;
 }
 
+#if defined(CONFIG_TRACEGALE_ENROLL)
+static int cmd_enroll(const struct shell *sh, size_t argc, char **argv)
+{
+	int rc = argc > 2 ? tracegale_set_serial(argv[2]) : 0;
+
+	if (rc != 0) {
+		shell_error(sh, "error %d: a serial is 1 to 64 printable characters, without spaces", -rc);
+		return rc;
+	}
+	rc = tracegale_enroll(argv[1]);
+	if (rc != 0) {
+		shell_error(sh, "error %d: %s", -rc,
+			    rc == -TRACEGALE_ERR_BAD_ARGUMENT ? "not an enrollment token, which starts tge_ and has 47 characters" : "can't keep it");
+		return rc;
+	}
+	shell_print(sh, "enrolling");
+	return 0;
+}
+#endif
+
 static int cmd_connect(const struct shell *sh, size_t argc, char **argv)
 {
 	ARG_UNUSED(sh);
@@ -213,6 +247,22 @@ static int cmd_connect(const struct shell *sh, size_t argc, char **argv)
 	tracegale_connect_now();
 	return 0;
 }
+
+#if defined(CONFIG_TRACEGALE_AUTOSTART)
+static int cmd_check_in(const struct shell *sh, size_t argc, char **argv)
+{
+	ARG_UNUSED(argc);
+	ARG_UNUSED(argv);
+	int rc = tracegale_check_in(K_SECONDS(120));
+
+	if (rc != 0) {
+		shell_error(sh, "error %d", -rc);
+		return rc;
+	}
+	shell_print(sh, "checked in");
+	return 0;
+}
+#endif
 
 #if defined(CONFIG_TRACEGALE_SHELL_TEST)
 /* Kept out of line, so that a backtrace shows these frames. */
@@ -262,12 +312,20 @@ SHELL_STATIC_SUBCMD_SET_CREATE(tracegale_test_cmds,
 
 SHELL_STATIC_SUBCMD_SET_CREATE(tracegale_cmds,
 	SHELL_CMD_ARG(status, NULL, "Show state", cmd_status, 1, 0),
-	SHELL_CMD_ARG(server, NULL, "Set the server: <host> <port>", cmd_server, 3, 0),
+	SHELL_CMD_ARG(server, NULL, "Set the server: <host> [port], the port for this firmware's binding if left out",
+		      cmd_server, 2, 1),
 	SHELL_CMD_ARG(cred, NULL, "Add a piece of a credential, and check the total it reports: <ca|cert|key> <base64|clear>",
 		      cmd_cred, 3, 0),
 	SHELL_CMD_ARG(commit, NULL, "Use and store what was provisioned", cmd_commit, 1, 0),
 	SHELL_CMD_ARG(erase, NULL, "Forget the server and credentials", cmd_erase, 1, 0),
+#if defined(CONFIG_TRACEGALE_ENROLL)
+	SHELL_CMD_ARG(enroll, NULL, "Enroll with the token of this build's enrollment key: <token> [serial, if not the chip's ID]",
+		      cmd_enroll, 2, 1),
+#endif
 	SHELL_CMD_ARG(connect, NULL, "Attempt now", cmd_connect, 1, 0),
+#if defined(CONFIG_TRACEGALE_AUTOSTART)
+	SHELL_CMD_ARG(checkin, NULL, "Attempt now, wait for it, and say how it went", cmd_check_in, 1, 0),
+#endif
 #if defined(CONFIG_TRACEGALE_LOGS)
 	SHELL_CMD_ARG(logs, NULL, "Show the log records waiting to be sent", cmd_logs, 1, 0),
 #endif

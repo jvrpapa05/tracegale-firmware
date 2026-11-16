@@ -24,6 +24,10 @@ Crash, OTA, metric and log code uses only the message layer.
 A device is identified only by the credentials that secured its connection. No message carries a device identity that
 the server trusts, so a compromised device can't claim to be another one (threats T4 and T8).
 
+A device's identity is `dev-` and 32 hexadecimal digits. An **enrollment key's** is `enroll-` and 32: its claim certificate,
+built into firmware, lets a device without credentials of its own connect, and send only `ENROLL`. See
+[Enrollment](#enrollment).
+
 ## How it fits together
 
 These diagrams show what happens; the sections below define each message exactly.
@@ -199,6 +203,8 @@ D is device and S is server.
 | 22 | `IMG_GET` | D to S | 0 `image_ref` uint, 1 `offset` uint, 2 `len` uint | `IMG_DATA` |
 | 23 | `IMG_DATA` | S to D | 0 `image_ref` uint, 1 `offset` uint, 2 `data` bytes | None |
 | 24 | `IMG_RESULT` | D to S | 0 `image_ref` uint, 1 `outcome` uint | `ACK` |
+| 30 | `ENROLL` | D to S | 0 `serial` text, 1 to 64 printable ASCII without spaces, 1 `hardware` text, 2 `public_key` bytes: P-256, uncompressed, 65 | `ENROLLED`, or `ERROR` `pending_approval` |
+| 31 | `ENROLLED` | S to D | 0 `device_id` text, 1 `cert` bytes: the device's certificate, DER | None |
 
 `ACK` bit 0 of `pending` means an update may be available, so a device can learn this from any reply, with no open
 connection or extra polling. `XFER_START` `kind` is 1 for a coredump, the only kind in use; 2 is reserved, and logs travel in `LOGS` messages
@@ -393,6 +399,7 @@ Rules:
 | 11 | `not_authorized` | This device may not do this | Don't retry until the next boot |
 | 12 | `server_busy` | Temporary overload | Wait `retry_after_s`, or back off with jitter |
 | 13 | `unsupported_kind` | Unknown `kind` | Ignore that offer or transfer |
+| 14 | `pending_approval` | An enrolling device, or its new key, waits for a person to approve it | Send `ENROLL` again after `retry_after_s`, with the same key |
 
 ## Cost per message
 
@@ -409,6 +416,31 @@ Measured with the decoder's encoder:
 
 That's about 3% on a 512-byte chunk.
 
+## Enrollment
+
+A device with no credentials of its own gets them from an enrollment key:
+
+1. The firmware's build has the server's host and CA, and the key's **claim certificate**. The device is given the claim's private
+   key, the **token**: `tge_` and the raw 32-byte P-256 scalar in unpadded base64url.
+2. The device makes its own P-256 key pair once, and keeps it until it has a certificate.
+3. It connects as usual, with the claim certificate, over either binding, and sends `ENROLL` with its serial number, its hardware
+   name and its public key.
+4. The server answers `ENROLLED` with the device's ID and a certificate for that public key, whose common name is the ID. The
+   device checks the certificate is for its own key and names that ID, keeps both, and from then on connects as itself.
+5. Or the server answers `ERROR` with `pending_approval` and a `retry_after_s`, and the device asks again later, with the same key.
+
+What the server decides:
+
+| The request | The answer |
+|---|---|
+| A serial it hasn't seen in the key's project | A new device: `ENROLLED`, or `pending_approval` if the key holds new devices |
+| A known serial, with the key it was certified for | The same certificate again, so a lost reply is harmless |
+| A known serial, with a new key | `pending_approval`, whatever the key says, until a person approves it |
+| A revoked device, or a revoked or unknown key | `not_authorized` |
+
+A device's private key never leaves it, and `ENROLLED` holds only a certificate, which is public. That matters over MQTT, where
+every device enrolling with one key shares the key's identity and topics.
+
 ## Bindings
 
 There are two bindings, HTTPS and MQTT, carrying the same messages. A device uses one of them, chosen in Kconfig, with
@@ -417,6 +449,10 @@ the same credentials either way.
 Both bindings:
 
 - Use TLS 1.2 or later, always verify the server's certificate, and have no unencrypted mode in production builds.
+  Verifying means the chain up to the provisioned CA, its signatures, and the host name, always. Expiry is checked too when
+  the device knows the time; a device without a clock can't, before it first connects, and the CA is private to one server.
+- Carry each message as binary: every byte value, unchanged. A link with a text-only mode, such as an MQTT stack on a modem's
+  AT commands that checks payloads are UTF-8, must have that turned off.
 - Authenticate each device with its own credentials during the TLS handshake.
 - Turn off TCP batching with `TCP_NODELAY`. It was measured to make each exchange faster.
 - Use small TLS buffers where the server allows. A server must accept the Maximum Fragment Length extension or send small

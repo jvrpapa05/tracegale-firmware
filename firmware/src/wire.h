@@ -26,6 +26,8 @@ enum tg_type {
 	TG_IMG_GET = 22,
 	TG_IMG_DATA = 23,
 	TG_IMG_RESULT = 24,
+	TG_ENROLL = 30,
+	TG_ENROLLED = 31,
 };
 
 /* Bits of ACK's "pending" field. */
@@ -97,5 +99,7 @@ int tg_read_message(const uint8_t *data, size_t len, struct tg_message *msg);
 bool tg_read_uint(const struct tg_message *msg, uint32_t key, uint32_t *value);
 bool tg_read_bytes(const struct tg_message *msg, uint32_t key, const uint8_t **data, size_t *len);
 bool tg_read_bool(const struct tg_message *msg, uint32_t key, bool *value);
+/** Text is checked as UTF-8 by tg_read_message, and isn't NUL-terminated. */
+bool tg_read_text(const struct tg_message *msg, uint32_t key, const char **text, size_t *len);
 
 #endif /* TG_WIRE_H_ */
