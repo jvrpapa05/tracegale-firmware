@@ -1,0 +1,40 @@
+PASS docker compose up works from nothing, with no secrets to prepare
+PASS first-time setup needs a code from the server, then gives an account and an API token
+PASS server-ca prints the CA that verifies the admin side, for tools such as curl
+PASS the admin API refuses a missing or wrong token
+PASS a client can't fake its address with X-Forwarded-For unless a trusted proxy is configured
+PASS a new device is registered and offline, and its key appears only in the creation reply
+PASS the real firmware connects, and the device appears online with its reported details
+PASS one message ID traces from the device's status to the server's log and registry
+PASS the firmware reports its metrics with each check-in, for the device and the fleet, with nothing turned on by hand
+PASS the firmware's log records arrive with its check-ins, placed in time, once each, and can be searched
+PASS over MQTT with Tracegale's own client, the real firmware checks in through the broker, and one message ID still traces it
+PASS metrics and logs arrive over MQTT with Tracegale's own client as they do over HTTPS
+PASS over MQTT with Tracegale's own client, a device can't publish to another device's topic
+PASS a revoked device is refused over MQTT with Tracegale's own client too
+PASS over MQTT with Zephyr's MQTT library, the real firmware checks in through the broker, and one message ID still traces it
+PASS metrics and logs arrive over MQTT with Zephyr's MQTT library as they do over HTTPS
+PASS over MQTT with Zephyr's MQTT library, a device can't publish to another device's topic
+PASS a revoked device is refused over MQTT with Zephyr's MQTT library too
+PASS the server's own measurements, for Prometheus, count every device message and need a server administrator's token
+PASS an AI agent, through the MCP server, adds a device without seeing its key and reads the fleet, over the server's own TLS
+PASS a connection with no device certificate is refused
+PASS a certificate from another CA is refused, even naming a real device
+PASS a device can't pose as another by sending the identity header
+PASS malformed messages and unknown types get the documented errors
+PASS nginx and the broker can't see the CA keys, the sockets are closed to others, and the database isn't published
+PASS the web view needs a login, and shows the overview and the device online
+PASS devices added through the API and logins through the web view are in the audit log, with who and from where
+PASS with no rollout, a device is told nothing is waiting
+PASS an upload that isn't an image, isn't signed, or is signed with a published development key is refused
+PASS once a signing key is registered, only an image it signed is accepted
+PASS a rollout reaches only the devices in its cohort, with the hardware it's for
+PASS a device the rollout doesn't reach can't download its image
+PASS a paused rollout stops a download in the middle, and a resumed one lets it continue to the same bytes
+PASS the device's result shows on the rollout, and the device isn't offered the image again
+PASS a device that went back to its old firmware three times isn't offered the image a fourth time
+PASS an ended rollout gives out nothing more and can't be started again
+PASS after a full restart, the registry, keys, accounts and releases survive, and the device reconnects by itself
+PASS a revoked device is refused at its next message, and shows as not online
+PASS with the database down, devices are told server_busy, and it recovers by itself
+All 39 server end-to-end checks passed.

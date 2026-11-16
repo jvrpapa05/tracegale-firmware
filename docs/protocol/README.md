@@ -1,7 +1,10 @@
 # Tracegale device protocol
 
-Status: version 1, approved by the user on 2026-11-09 at the end of plan 02. Later plans can add fields and message types as
-described under "Versions and new features". Any other change needs the user's approval until v1 ships.
+How a device and the server talk, message by message: for anyone writing their own device code or checking what goes over
+the wire. You don't need it to use Tracegale.
+
+This is version 1. New fields and message types can be added as "Versions and new features" describes; any other change
+would make a version 2.
 
 Decode any message offline with `tools/wire/tracegale_wire.py <hex>`. Shared test vectors are in `vectors.json`. Every
 implementation must accept the valid ones and reject the invalid ones.
@@ -20,6 +23,127 @@ Crash, OTA, metric and log code uses only the message layer.
 
 A device is identified only by the credentials that secured its connection. No message carries a device identity that
 the server trusts, so a compromised device can't claim to be another one (threats T4 and T8).
+
+## How it fits together
+
+These diagrams show what happens; the sections below define each message exactly.
+
+### The parts
+
+```mermaid
+flowchart LR
+    subgraph MCU["Device (MCU)"]
+        APP["Your application"]
+        TG["Tracegale module"]
+        APP --- TG
+    end
+    subgraph Server["Tracegale server (Docker Compose)"]
+        NGINX["nginx<br/>HTTPS, port 8443"]
+        BROKER["Mosquitto<br/>MQTT, port 8883"]
+        SRV["Tracegale server"]
+        DB[("PostgreSQL")]
+        DEC["Crash decoder<br/>(sandboxed, no network)"]
+        ADMIN["Web view and admin API<br/>port 8444"]
+    end
+    TG -- "TLS, the device's own certificate,<br/>over Ethernet, Wi-Fi or cellular" --> NGINX
+    TG -. "or MQTT over TLS" .-> BROKER
+    NGINX -- "Unix socket,<br/>the device's identity checked" --> SRV
+    BROKER -- "Unix socket" --> SRV
+    SRV --> DB
+    SRV --> DEC
+    ADMIN --- SRV
+    PEOPLE["Your team, CI, AI agents"] --> ADMIN
+```
+
+A device never names itself in a message: nginx or the broker takes its identity from the certificate it connected with.
+
+### A check-in
+
+A device checks in every hour by default, and soon after its network comes back. Everything happens on one connection,
+which it then closes.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant D as Device
+    participant S as Server
+    D->>S: Connect: TLS, both sides show certificates
+    D->>S: HELLO (firmware version, build ID, hardware, reset reason)
+    S->>S: Save the check-in before answering
+    S-->>D: ACK (pending bit 0: an update may be waiting)
+    opt A crash is waiting
+        D->>S: XFER_START, XFER_CHUNK ... (see "A crash upload")
+        S-->>D: XFER_STATUS, complete
+    end
+    opt Metrics were measured
+        D->>S: METRICS (system values, your gauges and counters)
+        S-->>D: ACK
+    end
+    opt Log records are waiting
+        D->>S: LOGS (records since the last ACK)
+        S-->>D: ACK
+    end
+    opt The ACK said an update may be waiting
+        D->>S: IMG_CHECK (see "A firmware update")
+        S-->>D: IMG_OFFER, or ACK if nothing is for this device
+    end
+    D->>S: Close
+```
+
+If the server is too busy, any reply can be `ERROR` with `server_busy` and a time to wait; the device keeps what it hasn't
+sent and tries again later.
+
+### A crash upload
+
+The device keeps the crash through the reset, and sends it at its next check-in. A dropped connection costs at most one
+repeated piece.
+
+```mermaid
+sequenceDiagram
+    participant D as Device
+    participant S as Server
+    D->>S: XFER_START (kind coredump, size, SHA-256, build ID)
+    S-->>D: XFER_STATUS (transfer ID, next offset 0, largest piece)
+    loop Until the whole dump is there
+        D->>S: XFER_CHUNK (transfer ID, offset, bytes)
+        S-->>D: XFER_STATUS (next offset)
+    end
+    S->>S: Check the SHA-256, store the dump
+    S-->>D: XFER_STATUS (complete)
+    Note over D: The device forgets the crash only now
+    Note over S: The decoder turns the dump into a backtrace<br/>with the build's symbol file, and groups it into an issue
+    Note over D,S: After a dropped connection, the next XFER_START with the same SHA-256<br/>gets the same transfer back, and the device continues from next offset
+```
+
+### A firmware update
+
+The server only offers; the device decides, and its bootloader, MCUboot, refuses any image without a valid signature.
+
+```mermaid
+sequenceDiagram
+    participant D as Device
+    participant S as Server
+    participant B as MCUboot (on the device)
+    D->>S: IMG_CHECK (firmware version, build ID, hardware)
+    S-->>D: IMG_OFFER (image, size, version, SHA-256)
+    loop Until the image is downloaded, resuming from flash after any break
+        D->>S: IMG_GET (image, offset, length)
+        S-->>D: IMG_DATA (bytes)
+        D->>D: Write to the second flash slot
+    end
+    D->>D: Check the SHA-256, then restart when the application allows
+    D->>B: Boot the new image on trial
+    B->>B: Check the signature, and refuse an unsigned or wrongly signed image
+    alt The new image reaches the server
+        D->>S: Check-in from the new firmware
+        D->>D: Confirm the image, so it stays
+        D->>S: IMG_RESULT (installed)
+    else It doesn't reach the server in time
+        B->>B: Restore the previous image at the next restart
+        D->>S: IMG_RESULT (reverted), from the old firmware
+    end
+    S-->>D: ACK
+```
 
 ## Message format
 
@@ -77,12 +201,12 @@ D is device and S is server.
 | 24 | `IMG_RESULT` | D to S | 0 `image_ref` uint, 1 `outcome` uint | `ACK` |
 
 `ACK` bit 0 of `pending` means an update may be available, so a device can learn this from any reply, with no open
-connection or extra polling. `XFER_START` `kind` is 1 for a coredump and 2 for stored logs. Plans 06, 09 and 11 define
-the remaining values for `kind`. The values of `outcome` are under "Server to device: firmware images", and the fields of
+connection or extra polling. `XFER_START` `kind` is 1 for a coredump, the only kind in use; 2 is reserved, and logs travel in `LOGS` messages
+instead. The values of `outcome` are under "Server to device: firmware images", and the fields of
 `METRICS` under "Metrics".
 
 `build_id` is the GNU build ID of the firmware image, up to 64 bytes, which the server uses to find the matching symbol file.
-In `HELLO` it's the running image's, and it's empty only if the firmware was built without one. Since plan 06, a device
+In `HELLO` it's the running image's, and it's empty only if the firmware was built without one. A device
 also sends it in `XFER_START` for a coredump, because a crash can be sent after an update, and must be decoded with the
 image that crashed.
 
@@ -109,7 +233,7 @@ reserved and must be 0.
 One scheme works on every link, because the sender needs nothing from the link except delivery of whole messages. HTTP
 ranges aren't used for this, which keeps OTA and crash code independent of the link.
 
-### Device to server: crashes and stored logs
+### Device to server: crash dumps
 
 1. The device sends `XFER_START`. The server replies with `XFER_STATUS`.
 2. The device sends `XFER_CHUNK` from `next_offset`, each no larger than `chunk_max`, and each reply gives the new
@@ -136,8 +260,8 @@ the correct `next_offset`, and the device continues from there. A lost reply the
 state for each download, which matters at 100,000 devices.
 
 A server may return fewer bytes than `len`. Over TCP, larger chunks use much less data and time, at a cost in RAM. A device
-sets its own limit with `max_chunk`, and uses the smaller of that and the server's `chunk_max`. Plan 02 measured 1,024 bytes
-on a device with 64 KB of RAM.
+sets its own limit with `max_chunk`, and uses the smaller of that and the server's `chunk_max`. 1,024 bytes was
+measured to suit a device with 64 KB of RAM.
 
 **Trust:** `sha256` only detects a damaged or wrong download. Only MCUboot's signature check, on the device, decides
 whether an image runs, so a breached server can't get its own image booted (threat T1).
@@ -287,14 +411,14 @@ That's about 3% on a 512-byte chunk.
 
 ## Bindings
 
-HTTPS comes first and MQTT follows later in v1. A device uses one of them, chosen in Kconfig. Credentials are chosen in
-plan 05.
+There are two bindings, HTTPS and MQTT, carrying the same messages. A device uses one of them, chosen in Kconfig, with
+the same credentials either way.
 
 Both bindings:
 
 - Use TLS 1.2 or later, always verify the server's certificate, and have no unencrypted mode in production builds.
 - Authenticate each device with its own credentials during the TLS handshake.
-- Turn off TCP batching with `TCP_NODELAY`. Plan 02 measured this making each exchange faster.
+- Turn off TCP batching with `TCP_NODELAY`. It was measured to make each exchange faster.
 - Use small TLS buffers where the server allows. A server must accept the Maximum Fragment Length extension or send small
   records, or devices need a 16 KB receive buffer.
 

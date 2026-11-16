@@ -1,0 +1,2 @@
+PASS an AI agent, through the MCP server, adds a device without seeing its key and reads the fleet, over the server's own TLS
+All 44 server end-to-end checks passed.

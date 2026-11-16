@@ -1,0 +1,9 @@
+# nrf52840dk/nrf52840, Zephyr v4.5.0, firmware/samples/connect, west build output (FLASH and RAM regions)
+off           FLASH: 135432 B 1 MB 12.92%  RAM: 31676 B 256 KB 12.08% 
+https-nosni   FLASH: 256488 B 1 MB 24.46%  RAM: 79788 B 256 KB 30.44% 
+https         FLASH: 256856 B 1 MB 24.50%  RAM: 79788 B 256 KB 30.44% 
+mqtt-own      FLASH: 247612 B 1 MB 23.61%  RAM: 79404 B 256 KB 30.29% 
+mqtt-zephyr   FLASH: 250948 B 1 MB 23.93%  RAM: 79724 B 256 KB 30.41% 
+
+# Builds: off = CONFIG_TRACEGALE=n; https = the default; https-nosni = -DCONFIG_MBEDTLS_SSL_SERVER_NAME_INDICATION=n;
+# mqtt-own = -DCONFIG_TRACEGALE_TRANSPORT_MQTT=y; mqtt-zephyr = the same plus -DCONFIG_MQTT_LIB=y

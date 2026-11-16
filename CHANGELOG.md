@@ -26,7 +26,7 @@ The first public release, ahead of 1.0.
 ### Tested
 
 The firmware's parsers of what a server sends were fuzzed with sanitizers, about 530 million inputs without a crash; the
-reports are in [tracegale-server's docs/reports/](https://github.com/jvrpapa05/tracegale-server/tree/main/docs/reports).
+reports are in [docs/reports/](docs/reports/).
 
 ### Known limits
 

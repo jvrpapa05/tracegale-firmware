@@ -14,8 +14,13 @@ if(CONFIG_TRACEGALE)
   zephyr_library_sources_ifdef(CONFIG_TRACEGALE_RESET_REASON src/reset.c)
   zephyr_library_sources_ifdef(CONFIG_TRACEGALE_SHELL src/shell.c)
   zephyr_library_sources_ifdef(CONFIG_TRACEGALE_TRANSPORT_HTTPS src/transport_https.c)
-  zephyr_library_sources_ifdef(CONFIG_TRACEGALE_TRANSPORT_MQTT src/transport_mqtt.c src/identity.c)
-  zephyr_library_sources_ifdef(CONFIG_TRACEGALE_TLS src/tls_socket.c)
+  zephyr_library_sources_ifdef(CONFIG_TRACEGALE_TRANSPORT_MQTT src/identity.c)
+  zephyr_library_sources_ifdef(CONFIG_TRACEGALE_MQTT_CLIENT_OWN src/transport_mqtt.c)
+  zephyr_library_sources_ifdef(CONFIG_TRACEGALE_MQTT_CLIENT_ZEPHYR src/transport_mqtt_zephyr.c)
+  # Zephyr's MQTT library opens its own TLS connection.
+  if(CONFIG_TRACEGALE_TRANSPORT_HTTPS OR CONFIG_TRACEGALE_MQTT_CLIENT_OWN)
+    zephyr_library_sources(src/tls_socket.c)
+  endif()
   if(CONFIG_TRACEGALE_CRED_NRF_MODEM)
     zephyr_library_sources(src/cred_nrf_modem.c src/sha256.c)
   elseif(CONFIG_TRACEGALE_TLS)
@@ -47,6 +52,17 @@ if(CONFIG_TRACEGALE)
     zephyr_linker_sources(SECTIONS build_id.ld)
   else()
     zephyr_linker_sources(SECTIONS build_id_none.ld)
+  endif()
+
+  # Predictable random numbers would let an attacker recover TLS keys. See TRACEGALE_INSECURE_RANDOM_FOR_TESTS.
+  if(CONFIG_TRACEGALE_TLS AND NOT CONFIG_TRACEGALE_MODEM_SOCKETS
+     AND (CONFIG_TEST_RANDOM_GENERATOR OR NOT CONFIG_ENTROPY_HAS_DRIVER)
+     AND NOT CONFIG_TRACEGALE_INSECURE_RANDOM_FOR_TESTS)
+    message(FATAL_ERROR
+      "Tracegale: this build's TLS would use Zephyr's test random number generator, whose numbers are predictable, "
+      "because the board has no random number driver here. If the chip has a random number generator, enable its "
+      "device in the devicetree and its driver; otherwise use the vendor's SDK or provide a driver. "
+      "Only for a simulator or emulator, set CONFIG_TRACEGALE_INSECURE_RANDOM_FOR_TESTS=y.")
   endif()
 
   if(NOT CONFIG_TRACEGALE_CORE)

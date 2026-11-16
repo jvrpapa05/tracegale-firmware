@@ -1,0 +1,23 @@
+{
+  "devices": 1000000,
+  "spread": "30s",
+  "seconds": 530.565458074,
+  "outcomes": {
+    "ok": 1000000,
+    "started over a second late, held back by -max-open": 977840
+  },
+  "retries": 175001,
+  "hello_ms": {
+    "max": 44247.483337,
+    "p50": 3155.569924,
+    "p95": 13525.741332,
+    "p99": 23977.094186
+  },
+  "checked_in_after_s": {
+    "max": 530.565451984,
+    "p50": 229.743564977,
+    "p95": 461.711539182,
+    "p99": 504.667807736
+  },
+  "checkins_per_second": 1884.7815755478866
+}

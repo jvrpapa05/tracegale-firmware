@@ -47,7 +47,7 @@ class Server:
         self.lock = threading.Lock()
         self.stats = {"messages": 0, "malformed": 0, "repeated_chunks": 0, "resumed": 0, "transfers_verified": 0,
                       "hash_failures": 0, "completed": [], "hello_build_ids": [], "image_checks": 0, "image_gets": 0,
-                      "image_bytes": 0, "image_results": []}
+                      "image_bytes": 0, "image_results": [], "sni": []}
         self.save()
 
     def save(self):
@@ -250,6 +250,14 @@ def main():
         context.load_cert_chain(a.creds / "server.pem", a.creds / "server.key")
         context.load_verify_locations(a.creds / "ca.pem")
         context.verify_mode = ssl.CERT_REQUIRED
+
+        # Records the name each client sends at the start of TLS (SNI), or None, which a proxy routing by name needs.
+        def sni(_sock, name, _context):
+            with server.lock:
+                if name not in server.stats["sni"]:
+                    server.stats["sni"].append(name)
+                    server.save()
+        context.sni_callback = sni
     serve_http(server, a.port, context)
 
 

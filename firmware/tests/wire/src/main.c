@@ -91,7 +91,7 @@ ZTEST(wire, test_mangled_input_is_only_rejected)
 	static const uint8_t seed[] = {0x84, 0x01, 0x0b, 0x03, 0xa3, 0x00, 0x07, 0x01, 0x00, 0x02, 0x44, 1, 2, 3, 4};
 	uint8_t buf[sizeof(seed)];
 
-	/* Plan 16 adds real fuzzing. This keeps a crash in the parser from reaching main. */
+	/* The fuzz tests in tests/fuzz go much further. This keeps a crash in the parser from reaching main. */
 	for (int i = 0; i < 20000; i++) {
 		struct tg_message msg;
 		uint32_t number;

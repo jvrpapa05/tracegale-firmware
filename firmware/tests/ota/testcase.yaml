@@ -4,6 +4,7 @@
 # Over-the-air updates against a fake server and a stand-in for MCUboot, on the simulator's flash. The real MCUboot
 # is in the end-to-end test, firmware/tests/e2e/run_ota.py.
 common:
+  tags: ota
   platform_allow:
     - native_sim
   integration_platforms:

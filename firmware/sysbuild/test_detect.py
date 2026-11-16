@@ -167,6 +167,19 @@ class McubootUsableTest(DetectTestCase):
         self.write(self.board_file("nrf52840dongle_nrf52840.dts"), "boot_partition: partition@0 {};\n")
         self.assertFalse(detect.mcuboot_usable())
 
+    def test_upstream_only_entry_applies_on_upstream_zephyr(self):
+        os.environ["BOARD"] = "nrf9151dk"
+        os.environ["BOARD_QUALIFIERS"] = "nrf9151/ns"
+        self.write(self.board_file("nrf9151dk_nrf9151_ns.dts"), "boot_partition: partition@0 {};\n")
+        self.assertFalse(detect.mcuboot_usable())
+
+    def test_upstream_only_entry_is_ignored_in_the_nrf_connect_sdk(self):
+        os.environ["BOARD"] = "nrf9151dk"
+        os.environ["BOARD_QUALIFIERS"] = "nrf9151/ns"
+        os.environ["ZEPHYR_NRF_MODULE_DIR"] = str(self.root / "nrf")
+        self.write(self.board_file("nrf9151dk_nrf9151_ns.dts"), "boot_partition: partition@0 {};\n")
+        self.assertTrue(detect.mcuboot_usable())
+
     def test_listed_board_with_soc_and_cpu_as_real_builds_pass_them(self):
         os.environ["BOARD"] = "thingy53"
         os.environ["BOARD_QUALIFIERS"] = "nrf5340/cpuapp"

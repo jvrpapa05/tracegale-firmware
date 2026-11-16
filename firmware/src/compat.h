@@ -26,6 +26,7 @@
 #define TG_TLS_DEVICE_CERT TLS_CREDENTIAL_SERVER_CERTIFICATE
 #define tg_sockaddr_in sockaddr_in
 #define tg_sockaddr_in6 sockaddr_in6
+#define tg_sockaddr_storage sockaddr_storage
 #define TG_AF_INET AF_INET
 #define tg_htons htons
 typedef uint32_t tg_net_event_t;
@@ -44,6 +45,7 @@ typedef uint64_t tg_net_event_t;
 #define TG_TLS_DEVICE_CERT TLS_CREDENTIAL_PUBLIC_CERTIFICATE
 #define tg_sockaddr_in net_sockaddr_in
 #define tg_sockaddr_in6 net_sockaddr_in6
+#define tg_sockaddr_storage net_sockaddr_storage
 #define TG_AF_INET NET_AF_INET
 #define tg_htons net_htons
 #endif

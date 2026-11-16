@@ -1,0 +1,2840 @@
+# 2026-11-15T06:27:23Z
+tracegale_device_messages_total{type="hello",result="ok"} 1345416
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1289788
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 249718.58041624766
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 341263.7062834446
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 917.378649457
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 0
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1173527575
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 244760576
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 264306688
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 377274368
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2029759
+tracegale_db_connection_wait_seconds_total 123404.447045074
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 81132912640
+# 2026-11-15T06:28:35Z
+tracegale_device_messages_total{type="hello",result="ok"} 1362315
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1306673
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 250185.57381711545
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 342113.0795666009
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 990.070372298
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 27
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1181899799
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 247603200
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 264790016
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 382353408
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2031820
+tracegale_db_connection_wait_seconds_total 123404.657731701
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 81130160128
+# 2026-11-15T06:29:48Z
+tracegale_device_messages_total{type="hello",result="ok"} 1382496
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1326854
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 250786.45171104616
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 343138.64345456194
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1062.699582137
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 21
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1192459287
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 251559936
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265003008
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 388743168
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2034277
+tracegale_db_connection_wait_seconds_total 123405.166842269
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 81128456192
+# 2026-11-15T06:31:01Z
+tracegale_device_messages_total{type="hello",result="ok"} 1402690
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1347048
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 251352.45772188655
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 344153.8874261194
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1135.352320166
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 15
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1202519063
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 255336448
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265093120
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 394944512
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2036833
+tracegale_db_connection_wait_seconds_total 123405.458188935
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 81054924800
+# 2026-11-15T06:32:13Z
+tracegale_device_messages_total{type="hello",result="ok"} 1422870
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1367228
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 251917.7074428565
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 345168.9614842329
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1208.048025945
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 22
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1212439575
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 259022848
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265125888
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 401137664
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2039314
+tracegale_db_connection_wait_seconds_total 123405.849450202
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80661708800
+# 2026-11-15T06:33:26Z
+tracegale_device_messages_total{type="hello",result="ok"} 1443079
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1387437
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 252480.34255806732
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 346189.34987171384
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1280.785004088
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 20
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1222155287
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 262717440
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265166848
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 407109632
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2041790
+tracegale_db_connection_wait_seconds_total 123406.162639888
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80655548416
+# 2026-11-15T06:34:39Z
+tracegale_device_messages_total{type="hello",result="ok"} 1463286
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1407645
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 253039.5721626982
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 347209.69826274394
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1353.508771013
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 17
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1231969303
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 266338304
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265199616
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 413286400
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2044307
+tracegale_db_connection_wait_seconds_total 123406.452596721
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80650305536
+# 2026-11-15T06:35:52Z
+tracegale_device_messages_total{type="hello",result="ok"} 1483454
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1427812
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 253610.69570438177
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 348221.6551836375
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1426.148362535
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 22
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1241701399
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 269869056
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265199616
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 419471360
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2046753
+tracegale_db_connection_wait_seconds_total 123406.724573064
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80634183680
+# 2026-11-15T06:37:04Z
+tracegale_device_messages_total{type="hello",result="ok"} 1503648
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1448006
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 254175.14431301184
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 349235.8874890421
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1498.841002656
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 20
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1251023895
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 273186816
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265199616
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 425476096
+tracegale_table_bytes{table="metric_rollups"} 81920
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2049019
+tracegale_db_connection_wait_seconds_total 123407.010327799
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80631955456
+# 2026-11-15T06:38:17Z
+tracegale_device_messages_total{type="hello",result="ok"} 1523843
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1468201
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 254778.47927614572
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 350260.5376777085
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1571.541028084
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 19
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1260944407
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 277086208
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265199616
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 431497216
+tracegale_table_bytes{table="metric_rollups"} 81920
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2051269
+tracegale_db_connection_wait_seconds_total 123407.298171497
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80629334016
+# 2026-11-15T06:39:30Z
+tracegale_device_messages_total{type="hello",result="ok"} 1544037
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1488395
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 255339.24471333943
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 351280.54641489085
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1644.218517856
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 16
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1270594583
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 280723456
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265199616
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 437518336
+tracegale_table_bytes{table="metric_rollups"} 81920
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2053564
+tracegale_db_connection_wait_seconds_total 123407.536931033
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80626974720
+# 2026-11-15T06:40:42Z
+tracegale_device_messages_total{type="hello",result="ok"} 1564231
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1508589
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 255910.84783575096
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 352295.35421363544
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1716.917945777
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 17
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1280457751
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 284532736
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265199616
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 443564032
+tracegale_table_bytes{table="metric_rollups"} 81920
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 7
+tracegale_db_connections{state="in_use"} 1
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2055928
+tracegale_db_connection_wait_seconds_total 123407.833401944
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80618455040
+# 2026-11-15T06:41:55Z
+tracegale_device_messages_total{type="hello",result="ok"} 1584426
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1528770
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 256475.63090673744
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 353309.51511204866
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1789.625265568
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 29
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1290296343
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 288210944
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265199616
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 449724416
+tracegale_table_bytes{table="metric_rollups"} 81920
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 7
+tracegale_db_connections{state="in_use"} 1
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2058326
+tracegale_db_connection_wait_seconds_total 123408.109025216
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80613343232
+# 2026-11-15T06:43:08Z
+tracegale_device_messages_total{type="hello",result="ok"} 1604620
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1548979
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 257035.35327678773
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 354327.97955248936
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1862.342250856
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 20
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1299758103
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 291831808
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265199616
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 455565312
+tracegale_table_bytes{table="metric_rollups"} 81920
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2060701
+tracegale_db_connection_wait_seconds_total 123408.348799618
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80603512832
+# 2026-11-15T06:44:21Z
+tracegale_device_messages_total{type="hello",result="ok"} 1624884
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1569243
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 257597.6650509171
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 355352.6440829242
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 1935.291929438
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 19
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1309285399
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 295272448
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265199616
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 461651968
+tracegale_table_bytes{table="metric_rollups"} 81920
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2063237
+tracegale_db_connection_wait_seconds_total 123408.66501936
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80583720960
+# 2026-11-15T06:45:33Z
+tracegale_device_messages_total{type="hello",result="ok"} 1645051
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1589409
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 258214.92977417863
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 356377.36591203726
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2007.924382534
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 27
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1318943767
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 298893312
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265248768
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 467632128
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2065573
+tracegale_db_connection_wait_seconds_total 123408.958427692
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80570482688
+# 2026-11-15T06:46:46Z
+tracegale_device_messages_total{type="hello",result="ok"} 1665232
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1609590
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 258780.8187219608
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 357392.8112102151
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2080.550582658
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 22
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1328192535
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 302325760
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265248768
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 473448448
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 7
+tracegale_db_connections{state="in_use"} 1
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2068174
+tracegale_db_connection_wait_seconds_total 123409.620650194
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80565370880
+# 2026-11-15T06:47:59Z
+tracegale_device_messages_total{type="hello",result="ok"} 1685426
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1629784
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 259343.6231981968
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 358411.67207059497
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2153.245488405
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 23
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1337883671
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 305963008
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265248768
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 479502336
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2070722
+tracegale_db_connection_wait_seconds_total 123409.880344248
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80555409408
+# 2026-11-15T06:49:11Z
+tracegale_device_messages_total{type="hello",result="ok"} 1705607
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1649965
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 259900.5862852439
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 359429.9181706055
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2225.911568551
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 24
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1347517463
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 309485568
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265248768
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 485613568
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2073330
+tracegale_db_connection_wait_seconds_total 123410.113539093
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80552525824
+# 2026-11-15T06:50:24Z
+tracegale_device_messages_total{type="hello",result="ok"} 1725787
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1670145
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 260463.6691044422
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 360449.91525696975
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2298.564673424
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 25
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1357110295
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 313131008
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265248768
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 491560960
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2075954
+tracegale_db_connection_wait_seconds_total 123410.48366995
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80547414016
+# 2026-11-15T06:51:37Z
+tracegale_device_messages_total{type="hello",result="ok"} 1745968
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1690326
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 261027.3590466313
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 361466.1826250987
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2371.195916633
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 21
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1366440983
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 316612608
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265281536
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 497377280
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2078603
+tracegale_db_connection_wait_seconds_total 123410.810384275
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80541384704
+# 2026-11-15T06:52:49Z
+tracegale_device_messages_total{type="hello",result="ok"} 1766148
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1710506
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 261626.3515375368
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 362491.43548937334
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2443.837384892
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 19
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1375779863
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 320110592
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265297920
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 503201792
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2080971
+tracegale_db_connection_wait_seconds_total 123411.056660555
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80537452544
+# 2026-11-15T06:54:02Z
+tracegale_device_messages_total{type="hello",result="ok"} 1786343
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1730701
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 262185.169880836
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 363509.543705087
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2516.518429079
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 16
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1384922135
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 323690496
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265297920
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 508764160
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2083615
+tracegale_db_connection_wait_seconds_total 123411.316186091
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80533520384
+# 2026-11-15T06:55:15Z
+tracegale_device_messages_total{type="hello",result="ok"} 1806509
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1750868
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 262746.7622967674
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 364527.22244480206
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2589.14362155
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 23
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1394113559
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 327155712
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265297920
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 514490368
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 7
+tracegale_db_connections{state="in_use"} 1
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2086489
+tracegale_db_connection_wait_seconds_total 123411.628802671
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80528408576
+# 2026-11-15T06:56:27Z
+tracegale_device_messages_total{type="hello",result="ok"} 1826690
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1771048
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 263313.16904375545
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 365542.43067602837
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2661.820301874
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 28
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1403444247
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 330694656
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265330688
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 520257536
+tracegale_table_bytes{table="metric_rollups"} 81920
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2089106
+tracegale_db_connection_wait_seconds_total 123411.907243993
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80522379264
+# 2026-11-15T06:57:40Z
+tracegale_device_messages_total{type="hello",result="ok"} 1846870
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1791228
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 263874.701704445
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 366559.80509640457
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2734.45719274
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 26
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1413086231
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 334372864
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265355264
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 526188544
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2091626
+tracegale_db_connection_wait_seconds_total 123412.175387676
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80518316032
+# 2026-11-15T06:58:52Z
+tracegale_device_messages_total{type="hello",result="ok"} 1867056
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1811423
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 264434.9692298467
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 367579.7886448071
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2807.094225959
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 20
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1422089239
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 337920000
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265363456
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 531636224
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2094313
+tracegale_db_connection_wait_seconds_total 123412.456680727
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80514908160
+# 2026-11-15T07:00:05Z
+tracegale_device_messages_total{type="hello",result="ok"} 1887234
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1831590
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 265026.3823731573
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 368601.5715372694
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2879.800095505
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 31
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1431739415
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 341704704
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265363456
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 537501696
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 2
+tracegale_db_connections{state="in_use"} 6
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2097065
+tracegale_db_connection_wait_seconds_total 123412.811138208
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80509927424
+# 2026-11-15T07:01:18Z
+tracegale_device_messages_total{type="hello",result="ok"} 1907426
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1851784
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 265609.4726599313
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 369625.56839630404
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 2952.450784532
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 23
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1441422359
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 345423872
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265428992
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 543399936
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2099663
+tracegale_db_connection_wait_seconds_total 123413.113378164
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80502718464
+# 2026-11-15T07:02:31Z
+tracegale_device_messages_total{type="hello",result="ok"} 1927620
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1871978
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 266173.2934376096
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 370643.19631772174
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3025.142739923
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 21
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1450982423
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 349118464
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265428992
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 549265408
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2102299
+tracegale_db_connection_wait_seconds_total 123413.395820283
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80498524160
+# 2026-11-15T07:03:43Z
+tracegale_device_messages_total{type="hello",result="ok"} 1947815
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1892173
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 266733.9053192731
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 371662.31463922985
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3097.85745083
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 23
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1460362263
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 352747520
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265445376
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 554999808
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2104924
+tracegale_db_connection_wait_seconds_total 123413.718122969
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80494985216
+# 2026-11-15T07:04:56Z
+tracegale_device_messages_total{type="hello",result="ok"} 1968009
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1912368
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 267291.6308372061
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 372681.1838653652
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3170.554255851
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 21
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1469717527
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 356392960
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265494528
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 560660480
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2107570
+tracegale_db_connection_wait_seconds_total 123413.968595824
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80491053056
+# 2026-11-15T07:06:09Z
+tracegale_device_messages_total{type="hello",result="ok"} 1988190
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1932548
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 267858.78387257224
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 373697.6007690166
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3243.192209321
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 20
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1478908951
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 359817216
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265568256
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 566353920
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2110349
+tracegale_db_connection_wait_seconds_total 123414.268815514
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80482009088
+# 2026-11-15T07:07:21Z
+tracegale_device_messages_total{type="hello",result="ok"} 2008370
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1952728
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 268424.3465657155
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 374713.5107545863
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3315.838805536
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 21
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1488280599
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 363470848
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265650176
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 571990016
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2112960
+tracegale_db_connection_wait_seconds_total 123414.549475225
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80475848704
+# 2026-11-15T07:08:34Z
+tracegale_device_messages_total{type="hello",result="ok"} 2028565
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1972923
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 269021.9094729007
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 375739.5803093186
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3388.512134476
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 16
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1497398295
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 366772224
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265814016
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 577650688
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2115348
+tracegale_db_connection_wait_seconds_total 123414.793049719
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80471654400
+# 2026-11-15T07:09:47Z
+tracegale_device_messages_total{type="hello",result="ok"} 2048745
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 1993104
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 269581.4957888797
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 376760.4813399728
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3461.18874705
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 18
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1507089431
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 370515968
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 265895936
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 583507968
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2117977
+tracegale_db_connection_wait_seconds_total 123415.057070656
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80466935808
+# 2026-11-15T07:10:59Z
+tracegale_device_messages_total{type="hello",result="ok"} 2068940
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2013298
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 270150.04867427313
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 377778.47146368463
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3533.901412611
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 23
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1516518423
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 374202368
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266027008
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 589119488
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2120754
+tracegale_db_connection_wait_seconds_total 123415.356623654
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80461299712
+# 2026-11-15T07:12:12Z
+tracegale_device_messages_total{type="hello",result="ok"} 2089134
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2033492
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 270714.22549933306
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 378796.1441507509
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3606.596226277
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 26
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1526062103
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 377864192
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266133504
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 594894848
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2123302
+tracegale_db_connection_wait_seconds_total 123415.638310514
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80456056832
+# 2026-11-15T07:13:25Z
+tracegale_device_messages_total{type="hello",result="ok"} 2109329
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2053687
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 271280.9993745123
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 379812.1909541394
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3679.293898298
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 24
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1535433751
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 381550592
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266240000
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 600473600
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2125593
+tracegale_db_connection_wait_seconds_total 123415.980421103
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80450551808
+# 2026-11-15T07:14:37Z
+tracegale_device_messages_total{type="hello",result="ok"} 2129523
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2073881
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 271882.46838302526
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 380833.7863074333
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3751.98461534
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 23
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1545329687
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 385417216
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266297344
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 606437376
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2127767
+tracegale_db_connection_wait_seconds_total 123416.211870755
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80446357504
+# 2026-11-15T07:15:50Z
+tracegale_device_messages_total{type="hello",result="ok"} 2149704
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2094062
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 272453.48885760934
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 381844.72789909557
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3824.643659023
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 23
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1554775063
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 389013504
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266371072
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 612212736
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2129956
+tracegale_db_connection_wait_seconds_total 123416.475779233
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80440197120
+# 2026-11-15T07:17:03Z
+tracegale_device_messages_total{type="hello",result="ok"} 2169884
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2114242
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 273024.53043430974
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 382857.44323255966
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3897.29234327
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 23
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1564351511
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 392806400
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266371072
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 617996288
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2132323
+tracegale_db_connection_wait_seconds_total 123416.813575802
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80435216384
+# 2026-11-15T07:18:15Z
+tracegale_device_messages_total{type="hello",result="ok"} 2190065
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2134423
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 273591.6290970717
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 383869.8503068355
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 3969.94158146
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 20
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1573772311
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 396435456
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266420224
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 623738880
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 7
+tracegale_db_connections{state="in_use"} 1
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2134607
+tracegale_db_connection_wait_seconds_total 123417.09906328
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80431415296
+# 2026-11-15T07:19:28Z
+tracegale_device_messages_total{type="hello",result="ok"} 2210245
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2154604
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 274154.8680129588
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 384883.0850634578
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 4042.590323798
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 20
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1583209495
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 400121856
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266428416
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 629481472
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2136747
+tracegale_db_connection_wait_seconds_total 123417.326879408
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80428138496
+# 2026-11-15T07:20:41Z
+tracegale_device_messages_total{type="hello",result="ok"} 2230426
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2174784
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 274725.84406728315
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 385896.4215692222
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 4115.235964067
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 25
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1592876055
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 403890176
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266436608
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 635363328
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2139113
+tracegale_db_connection_wait_seconds_total 123417.611739918
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80424206336
+# 2026-11-15T07:21:53Z
+tracegale_device_messages_total{type="hello",result="ok"} 2250621
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2194979
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 275324.6271539584
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 386914.3637641947
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 4187.91833174
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 19
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1602501655
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 407592960
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266436608
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 641277952
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2141380
+tracegale_db_connection_wait_seconds_total 123417.883996257
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80419618816
+# 2026-11-15T07:23:06Z
+tracegale_device_messages_total{type="hello",result="ok"} 2270801
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2215159
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 275903.4167287046
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 387930.51821896987
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 4260.580713526
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 18
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1611914263
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 411402240
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266436608
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 646873088
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2143485
+tracegale_db_connection_wait_seconds_total 123418.127861756
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80415162368
+# 2026-11-15T07:24:19Z
+tracegale_device_messages_total{type="hello",result="ok"} 2290981
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2235340
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 276468.2096190429
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 388946.5653211389
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 4333.231727876
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 17
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1621376023
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 414932992
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266436608
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 652804096
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2145862
+tracegale_db_connection_wait_seconds_total 123418.427205421
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80411754496
+# 2026-11-15T07:25:31Z
+tracegale_device_messages_total{type="hello",result="ok"} 2311176
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2255534
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 277039.70349899324
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 389959.8669735666
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 4405.92650036
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 19
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1630837783
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 418594816
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266436608
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 658604032
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2148134
+tracegale_db_connection_wait_seconds_total 123418.72506438
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80406642688
+# 2026-11-15T07:26:44Z
+tracegale_device_messages_total{type="hello",result="ok"} 2331357
+tracegale_device_messages_total{type="hello",result="server_busy"} 53131
+tracegale_device_messages_total{type="metrics",result="ok"} 2275714
+tracegale_device_messages_total{type="metrics",result="server_busy"} 55524
+tracegale_device_message_seconds_total{type="hello",result="ok"} 277612.970231397
+tracegale_device_message_seconds_total{type="hello",result="server_busy"} 979.9257532339927
+tracegale_device_message_seconds_total{type="metrics",result="ok"} 390973.4399482506
+tracegale_device_message_seconds_total{type="metrics",result="server_busy"} 1246.2150009079996
+tracegale_retention_last_success_timestamp_seconds{step="audit events"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="crashes"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of check-ins"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of logs"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="days of metric reports"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="event partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="hours of fleet metrics"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="log partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="metric partitions ahead"} 1794726728
+tracegale_retention_last_success_timestamp_seconds{step="uploads"} 1794726728
+tracegale_retention_failures_total{step="audit events"} 0
+tracegale_retention_failures_total{step="crashes"} 0
+tracegale_retention_failures_total{step="days of check-ins"} 0
+tracegale_retention_failures_total{step="days of logs"} 0
+tracegale_retention_failures_total{step="days of metric reports"} 0
+tracegale_retention_failures_total{step="event partitions ahead"} 0
+tracegale_retention_failures_total{step="hours of fleet metrics"} 0
+tracegale_retention_failures_total{step="log partitions ahead"} 0
+tracegale_retention_failures_total{step="metric partitions ahead"} 0
+tracegale_retention_failures_total{step="uploads"} 0
+tracegale_retention_rows_total{step="audit events"} 0
+tracegale_retention_rows_total{step="crashes"} 0
+tracegale_retention_rows_total{step="days of check-ins"} 0
+tracegale_retention_rows_total{step="days of logs"} 0
+tracegale_retention_rows_total{step="days of metric reports"} 0
+tracegale_retention_rows_total{step="event partitions ahead"} 0
+tracegale_retention_rows_total{step="hours of fleet metrics"} 0
+tracegale_retention_rows_total{step="log partitions ahead"} 0
+tracegale_retention_rows_total{step="metric partitions ahead"} 0
+tracegale_retention_rows_total{step="uploads"} 0
+tracegale_mqtt_bridge_connected 1
+tracegale_uptime_seconds 4478.581777996
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 1000000
+tracegale_devices{state="revoked"} 0
+tracegale_device_requests_in_flight 19
+tracegale_device_requests_in_flight_limit 4000
+tracegale_database_bytes 1640135703
+tracegale_table_bytes{table="api_tokens"} 114688
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="crashes"} 57344
+tracegale_table_bytes{table="device_events"} 422027264
+tracegale_table_bytes{table="device_updates"} 24576
+tracegale_table_bytes{table="devices"} 266436608
+tracegale_table_bytes{table="issues"} 24576
+tracegale_table_bytes{table="log_cursors"} 24576
+tracegale_table_bytes{table="log_records"} 327680
+tracegale_table_bytes{table="memberships"} 49152
+tracegale_table_bytes{table="metric_names"} 73728
+tracegale_table_bytes{table="metric_reports"} 664469504
+tracegale_table_bytes{table="metric_rollups"} 90112
+tracegale_table_bytes{table="organizations"} 49152
+tracegale_table_bytes{table="projects"} 65536
+tracegale_table_bytes{table="releases"} 24576
+tracegale_table_bytes{table="rollouts"} 32768
+tracegale_table_bytes{table="schema_migrations"} 24576
+tracegale_table_bytes{table="sessions"} 65536
+tracegale_table_bytes{table="setup_code"} 32768
+tracegale_table_bytes{table="signing_keys"} 24576
+tracegale_table_bytes{table="symbol_files"} 16384
+tracegale_table_bytes{table="transfers"} 40960
+tracegale_table_bytes{table="users"} 65536
+tracegale_db_connections{state="open"} 8
+tracegale_db_connections{state="idle"} 8
+tracegale_db_connections{state="in_use"} 0
+tracegale_db_connections{state="limit"} 8
+tracegale_db_connection_waits_total 2150441
+tracegale_db_connection_wait_seconds_total 123418.985126084
+tracegale_symbol_files_bytes 0
+tracegale_disk_free_bytes 80401793024

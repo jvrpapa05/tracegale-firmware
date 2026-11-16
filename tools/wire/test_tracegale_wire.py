@@ -68,7 +68,7 @@ class Limits(unittest.TestCase):
             wire.decode(wire.encode_item([2, 1, 1, {}]))
 
     def test_any_mangled_input_raises_only_wire_error(self):
-        # A small fuzz, so a crash in the decoder shows up in the ordinary tests. Plan 16 adds real fuzzing.
+        # A small fuzz, so a crash in the decoder shows up in the ordinary tests. The fuzz tests go much further.
         rng = random.Random(1)
         seed = wire.encode(11, 5, {0: 1, 1: 512, 2: bytes(32)})
         for _ in range(20000):

@@ -331,6 +331,9 @@ def main():
                 stats = server.stats()
                 assert stats["messages"] >= 1 and stats["malformed"] == 0, stats
                 passed.append("once the server is up, it connects using runtime credentials, and the strict server accepts it")
+                # A proxy that shares a port between services, as Traefik can, routes by this name.
+                assert stats["sni"] == ["localhost"], stats
+                passed.append("it sends the server's name at the start of TLS (SNI), so a proxy routing by name can route it")
 
                 out = device.command("tracegale status", "build id:")
                 for secret in (base64.b64encode(creds["key"][:30]).decode()[:20],):

@@ -1,0 +1,7 @@
+#294	INITED cov: 126 ft: 520 corp: 168/3276b exec/s: 0 rss: 38Mb
+Done 193383257 runs in 601 second(s)
+stat::number_of_executed_units: 193383257
+stat::average_exec_per_sec:     321769
+stat::new_units_added:          317
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              490

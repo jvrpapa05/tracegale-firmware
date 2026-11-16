@@ -5,3 +5,10 @@ path = "**"
 precedence = "closest"
 SPDX-FileCopyrightText = "2026 PHITES Embedded Research and Development on Engineering"
 SPDX-License-Identifier = "Apache-2.0"
+
+# The in-app Help guides, which the docs site is built from, are the server's, under its licence.
+[[annotations]]
+path = "server/internal/admin/help/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "2026 PHITES Embedded Research and Development on Engineering"
+SPDX-License-Identifier = "AGPL-3.0-or-later"

@@ -39,7 +39,7 @@ static int connect_to(int *out, const struct zsock_addrinfo *addr, const char *h
 		zsock_close(sock);
 		return -TRACEGALE_ERR_TLS;
 	}
-	/* Plan 02 measured each exchange getting faster with TCP batching off. It isn't required, so a failure doesn't matter. */
+	/* Each exchange was measured to get faster with TCP batching off. It isn't required, so a failure doesn't matter. */
 	(void)zsock_setsockopt(sock, TG_PROTO_TCP, TG_TCP_NODELAY, &on, sizeof(on));
 	if (zsock_connect(sock, addr->ai_addr, addr->ai_addrlen) == 0) {
 		*out = sock;

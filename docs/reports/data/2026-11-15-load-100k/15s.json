@@ -1,0 +1,30 @@
+{
+  "devices": 100000,
+  "spread": "15s",
+  "seconds": 36.352114983,
+  "outcomes": {
+    "connect: TLS failed": 1345,
+    "connect: reset": 31,
+    "connect: timed out": 41,
+    "hello: no reply": 127,
+    "hello: send failed": 2433,
+    "hello: server_busy": 3667,
+    "metrics: server_busy": 2568,
+    "ok": 89788,
+    "started over a second late, held back by -max-open": 70487
+  },
+  "retries": 0,
+  "hello_ms": {
+    "max": 32774.47138,
+    "p50": 1612.305767,
+    "p95": 15157.155561,
+    "p99": 18862.206233
+  },
+  "checked_in_after_s": {
+    "max": 36.352111103,
+    "p50": 20.969453435,
+    "p95": 35.97543087,
+    "p99": 36.324341005
+  },
+  "checkins_per_second": 2469.9525747536063
+}

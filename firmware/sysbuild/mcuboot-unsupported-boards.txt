@@ -9,3 +9,14 @@ thingy53/nrf5340/cpuapp        # MCUboot's console configuration doesn't link
 nrf9280pdk/nrf9280/cpuapp      # Kconfig warnings in the MCUboot image
 stm32f0_disco/stm32f051x8      # MCUboot has no support for this target
 frdm_mcxa344/mcxa344           # imgtool rejects the flash write alignment
+# From the board survey of 2026-11-15 (docs/firmware/boards.md). On the TF-M (/ns) boards, MCUboot's ECDSA code doesn't
+# build against Zephyr v4.5's Mbed TLS ("unknown type name mbedtls_pk_type_t"); the nRF Connect SDK builds them.
+kit_pse84_eval/pse846gps2dbzc4a/m33/ns  # MCUboot's ECDSA code doesn't build with TF-M
+nrf5340_audio_dk/nrf5340/cpuapp/ns      # [upstream-only] MCUboot's ECDSA code doesn't build with TF-M
+nrf5340dk/nrf5340/cpuapp/ns             # [upstream-only] MCUboot's ECDSA code doesn't build with TF-M
+thingy53/nrf5340/cpuapp/ns              # [upstream-only] MCUboot's ECDSA code doesn't build with TF-M
+nrf9131ek/nrf9131/ns                    # [upstream-only] MCUboot's ECDSA code doesn't build with TF-M
+nrf9151dk/nrf9151/ns                    # [upstream-only] MCUboot's ECDSA code doesn't build with TF-M
+nrf9160dk/nrf9160/ns                    # [upstream-only] MCUboot's ECDSA code doesn't build with TF-M
+nrf9161dk/nrf9161/ns                    # [upstream-only] MCUboot's ECDSA code doesn't build with TF-M
+xiao_nrf54lm20a/nrf54lm20a/cpuapp       # MCUboot fails to link (k_mutex_unlock)

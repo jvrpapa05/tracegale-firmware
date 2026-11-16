@@ -1,0 +1,3 @@
+fuzz: elapsed: 10m0s, execs: 11766059 (0/sec), new interesting: 2 (total: 44)
+fuzz: elapsed: 10m1s, execs: 11766059 (0/sec), new interesting: 2 (total: 44)
+ok  	github.com/jvrpapa05/open-source-fleet-firmware-management/server/internal/crash	601.022s

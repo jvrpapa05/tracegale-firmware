@@ -1,0 +1,20 @@
+=== RUN   TestAgainstARealServer
+--- SKIP: TestAgainstARealServer (0.00s)
+=== RUN   TestReadOnlyByDefault
+--- PASS: TestReadOnlyByDefault (0.01s)
+=== RUN   TestChangesAndDestructionNeedTheirFlags
+--- PASS: TestChangesAndDestructionNeedTheirFlags (0.03s)
+=== RUN   TestAnswersMarkDeviceTextAsUntrusted
+--- PASS: TestAnswersMarkDeviceTextAsUntrusted (0.02s)
+=== RUN   TestQueriesAndPathsAreChecked
+--- PASS: TestQueriesAndPathsAreChecked (0.02s)
+=== RUN   TestServerErrorsBecomeToolErrors
+--- PASS: TestServerErrorsBecomeToolErrors (0.01s)
+=== RUN   TestAddDeviceKeepsTheKeyOutOfTheConversation
+--- PASS: TestAddDeviceKeepsTheKeyOutOfTheConversation (0.02s)
+=== RUN   TestTheSetupGuideIsThere
+--- PASS: TestTheSetupGuideIsThere (0.01s)
+=== RUN   TestConfigurationIsChecked
+--- PASS: TestConfigurationIsChecked (0.00s)
+PASS
+ok  	github.com/jvrpapa05/open-source-fleet-firmware-management/tools/mcp	1.140s

@@ -1,0 +1,3 @@
+device_events|1345416|244760576
+metric_reports|1289788|377274368
+database|0|1173527575

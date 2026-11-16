@@ -180,16 +180,25 @@ def boot_partition():
 
 
 def known_unsupported():
-    """Reads the boards where MCUboot is known not to build, one board target per line."""
+    """Reads the boards where MCUboot is known not to build, one board target per line.
+
+    A line whose comment says [upstream-only] doesn't apply in the nRF Connect SDK, whose own MCUboot and TF-M setup
+    builds those boards.
+    """
     path = Path(__file__).with_name("mcuboot-unsupported-boards.txt")
     # Real builds pass qualifiers without a leading slash, such as "nrf5340/cpuapp".
     qualifiers = os.environ.get("BOARD_QUALIFIERS", "").strip("/")
     board = os.environ.get("BOARD", "")
     if qualifiers:
         board = f"{board}/{qualifiers}"
+    nrf_connect_sdk = bool(os.environ.get("ZEPHYR_NRF_MODULE_DIR"))
     for line in path.read_text(encoding="utf-8").splitlines():
-        if line.split("#")[0].strip() == board:
-            return True
+        target, _, comment = line.partition("#")
+        if target.strip() != board:
+            continue
+        if nrf_connect_sdk and "[upstream-only]" in comment:
+            continue
+        return True
     return False
 
 

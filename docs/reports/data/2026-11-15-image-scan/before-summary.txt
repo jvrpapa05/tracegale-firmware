@@ -1,0 +1,8 @@
+# The first run of scripts/ci/image-check.sh, 2026-11-15, before any fix: findings by severity, "with a fix / without".
+# Copied from the check's own summary lines; the full tables were overwritten by the run after the fixes.
+tracegale-server     High 1/0 (go-jose v4.1.4)
+tracegale-decoder    Critical 0/13  High 3/138  Medium 3/155  Low 0/27  Negligible 0/158  Unknown 0/35
+tracegale-broker     Critical 1/0 (zlib 1.3.2)  High 0/3  Medium 0/4
+tracegale-backup     Critical 4/0  High 45/0  Medium 33/3  Low 2/0  Unknown 7/0   (from postgres:16-alpine)
+nginx-unprivileged:1.28-alpine (as compose.yaml ran it)   Critical 45/1  High 160/10  Medium 74/17  Low 5/8  Unknown 3/0
+postgres:16-alpine (as compose.yaml ran it)               Critical 4/0  High 44/0  Medium 31/3  Low 2/0  Unknown 7/0

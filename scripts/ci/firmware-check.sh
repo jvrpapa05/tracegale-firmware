@@ -3,23 +3,38 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 # Runs the firmware tests and size check in a workspace made by setup-zephyr.sh.
-# Usage: scripts/ci/firmware-check.sh <zephyr-tag> [--update-size-baseline]
+#
+# --ci is the short check GitHub runs, to save CI minutes: what only a clean machine proves (setup from nothing, the unit tests,
+# the end-to-end run on the simulator, the sysbuild checks and the tracked sizes). The rest, which needs QEMU or many more
+# builds (the QEMU and RISC-V end-to-end runs, the MQTT simulator builds the server's end-to-end test uses, other hardware
+# families, and the real-MCUboot update test), runs in the maintainers' full local check before every push.
+# Usage: scripts/ci/firmware-check.sh <zephyr-tag> [--update-size-baseline] [--ci]
 set -euo pipefail
 
-if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
-  echo "Usage: $0 <zephyr-tag> [--update-size-baseline]" >&2
+if [ "$#" -lt 1 ]; then
+  echo "Usage: $0 <zephyr-tag> [--update-size-baseline] [--ci]" >&2
   exit 2
 fi
 tag=$1
 update=()
-if [ "${2:-}" = "--update-size-baseline" ]; then
-  update=(--update)
-elif [ -n "${2:-}" ]; then
-  echo "Unknown option: $2" >&2
-  exit 2
-fi
+ci=no
+for option in "${@:2}"; do
+  case "$option" in
+    --update-size-baseline) update=(--update) ;;
+    --ci) ci=yes ;;
+    *)
+      echo "Unknown option: $option" >&2
+      exit 2
+      ;;
+  esac
+done
 
 repo=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
+# The exact Zephyr SDK this workspace's Zephyr asks for, which setup-zephyr.sh installed. Left to itself, Zephyr picks the
+# newest installed SDK it accepts, and on a machine with several, an older Zephyr then built with a newer SDK's C library
+# and failed (found 2026-11-16, when the nRF Connect SDK v2.9 picked up SDK 0.17.4).
+ZEPHYR_SDK_INSTALL_DIR="$HOME/zephyr-sdk-$(cat "$(dirname "$repo")/zephyr/SDK_VERSION")"
+export ZEPHYR_SDK_INSTALL_DIR
 # The nRF Connect SDK has checks of its own, for what it adds to the Zephyr release it's built on.
 case "$tag" in
   ncs-*) exec "$repo/scripts/ci/ncs-check.sh" "$@" ;;
@@ -100,11 +115,20 @@ esac
 west build -p always --no-sysbuild -b native_sim -d "$out/e2e" "$repo/firmware/samples/connect" -- \
   -DEXTRA_CONF_FILE="$sim_overlay"
 python3 "$repo/firmware/tests/e2e/run_e2e.py" "$out/e2e/zephyr/zephyr.exe"
+# In CI mode, the MQTT simulator builds and the QEMU run are left to the local check.
+if [ "$ci" = no ]; then
 # The same device with the MQTT binding, which the server's end-to-end test runs against the broker in its Docker stack.
 west build -p always --no-sysbuild -b native_sim -d "$out/e2e-mqtt" "$repo/firmware/samples/connect" -- \
   -DEXTRA_CONF_FILE="$sim_overlay" -DCONFIG_TRACEGALE_TRANSPORT_MQTT=y
 grep -q '^CONFIG_TRACEGALE_TRANSPORT_MQTT=y' "$out/e2e-mqtt/zephyr/.config" || {
   echo "expected the MQTT binding in the MQTT build" >&2
+  exit 1
+}
+# And with Zephyr's MQTT library, which Tracegale uses when the application has it on.
+west build -p always --no-sysbuild -b native_sim -d "$out/e2e-mqtt-zephyr" "$repo/firmware/samples/connect" -- \
+  -DEXTRA_CONF_FILE="$sim_overlay" -DCONFIG_TRACEGALE_TRANSPORT_MQTT=y -DCONFIG_MQTT_LIB=y
+grep -q '^CONFIG_TRACEGALE_MQTT_CLIENT_ZEPHYR=y' "$out/e2e-mqtt-zephyr/zephyr/.config" || {
+  echo "expected Zephyr's MQTT library with CONFIG_MQTT_LIB=y" >&2
   exit 1
 }
 
@@ -118,6 +142,7 @@ case "$tag" in
     python3 "$repo/firmware/tests/e2e/run_e2e.py" --qemu "$out/e2e-qemu/zephyr/zephyr.elf"
     ;;
 esac
+fi
 
 check_sysbuild nrf52840dk/nrf52840 yes
 check_sysbuild qemu_cortex_m3 no
@@ -161,6 +186,20 @@ python3 "$repo/scripts/ci/size_report.py" \
   --baseline "$repo/ci/size-baseline.json" \
   --key "$tag/$board/mqtt" \
   --on "$out/size/mqtt/on/zephyr/zephyr.elf" \
+  --off "$out/size/connect/off/zephyr/zephyr.elf" \
+  "${update[@]}"
+
+# And with Zephyr's MQTT library, which an application that already uses it shares with Tracegale.
+west build -p always --no-sysbuild -b "$board" -d "$out/size/mqtt-zephyr/on" "$repo/firmware/samples/connect" \
+  -- -DCONFIG_TRACEGALE_TRANSPORT_MQTT=y -DCONFIG_MQTT_LIB=y
+grep -q '^CONFIG_TRACEGALE_MQTT_CLIENT_ZEPHYR=y' "$out/size/mqtt-zephyr/on/zephyr/.config" || {
+  echo "$board: expected Zephyr's MQTT library" >&2
+  exit 1
+}
+python3 "$repo/scripts/ci/size_report.py" \
+  --baseline "$repo/ci/size-baseline.json" \
+  --key "$tag/$board/mqtt-zephyr" \
+  --on "$out/size/mqtt-zephyr/on/zephyr/zephyr.elf" \
   --off "$out/size/connect/off/zephyr/zephyr.elf" \
   "${update[@]}"
 
@@ -226,7 +265,7 @@ build_ota_image() {
 # The one line on unrelated hardware families: other vendors' drivers, entropy sources and links. Only the newest Zephyr
 # version's manifest has these vendors' modules, which keeps the other versions' checks short.
 newest=$(printf '%s\n' "$repo"/ci/manifests/west-v*.yml | sort -V | tail -n 1)
-if [ "$newest" = "$repo/ci/manifests/west-$tag.yml" ]; then
+if [ "$ci" = no ] && [ "$newest" = "$repo/ci/manifests/west-$tag.yml" ]; then
   # STMicroelectronics, Arm Cortex-M7, Ethernet.
   check_family nucleo_f767zi
   # NXP, Arm Cortex-M4, Ethernet.
@@ -245,21 +284,32 @@ if [ "$newest" = "$repo/ci/manifests/west-$tag.yml" ]; then
 
   # Real updates through the real MCUboot, on an emulated board whose flash is a file: an update interrupted by a power
   # cut, a downgrade, an image that can't reach the server and is rolled back, and an image signed with another key.
-  # See firmware/tests/e2e/run_ota.py. The newest version only, because it takes six builds.
-  build_ota_image base 2
-  build_ota_image next 3
-  # An address that can't reach the server, and a short trial so the test doesn't wait 15 minutes.
-  build_ota_image bad 4 '-DCONFIG_NET_CONFIG_MY_IPV4_ADDR="192.0.2.15"' '-DCONFIG_NET_CONFIG_MY_IPV4_GW="192.0.2.1"' \
-    -DCONFIG_TRACEGALE_OTA_CONFIRM_TIMEOUT_S=30
-  # The same firmware as "next", signed with a key made here, which the device's MCUboot has never seen.
+  # See firmware/tests/e2e/run_ota.py. The newest version only, because it takes several builds. It runs in both of
+  # MCUboot's swap modes that need no scratch partition: swap using offset, Zephyr's default since v4.3, and swap using
+  # move, the default of Zephyr v3.7 and the nRF Connect SDK, where most devices in production are.
   imgtool="$workspace/bootloader/mcuboot/scripts/imgtool.py"
+  mkdir -p "$out/ota"
   python3 "$imgtool" keygen -k "$out/ota/other-key.pem" -t ecdsa-p256
-  python3 "$imgtool" sign --version 1.5.0+0 --header-size 0x200 --slot-size 1048576 --align 4 \
-    --key "$out/ota/other-key.pem" "$out/ota/next/src-next/zephyr/zephyr.bin" "$out/ota/wrong-key.bin"
-  python3 "$repo/firmware/tests/e2e/run_ota.py" \
-    --mcuboot "$out/ota/base/mcuboot/zephyr/zephyr.bin" \
-    --base "$out/ota/base/src-base/zephyr/zephyr.signed.bin" \
-    --next "$out/ota/next/src-next/zephyr/zephyr.signed.bin" \
-    --bad "$out/ota/bad/src-bad/zephyr/zephyr.signed.bin" \
-    --wrong-key "$out/ota/wrong-key.bin"
+  for mode in offset move; do
+    mode_args=("-DSB_CONFIG_MCUBOOT_MODE_SWAP_USING_${mode^^}=y")
+    build_ota_image "base-$mode" 2 "${mode_args[@]}"
+    grep -q "^SB_CONFIG_MCUBOOT_MODE_SWAP_USING_${mode^^}=y" "$out/ota/base-$mode/zephyr/.config" || {
+      echo "expected MCUboot's swap using $mode in the update test" >&2
+      exit 1
+    }
+    build_ota_image "next-$mode" 3 "${mode_args[@]}"
+    # An address that can't reach the server, and a short trial so the test doesn't wait 15 minutes.
+    build_ota_image "bad-$mode" 4 '-DCONFIG_NET_CONFIG_MY_IPV4_ADDR="192.0.2.15"' \
+      '-DCONFIG_NET_CONFIG_MY_IPV4_GW="192.0.2.1"' -DCONFIG_TRACEGALE_OTA_CONFIRM_TIMEOUT_S=30 "${mode_args[@]}"
+    # The same firmware as "next", signed with a key made here, which the device's MCUboot has never seen.
+    python3 "$imgtool" sign --version 1.5.0+0 --header-size 0x200 --slot-size 1048576 --align 4 \
+      --key "$out/ota/other-key.pem" "$out/ota/next-$mode/src-next-$mode/zephyr/zephyr.bin" "$out/ota/wrong-key-$mode.bin"
+    echo "== The update test, MCUboot's swap using $mode"
+    python3 "$repo/firmware/tests/e2e/run_ota.py" \
+      --mcuboot "$out/ota/base-$mode/mcuboot/zephyr/zephyr.bin" \
+      --base "$out/ota/base-$mode/src-base-$mode/zephyr/zephyr.signed.bin" \
+      --next "$out/ota/next-$mode/src-next-$mode/zephyr/zephyr.signed.bin" \
+      --bad "$out/ota/bad-$mode/src-bad-$mode/zephyr/zephyr.signed.bin" \
+      --wrong-key "$out/ota/wrong-key-$mode.bin"
+  done
 fi

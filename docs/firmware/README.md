@@ -1,10 +1,29 @@
 # Using Tracegale in firmware
 
+Everything about the firmware module: each feature, its options, how it behaves when things go wrong, and what it costs in
+flash and RAM. New to Tracegale? Start with the step-by-step guide to adding it to your firmware, in the in-app Help or on the docs
+site's Get started.
+
 Tracegale uses the connection your application already has, and never turns on networking by itself.
 
 ## Setup
 
-1. Add the Tracegale module to your `west.yml`.
+1. Add Tracegale's repository to your workspace's `west.yml`, then run `west update`:
+
+    ```yaml
+    manifest:
+      remotes:
+        - name: tracegale
+          url-base: https://github.com/jvrpapa05
+      projects:
+        - name: tracegale-firmware
+          remote: tracegale
+          revision: main
+          path: modules/lib/tracegale
+    ```
+
+    Zephyr finds the module by itself. For products, pin `revision` to a release tag.
+
 2. Add `CONFIG_TRACEGALE=y` to `prj.conf`.
 
 If the application has TCP networking (`CONFIG_NETWORKING` and `CONFIG_NET_TCP`), that's enough. Tracegale adds its HTTPS and TLS code, with
@@ -12,6 +31,8 @@ TLS defaults you can override, and starts itself. Without networking, the build 
 
 For over-the-air updates, also run `west config build.sysbuild true` once per workspace, and give the application settings
 storage. See [Over-the-air updates](#over-the-air-updates).
+
+Which boards it builds for, with the whole stack's size on each: [boards.md](boards.md).
 
 ## HTTPS or MQTT
 
@@ -23,13 +44,37 @@ credentials, the messages, what the server does with them, and every feature. A 
 |---|---|---|
 | Kconfig | `CONFIG_TRACEGALE_TRANSPORT_HTTPS`, the default | `CONFIG_TRACEGALE_TRANSPORT_MQTT` |
 | Server port | 8443, or 443 behind a proxy | 8883 |
-| Flash, `nrf52840dk`, Zephyr v4.5 | 121,024 bytes | 111,768 bytes, about 9 KB less (see "What it costs") |
+| Flash, `nrf52840dk`, Zephyr v4.5 | 121,424 bytes | 112,172 bytes, about 9 KB less (see "What it costs") |
 | Firewalls | Port 443 passes almost everywhere | Port 8883 is blocked on some networks |
 
 MQTT 3.1.1 over TLS, at QoS 1. The device's identity is its certificate's common name, which the server sets when it issues the
 certificate, so provisioning doesn't change. Each check-in connects, sends its messages, and disconnects, as over HTTPS.
-Tracegale carries its own small MQTT client, which reads each reply straight into the buffer it already has, so MQTT needs no
-buffer the size of a message. It doesn't use or affect an MQTT connection the application has of its own.
+MQTT needs no buffer the size of a message: each message is sent from, and each reply read into, the buffer Tracegale
+already has. Tracegale's connection is its own, apart from any MQTT connection the application has.
+
+**Which MQTT client.** Tracegale has two, chosen by `CONFIG_TRACEGALE_MQTT_CLIENT`:
+
+- **Tracegale's own** (`CONFIG_TRACEGALE_MQTT_CLIENT_OWN`), the default: a small client with only what Tracegale needs.
+- **Zephyr's MQTT library** (`CONFIG_TRACEGALE_MQTT_CLIENT_ZEPHYR`), chosen by default when the application turns that library
+  on with `CONFIG_MQTT_LIB=y`, for its own broker. The device then carries one MQTT client, not two, maintained with Zephyr.
+
+Measured on `nrf52840dk`, Zephyr v4.5:
+
+| | Flash | RAM |
+|---|---|---|
+| Tracegale's own client | 2,246 bytes | 139 bytes |
+| Zephyr's library, in an application that already has it | 1,580 bytes | 434 bytes |
+| Zephyr's library, in an application that doesn't | 5,496 bytes | 434 bytes |
+
+So for an application that already uses Zephyr's library, sharing it saves about 0.7 KB of flash and costs about 0.3 KB of
+RAM; to keep the RAM instead, set `CONFIG_TRACEGALE_MQTT_CLIENT_OWN=y`. Both pass the same end-to-end checks against the real
+server.
+
+**Behind a proxy.** The device sends the server's name at the start of TLS (SNI), as TLS 1.3 expects, so a proxy that picks
+the service by name, for example one that shares port 8883 between Tracegale and another broker, routes it correctly.
+Tracegale turns this on in Mbed TLS (`CONFIG_MBEDTLS_SSL_SERVER_NAME_INDICATION`, or `CONFIG_MBEDTLS_SERVER_NAME_INDICATION` up to Zephyr
+v4.3), at 388 to 404 bytes of flash, depending on the Zephyr version. On the nRF91 series, the modem sends it. A device provisioned with an IP address in
+place of a name can't be routed by name.
 
 `CONFIG_TRACEGALE_TRANSPORT_CUSTOM` is for an application that carries the messages itself, and `_NONE` turns reporting off.
 
@@ -47,10 +92,20 @@ A link that comes up slowly, such as cellular, is what the [network wake](#when-
 
 ## The nRF Connect SDK
 
-Tracegale works in a workspace of Nordic's nRF Connect SDK, the latest stable release (v3.4.2), as it does on upstream Zephyr:
-add the module to the SDK's `west.yml` and `CONFIG_TRACEGALE=y` to `prj.conf`. The SDK's sysbuild, MCUboot, flash layout and
-security library work with the one line unchanged, so updates are on wherever MCUboot is. CI checks it with
-`scripts/ci/ncs-check.sh`.
+Tracegale works in a workspace of Nordic's nRF Connect SDK as it does on upstream Zephyr: add the module to the SDK's
+`west.yml` and `CONFIG_TRACEGALE=y` to `prj.conf`. The SDK's sysbuild, MCUboot, flash layout and security library work with
+the one line unchanged, so updates are on wherever MCUboot is. Three SDK versions are checked with
+`scripts/ci/ncs-check.sh`:
+
+| SDK | Built on | Why |
+|---|---|---|
+| v3.4 (v3.4.2) | Zephyr v4.4 | The latest release; checked in CI and locally |
+| v3.3 (v3.3.5) | Zephyr v4.3 | The release before, still patched by Nordic; checked locally |
+| v2.9 (v2.9.3) | Zephyr v3.7 | The last 2.x series, which many products shipped and were certified on; checked locally |
+
+On v2.9 the update unit tests don't run, because that SDK builds MCUboot its own way without sysbuild; updates are built
+for its boards with its MCUboot like the others. SDK v2.6 and older are on Zephyr releases older than v3.7, which Tracegale
+doesn't support.
 
 **The nRF91 series** has a modem that does TCP and TLS itself, through Nordic's modem library (`CONFIG_NRF_MODEM_LIB`). There,
 Tracegale adds no TLS library and needs no Zephyr TCP, and keeps the credentials in the modem's own storage, at
@@ -107,6 +162,14 @@ Or from code, with `tracegale_provision_server()`, `tracegale_provision_credenti
 it. Anyone with physical access could read it. That exposes only this device, since each has its own credentials (threat T5), and it can be
 revoked. Shell commands can also replace the credentials, so turn `CONFIG_TRACEGALE_SHELL` off in production builds if anyone untrusted can
 reach the shell.
+
+**Random numbers:** TLS is only as safe as its random numbers. Where upstream Zephyr has no random number driver for a chip,
+such as the nRF5340's application core, its Mbed TLS falls back to `TEST_RANDOM_GENERATOR`, whose numbers are predictable, or
+fails to link. Tracegale then stops the build with a message, rather than ship TLS that an attacker could break. If the chip
+has a random number generator whose devicetree node is off, enable it and its driver; otherwise build such a board with its
+vendor's SDK (the nRF Connect SDK for the nRF5340), or provide a driver. Only a simulator or emulator may set
+`CONFIG_TRACEGALE_INSECURE_RANDOM_FOR_TESTS=y`, as Tracegale's own `native_sim` and QEMU tests do. On the nRF91 series the
+modem does TLS with its own random numbers, so this doesn't apply.
 
 ## Crash reports
 
@@ -485,17 +548,17 @@ The 32 bytes allow for different machines measuring the same source a few bytes 
 
 | Zephyr | Flash | RAM |
 |---|---|---|
-| v4.5.0 | 121,024 bytes | 48,125 bytes |
-| v4.4.2 | 117,528 bytes | 48,413 bytes |
-| v3.7.2 | 118,040 bytes | 46,735 bytes |
+| v4.5.0 | 121,424 bytes | 48,133 bytes |
+| v4.4.2 | 117,932 bytes | 48,421 bytes |
+| v3.7.2 | 118,428 bytes | 46,743 bytes |
 
 The same build over MQTT (`CONFIG_TRACEGALE_TRANSPORT_MQTT=y`), which has no HTTP client:
 
 | Zephyr | Flash | RAM |
 |---|---|---|
-| v4.5.0 | 111,768 bytes | 47,748 bytes |
-| v4.4.2 | 108,396 bytes | 48,036 bytes |
-| v3.7.2 | 109,572 bytes | 46,358 bytes |
+| v4.5.0 | 112,172 bytes | 47,756 bytes |
+| v4.4.2 | 108,800 bytes | 48,044 bytes |
+| v3.7.2 | 109,960 bytes | 46,366 bytes |
 
 These include metrics, which `CONFIG_TRACEGALE=y` turns on, at about 2.2 KB of flash and 68 bytes of RAM, and logs, which the
 sample's `CONFIG_LOG=y` turns on, at about 2.4 KB of flash and 2 KB of RAM (see "What metrics cost" and "What logs cost").

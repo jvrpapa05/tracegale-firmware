@@ -1,0 +1,8 @@
+# Each MQTT client's share of the linked image, summed from zephyr.map: code, read-only data and initialised data count as
+# flash; .bss, .noinit and initialised data count as RAM. Debug sections excluded. nrf52840dk/nrf52840, Zephyr v4.5.0.
+mqtt-own     transport_mqtt.c.obj           1750 B flash  139 B RAM
+mqtt-own     tls_socket.c.obj                496 B flash    0 B RAM
+mqtt-own     identity.c.obj                  457 B flash    0 B RAM   (both clients)
+mqtt-zephyr  transport_mqtt_zephyr.c.obj    1580 B flash  434 B RAM
+mqtt-zephyr  libsubsys__net__lib__mqtt.a    3916 B flash    0 B RAM
+mqtt-zephyr  identity.c.obj                  457 B flash    0 B RAM   (both clients)

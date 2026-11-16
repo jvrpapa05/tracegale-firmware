@@ -1,0 +1,4 @@
+# SNI: tracked sizes before and after (ci/size-baseline.json), connect sample, nrf52840dk/nrf52840
+v4.5.0  121,024 -> 121,424 B flash (+400)  48,125 -> 48,133 B RAM (+8)
+v4.4.2  117,528 -> 117,932 B flash (+404)  48,413 -> 48,421 B RAM (+8)
+v3.7.2  118,040 -> 118,428 B flash (+388)  46,735 -> 46,743 B RAM (+8)

@@ -1,0 +1,16 @@
+time,container,cpu_percent,memory
+2026-11-15T06:15:05Z,tracegale-load-server-1,64.49,87.95MiB
+2026-11-15T06:15:05Z,tracegale-load-broker-1,0.02,1.672MiB
+2026-11-15T06:15:05Z,tracegale-load-decoder-1,0.00,20.76MiB
+2026-11-15T06:15:05Z,tracegale-load-nginx-1,249.69,126.7MiB
+2026-11-15T06:15:05Z,tracegale-load-db-1,61.22,181.6MiB
+2026-11-15T06:15:17Z,tracegale-load-server-1,92.00,110.1MiB
+2026-11-15T06:15:17Z,tracegale-load-broker-1,0.02,1.672MiB
+2026-11-15T06:15:17Z,tracegale-load-decoder-1,5.28,20.84MiB
+2026-11-15T06:15:17Z,tracegale-load-nginx-1,379.13,161.4MiB
+2026-11-15T06:15:17Z,tracegale-load-db-1,90.99,184.9MiB
+2026-11-15T06:15:29Z,tracegale-load-server-1,102.46,112.6MiB
+2026-11-15T06:15:29Z,tracegale-load-broker-1,0.05,1.672MiB
+2026-11-15T06:15:29Z,tracegale-load-decoder-1,0.00,20.81MiB
+2026-11-15T06:15:29Z,tracegale-load-nginx-1,377.64,147.6MiB
+2026-11-15T06:15:29Z,tracegale-load-db-1,95.99,184.6MiB

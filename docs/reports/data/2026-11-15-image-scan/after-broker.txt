@@ -1,0 +1,8 @@
+NAME           INSTALLED   TYPE  VULNERABILITY   SEVERITY  EPSS         RISK  
+cjson          1.7.19-r1   apk   CVE-2026-67215  High      0.7% (53rd)  0.5   
+cjson          1.7.19-r1   apk   CVE-2026-67216  High      0.6% (51st)  0.5   
+cjson          1.7.19-r1   apk   CVE-2026-16554  High      0.4% (31st)  0.3   
+cjson          1.7.19-r1   apk   CVE-2026-67217  Medium    0.4% (38th)  0.2   
+busybox        1.37.0-r30  apk   CVE-2025-60876  Medium    0.3% (24th)  0.2   
+busybox-binsh  1.37.0-r30  apk   CVE-2025-60876  Medium    0.3% (24th)  0.2   
+ssl_client     1.37.0-r30  apk   CVE-2025-60876  Medium    0.3% (24th)  0.2   

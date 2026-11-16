@@ -1,0 +1,7 @@
+tracegale_devices{state="active"} 1000000
+tracegale_devices{state="online"} 0
+tracegale_devices{state="revoked"} 0
+tracegale_database_bytes 493386775
+tracegale_table_bytes{table="audit_events"} 277078016
+tracegale_table_bytes{table="device_events"} 24576
+tracegale_table_bytes{table="devices"} 205053952

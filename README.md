@@ -7,13 +7,16 @@ logs, sent to a server you host yourself. One line in `prj.conf` turns it on:
 CONFIG_TRACEGALE=y
 ```
 
-This repository is the Zephyr module that goes into your firmware. The server it reports to is
-[tracegale-server](https://github.com/jvrpapa05/tracegale-server).
+This repository is the Zephyr module that goes into your firmware. The server it reports to runs on your own machine; it
+will be published as open source once it's proven on real hardware. Until then, developers and hobbyists can have early
+access: open an issue titled "Early access". The [docs site](https://jvrpapa05.github.io/tracegale-firmware/) covers both: installing and using the
+server, adding Tracegale to your firmware, and every option.
 
 ## Status
 
-**Version 0.9, before 1.0.** Tested on emulators and in builds for real boards from Nordic, STMicroelectronics, NXP and
-Espressif; not yet run on real hardware. Interfaces may still change before 1.0.
+**Version 1.0.0-rc.1, a release candidate for 1.0.** Tested on emulators and in builds for real boards from Nordic, STMicroelectronics, NXP and
+Espressif; not yet run on real hardware. Interfaces may still change before 1.0. Built for every board Zephyr v4.5
+supports: 1,642 of 1,662 board configurations build `CONFIG_TRACEGALE=y` ([board list](docs/firmware/boards.md)).
 
 ## What it does
 
@@ -46,7 +49,7 @@ Then `west update`, add `CONFIG_TRACEGALE=y` to `prj.conf`, build, and give the 
 you add it. The full guide: [docs/firmware/README.md](docs/firmware/README.md). Error codes:
 [docs/firmware/errors.md](docs/firmware/errors.md).
 
-**Supported:** Zephyr v4.5, v4.4 and v3.7 (LTS), and the nRF Connect SDK v3.4.
+**Supported:** Zephyr v4.5, v4.4 and v3.7 (LTS), and the nRF Connect SDK v3.4, v3.3 and v2.9.
 
 **What it costs:** about 118 KB of flash and 47 KB of RAM on top of an application with networking but no TLS, most of it
 TLS; much less when the application already uses TLS, or on the nRF91 series, whose modem does TLS. Every feature can be

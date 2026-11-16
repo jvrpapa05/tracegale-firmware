@@ -1,0 +1,25 @@
+/* SPDX-FileCopyrightText: 2026 PHITES Embedded Research and Development on Engineering */
+/* SPDX-License-Identifier: Apache-2.0 */
+/* Tracegale's colours, the same as the web view's (server/internal/admin/static/style.css). */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #0a5d79;
+  --md-primary-fg-color--light: #2c7c97;
+  --md-primary-fg-color--dark: #084a61;
+  --md-accent-fg-color: #084a61;
+  --md-typeset-a-color: #0a5d79;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #152027;
+  --md-primary-fg-color--light: #1a272f;
+  --md-primary-fg-color--dark: #0e161b;
+  --md-accent-fg-color: #93d4ea;
+  --md-typeset-a-color: #6cc2e0;
+  --md-default-bg-color: #0e161b;
+}
+/* The home page's cards. */
+.md-typeset .grid.cards > ul > li { border-radius: 8px; }
+.md-typeset .hero-lead { font-size: 1.1rem; max-width: 46rem; }
+/* Four cards read best two by two on a wide screen; the theme stacks them on a narrow one. */
+@media screen and (min-width: 60em) {
+  .md-typeset .grid.cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

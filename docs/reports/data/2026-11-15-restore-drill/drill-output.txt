@@ -1,0 +1,8 @@
+PASS backup.sh writes a backup while the server runs, encrypted to a public key, with a plain manifest
+PASS a backup without a recipient key is refused, so nothing is written unencrypted
+PASS restore.sh brings back the CA, the account and its API token, devices, symbol files and releases
+PASS the same device, with the credentials it already had, checks in to the restored server
+PASS a restore onto an install that has run is refused, so a working CA can't be replaced
+PASS a backup with the wrong key, or from a newer server, is refused before anything is written
+All 6 restore drill checks passed.
+drill exit 0

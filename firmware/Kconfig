@@ -60,10 +60,46 @@ config TRACEGALE_TRANSPORT_NONE
 
 endchoice
 
+choice TRACEGALE_MQTT_CLIENT
+	prompt "MQTT client"
+	depends on TRACEGALE_TRANSPORT_MQTT
+	default TRACEGALE_MQTT_CLIENT_ZEPHYR if MQTT_LIB
+	default TRACEGALE_MQTT_CLIENT_OWN
+	help
+	  Zephyr's MQTT library when the application already uses it, so the device carries one MQTT client, not two. Otherwise
+	  Tracegale's own, which is smaller than adding Zephyr's library. Both speak the same protocol to the same broker. See
+	  docs/firmware/README.md.
+
+config TRACEGALE_MQTT_CLIENT_OWN
+	bool "Tracegale's own"
+	help
+	  A small MQTT 3.1.1 client with only what Tracegale needs: connect, subscribe, publish and acknowledge.
+
+# It can't select MQTT_LIB: the choice's default depends on that, and Kconfig would find a loop.
+config TRACEGALE_MQTT_CLIENT_ZEPHYR
+	bool "Zephyr's MQTT library"
+	depends on MQTT_LIB
+	select MQTT_LIB_TLS
+	help
+	  Zephyr's MQTT library, shared with the application, and chosen by default when the application turns it on with
+	  CONFIG_MQTT_LIB=y.
+
+endchoice
+
 config TRACEGALE_TLS
 	def_bool TRACEGALE_TRANSPORT_HTTPS || TRACEGALE_TRANSPORT_MQTT
 	help
 	  Set when a binding uses TLS with the device's credentials.
+
+config TRACEGALE_INSECURE_RANDOM_FOR_TESTS
+	bool "Allow TLS on Zephyr's test random number generator, for simulators and tests only"
+	depends on TEST_RANDOM_GENERATOR
+	help
+	  Without a hardware random number driver, Zephyr's Mbed TLS quietly falls back to TEST_RANDOM_GENERATOR, whose numbers
+	  are predictable, so an attacker could recover TLS keys. Tracegale then refuses to build TLS on the microcontroller,
+	  unless this is set. Set it only in a simulator or emulator, never in a product. If the chip has a random number
+	  generator, enable its devicetree node and driver; on a board that has no driver in upstream Zephyr, such as the
+	  nRF5340's application core, use the vendor's SDK, or provide a driver.
 
 config TRACEGALE_CRED_NRF_MODEM
 	def_bool TRACEGALE_TLS && NRF_MODEM_LIB
@@ -528,4 +564,82 @@ config MBEDTLS_SHA256
 	bool
 	default y
 
+# The server's name is sent at the start of TLS (SNI), as TLS 1.3 expects of clients, so a proxy that picks the service by name,
+# such as one that shares port 8883 between brokers, sends the device to the right one. Without it the certificate's name is
+# still checked, but such a proxy can't route the device. The old name is used up to Zephyr v4.3 (the nRF Connect SDK v3.3 is
+# on v4.3), the new one from v4.4; a version that lacks a name just leaves it unused. Found by the SDK v3.3 end-to-end test.
+config MBEDTLS_SERVER_NAME_INDICATION
+	bool
+	default y
+
+config MBEDTLS_SSL_SERVER_NAME_INDICATION
+	bool
+	default y
+
+# Mbed TLS needs ASN.1 writing for ECDSA signatures, but Zephyr v4.5 turns it on only when Mbed TLS's own ECDSA is built, not
+# when a hardware driver provides ECDSA (Silicon Labs' series 2, boards with TF-M), and the build stops. Writing keys is
+# Zephyr's other reason to turn it on. Found by the board survey; the linker drops what isn't used.
+config MBEDTLS_PK_WRITE_C
+	bool
+	default y
+
 endif # TRACEGALE_TLS && !TRACEGALE_MODEM_SOCKETS
+
+# The same TLS (ECDHE-ECDSA with AES-128-GCM and SHA-256 on P-256) in the nRF Connect SDK's own crypto, which takes PSA's
+# names. The SDK v3.4 derives these from the Mbed TLS options above; v3.3 doesn't, and then stops with "MBEDTLS_PK_C defined,
+# but not all prerequisites" (found 2026-11-16 on the nRF54L15). Only with the SDK's crypto, so upstream builds don't change.
+if TRACEGALE_TLS && !TRACEGALE_MODEM_SOCKETS && NRF_SECURITY
+
+config PSA_WANT_ALG_ECDH
+	bool
+	default y
+
+config PSA_WANT_ALG_ECDSA
+	bool
+	default y
+
+config PSA_WANT_ALG_GCM
+	bool
+	default y
+
+config PSA_WANT_ALG_HMAC
+	bool
+	default y
+
+config PSA_WANT_ALG_SHA_256
+	bool
+	default y
+
+config PSA_WANT_ALG_TLS12_PRF
+	bool
+	default y
+
+config PSA_WANT_ECC_SECP_R1_256
+	bool
+	default y
+
+config PSA_WANT_KEY_TYPE_AES
+	bool
+	default y
+
+config PSA_WANT_KEY_TYPE_ECC_PUBLIC_KEY
+	bool
+	default y
+
+config PSA_WANT_KEY_TYPE_ECC_KEY_PAIR_BASIC
+	bool
+	default y
+
+config PSA_WANT_KEY_TYPE_ECC_KEY_PAIR_IMPORT
+	bool
+	default y
+
+config PSA_WANT_KEY_TYPE_ECC_KEY_PAIR_EXPORT
+	bool
+	default y
+
+config PSA_WANT_KEY_TYPE_ECC_KEY_PAIR_GENERATE
+	bool
+	default y
+
+endif # TRACEGALE_TLS && !TRACEGALE_MODEM_SOCKETS && NRF_SECURITY

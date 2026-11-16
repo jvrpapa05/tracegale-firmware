@@ -43,7 +43,7 @@ supported releases from v1.
 ## Scope
 
 In scope: everything in this repository, which is the Zephyr module (`firmware/`, `zephyr/`) and its tools (`tools/`,
-`scripts/`). The server is in [tracegale-server](https://github.com/jvrpapa05/tracegale-server), under the same policy.
+`scripts/`). The server, to be published once it's proven on real hardware, is under the same policy.
 
 Out of scope:
 
@@ -67,7 +67,7 @@ Every release has passed these, in the project's own checks (`scripts/ci/firmwar
 
 Everything Tracegale builds from is pinned to an exact version and checked against a hash; how updates are taken is in
 [docs/security/dependency-updates.md](docs/security/dependency-updates.md). Results of the security review are reported in
-[tracegale-server's docs/reports/](https://github.com/jvrpapa05/tracegale-server/tree/main/docs/reports).
+[docs/reports/](docs/reports/).
 
 Images aren't published yet: each installation builds its own from this source. Published images will be signed.
 
