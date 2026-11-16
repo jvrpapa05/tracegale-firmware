@@ -1,43 +1,43 @@
 {
   "ncs-v2.9.3/nrf9151dk/nrf9151/ns/https": {
-    "ram": 18630,
-    "rom": 38144
+    "ram": 18679,
+    "rom": 40424
   },
   "ncs-v2.9.3/nrf9151dk/nrf9151/ns/mqtt": {
-    "ram": 18253,
-    "rom": 29772
+    "ram": 18311,
+    "rom": 31888
   },
   "ncs-v2.9.3/nrf9151dk/nrf9151/ns/mqtt-zephyr": {
-    "ram": 18548,
-    "rom": 32940
+    "ram": 18612,
+    "rom": 35060
   },
   "ncs-v3.3.5/nrf9151dk/nrf9151/ns/https": {
-    "ram": 19174,
-    "rom": 40504
+    "ram": 19223,
+    "rom": 42788
   },
   "ncs-v3.3.5/nrf9151dk/nrf9151/ns/mqtt": {
-    "ram": 18797,
-    "rom": 31028
+    "ram": 18855,
+    "rom": 33152
   },
   "ncs-v3.3.5/nrf9151dk/nrf9151/ns/mqtt-zephyr": {
-    "ram": 19096,
-    "rom": 34444
+    "ram": 19160,
+    "rom": 36568
   },
   "ncs-v3.4.2/nrf9151dk/nrf9151/ns/https": {
-    "ram": 19170,
-    "rom": 40412
+    "ram": 19219,
+    "rom": 42668
   },
   "ncs-v3.4.2/nrf9151dk/nrf9151/ns/mqtt": {
-    "ram": 18793,
-    "rom": 31208
+    "ram": 18851,
+    "rom": 33300
   },
   "ncs-v3.4.2/nrf9151dk/nrf9151/ns/mqtt-zephyr": {
-    "ram": 19092,
-    "rom": 34580
+    "ram": 19156,
+    "rom": 36680
   },
   "v3.7.2/nrf52840dk/nrf52840/connect": {
-    "ram": 46743,
-    "rom": 118428
+    "ram": 46792,
+    "rom": 120808
   },
   "v3.7.2/nrf52840dk/nrf52840/logs": {
     "ram": 2090,
@@ -45,90 +45,90 @@
   },
   "v3.7.2/nrf52840dk/nrf52840/metrics": {
     "ram": 52,
-    "rom": 2300
+    "rom": 2256
   },
   "v3.7.2/nrf52840dk/nrf52840/mqtt": {
-    "ram": 46366,
-    "rom": 109960
+    "ram": 46424,
+    "rom": 112184
   },
   "v3.7.2/nrf52840dk/nrf52840/mqtt-zephyr": {
-    "ram": 46653,
-    "rom": 113104
+    "ram": 46717,
+    "rom": 115324
   },
   "v3.7.2/nrf52840dk/nrf52840/ota": {
     "ram": 633,
-    "rom": 6352
+    "rom": 6356
   },
   "v3.7.2/qemu_cortex_m3": {
     "ram": 0,
-    "rom": 64
+    "rom": 68
   },
   "v3.7.2/qemu_riscv32": {
     "ram": 0,
-    "rom": 64
+    "rom": 68
   },
   "v4.4.2/nrf52840dk/nrf52840/connect": {
-    "ram": 48421,
-    "rom": 117932
+    "ram": 48470,
+    "rom": 120284
   },
   "v4.4.2/nrf52840dk/nrf52840/logs": {
     "ram": 2090,
-    "rom": 2396
+    "rom": 2380
   },
   "v4.4.2/nrf52840dk/nrf52840/metrics": {
     "ram": 68,
-    "rom": 2248
+    "rom": 2180
   },
   "v4.4.2/nrf52840dk/nrf52840/mqtt": {
-    "ram": 48044,
-    "rom": 108800
+    "ram": 48102,
+    "rom": 110996
   },
   "v4.4.2/nrf52840dk/nrf52840/mqtt-zephyr": {
-    "ram": 48339,
-    "rom": 112132
+    "ram": 48403,
+    "rom": 114328
   },
   "v4.4.2/nrf52840dk/nrf52840/ota": {
     "ram": 641,
-    "rom": 7116
+    "rom": 7140
   },
   "v4.4.2/qemu_cortex_m3": {
     "ram": 0,
-    "rom": 60
+    "rom": 64
   },
   "v4.4.2/qemu_riscv32": {
     "ram": 0,
-    "rom": 64
+    "rom": 68
   },
   "v4.5.0/nrf52840dk/nrf52840/connect": {
-    "ram": 48133,
-    "rom": 121424
+    "ram": 48182,
+    "rom": 123792
   },
   "v4.5.0/nrf52840dk/nrf52840/logs": {
     "ram": 2090,
-    "rom": 2336
+    "rom": 2324
   },
   "v4.5.0/nrf52840dk/nrf52840/metrics": {
     "ram": 68,
-    "rom": 2228
+    "rom": 2164
   },
   "v4.5.0/nrf52840dk/nrf52840/mqtt": {
-    "ram": 47756,
-    "rom": 112172
+    "ram": 47814,
+    "rom": 114380
   },
   "v4.5.0/nrf52840dk/nrf52840/mqtt-zephyr": {
-    "ram": 48051,
-    "rom": 115512
+    "ram": 48115,
+    "rom": 117720
   },
   "v4.5.0/nrf52840dk/nrf52840/ota": {
     "ram": 641,
-    "rom": 7036
+    "rom": 7056
   },
   "v4.5.0/qemu_cortex_m3": {
     "ram": 0,
-    "rom": 60
+    "rom": 64
   },
   "v4.5.0/qemu_riscv32": {
     "ram": 0,
-    "rom": 64
+    "rom": 68
   }
 }

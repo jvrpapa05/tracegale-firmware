@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 /* Set by scripts/release.sh, the same as the server's and the tools'. */
-#define TRACEGALE_VERSION_STRING "1.0.0-rc.1"
+#define TRACEGALE_VERSION_STRING "1.0.0-rc.2"
 
 /**
  * @brief Get the version of the Tracegale firmware stack.

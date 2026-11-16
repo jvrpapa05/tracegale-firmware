@@ -7,9 +7,9 @@ sample:
     application powers now and then.
 common:
   build_only: true
+  # Settings storage needs a flash driver, which QEMU's Cortex-M3 has none of. Nordic's boards are built by ncs-check.sh.
   platform_allow:
     - native_sim
-    - qemu_cortex_m3
   integration_platforms:
     - native_sim
 tests:

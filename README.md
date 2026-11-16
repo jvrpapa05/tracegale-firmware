@@ -14,8 +14,9 @@ server, adding Tracegale to your firmware, and every option.
 
 ## Status
 
-**Version 1.0.0-rc.1, a release candidate for 1.0.** Tested on emulators and in builds for real boards from Nordic, STMicroelectronics, NXP and
-Espressif; not yet run on real hardware. Interfaces may still change before 1.0. Built for every board Zephyr v4.5
+**Version 1.0.0-rc.2, a release candidate for 1.0.** Tested on emulators and in builds for real boards from Nordic, STMicroelectronics, NXP and
+Espressif, and first run on one real board, an nRF52840 with a cellular modem; rc.2 has the fixes from that run, and enrollment, so
+devices add themselves with nothing pasted. Interfaces may still change before 1.0. Built for every board Zephyr v4.5
 supports: 1,642 of 1,662 board configurations build `CONFIG_TRACEGALE=y` ([board list](docs/firmware/boards.md)).
 
 ## What it does

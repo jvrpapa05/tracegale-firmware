@@ -30,7 +30,7 @@ Tracegale uses the connection your application already has, and never turns on n
 
     ```
     git submodule add https://github.com/jvrpapa05/tracegale-firmware modules/tracegale
-    git -C modules/tracegale checkout v1.0.0-rc.1
+    git -C modules/tracegale checkout v1.0.0-rc.2
     west build -b <board> -- -DZEPHYR_EXTRA_MODULES=$PWD/modules/tracegale
     ```
 

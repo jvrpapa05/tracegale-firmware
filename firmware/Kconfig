@@ -254,13 +254,14 @@ config TRACEGALE_ENROLL
 	depends on TRACEGALE_CORE && SETTINGS && !TRACEGALE_CRED_NRF_MODEM
 	select BASE64
 	imply HWINFO
-	# PSA Crypto: in the nRF Connect SDK from v3.0 that brings its security library too, and before that NRF_SECURITY
-	# does. Zephyr v3.7 has no PSA_CRYPTO, and gets Mbed TLS's own elliptic curves. ZEPHYR_NRF_MODULE is set in the SDK.
+	# PSA Crypto: in the nRF Connect SDK from v3.0 on Nordic's chips that brings its security library too, and before that
+	# NRF_SECURITY does. Elsewhere, including the SDK's simulator builds and Zephyr v3.7, which has no PSA_CRYPTO, Mbed TLS's
+	# own elliptic curves. ZEPHYR_NRF_MODULE is set in the SDK.
 	imply PSA_CRYPTO if !TRACEGALE_TLS
-	imply NRF_SECURITY if !TRACEGALE_TLS && ZEPHYR_NRF_MODULE
-	imply MBEDTLS if !TRACEGALE_TLS && !ZEPHYR_NRF_MODULE
-	imply MBEDTLS_ECP_C if !TRACEGALE_TLS && !ZEPHYR_NRF_MODULE
-	imply MBEDTLS_ECP_DP_SECP256R1_ENABLED if !TRACEGALE_TLS && !ZEPHYR_NRF_MODULE
+	imply NRF_SECURITY if !TRACEGALE_TLS && ZEPHYR_NRF_MODULE && SOC_FAMILY_NORDIC_NRF
+	imply MBEDTLS if !TRACEGALE_TLS && !(ZEPHYR_NRF_MODULE && SOC_FAMILY_NORDIC_NRF)
+	imply MBEDTLS_ECP_C if !TRACEGALE_TLS && !(ZEPHYR_NRF_MODULE && SOC_FAMILY_NORDIC_NRF)
+	imply MBEDTLS_ECP_DP_SECP256R1_ENABLED if !TRACEGALE_TLS && !(ZEPHYR_NRF_MODULE && SOC_FAMILY_NORDIC_NRF)
 	help
 	  A device with an enrollment key's build file and its token makes its own key pair, which never leaves it, and asks the
 	  server for its certificate, so nothing is copied per device. The web app's Enrollment keys page makes the build file and
